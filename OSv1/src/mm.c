@@ -101,10 +101,7 @@ int vmap_page_range(struct pcb_t *caller, // process call
     ret_rg->rg_end += PAGING_PAGESZ;
     init_pte(&caller->mm->pgd[pgn + pgit], 1, fpit->fpn, 0, 0, 0, 0);
     enlist_pgn_node(&caller->mm->fifo_pgn, pgn + pgit);
-    struct framephy_struct *curframe = fpit;
     fpit = fpit->fp_next;
-    curframe->fp_next = caller->mram->used_fp_list;
-    caller->mram->used_fp_list = curframe;
     pgit++;
   }
    /* Tracking for later page replacement activities (if needed)
