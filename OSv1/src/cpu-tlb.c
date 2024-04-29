@@ -28,7 +28,7 @@ int tlb_change_all_page_tables_of(struct pcb_t *proc,  struct memphy_struct * mp
 int tlb_flush_tlb_of(struct pcb_t *proc, struct memphy_struct * mp)
 {
   /* TODO flush tlb cached*/
-#ifdef CPUTLB_FIXED_TLBSZ
+#ifdef CPU_TLB
   for (uint32_t i = 0; i < proc->tlb->maxsz; i++) {
     proc->tlb->storage[i] = 0;
   }
@@ -47,7 +47,8 @@ int tlballoc(struct pcb_t *proc, uint32_t size, uint32_t reg_index)
   /* By default using vmaid = 0 */
   int rgid = 0;
   
-  while (rgid < PAGING_MAX_SYMTBL_SZ && proc->mm->symrgtbl[rgid] != NULL) rgid++;
+  while (rgid < PAGING_MAX_SYMTBL_SZ && proc->mm->symrgtbl[rgid] != NULL) 
+    rgid++;
   if (rgid == PAGING_MAX_SYMTBL_SZ) {
 #ifdef DEBUG
     printf("WARNING: Out of memory region\n");
@@ -57,7 +58,7 @@ int tlballoc(struct pcb_t *proc, uint32_t size, uint32_t reg_index)
 
   int val = __alloc(proc, proc->mm->mmap->vm_id, rgid, size, &addr);
  
-  if (val != 0) return -1;
+  if (val < 0) return -1;
   proc->regs[reg_index] = addr;
 
 #ifdef DEBUG
@@ -68,9 +69,9 @@ int tlballoc(struct pcb_t *proc, uint32_t size, uint32_t reg_index)
   unsigned long rgstart = proc->mm->symrgtbl[rgid]->rg_start;
   unsigned long rgend = proc->mm->symrgtbl[rgid]->rg_end;
   unsigned long pgnum = (rgend - rgstart) / PAGING_PAGESZ;
-  
+  int pgstart = PAGING_PGN(rgstart);
   for (int i = 0; i < pgnum; i++) {
-    int pgid = PAGING_PGN((rgstart + i * PAGING_PAGESZ));
+    int pgid = pgstart + i;
     tlb_cache_write(proc->tlb, proc->pid, pgid, proc->mm->pgd[pgid]);
   }
   return val;
@@ -86,12 +87,12 @@ int tlbfree_data(struct pcb_t *proc, uint32_t reg_index)
   addr_t addr = proc->regs[reg_index];
   int rgid;
   for (rgid = 0; rgid < PAGING_MAX_SYMTBL_SZ; rgid++) {
-    if (proc->mm->symrgtbl[rgid] != NULL && proc->mm->symrgtbl[rgid]->rg_start == addr) 
+    if (proc->mm->symrgtbl[rgid] != NULL 
+        && proc->mm->symrgtbl[rgid]->rg_start == addr) 
       break;
   }
   if (rgid == PAGING_MAX_SYMTBL_SZ) return -1;
   __free(proc, proc->mm->mmap->vm_id, rgid);
-  proc->mm->symrgtbl[rgid] = NULL;
 #ifdef DEBUG
   printf("Freed region %d in register %d\n", addr, reg_index);
 #endif
@@ -135,12 +136,13 @@ int tlbread(struct pcb_t * proc, uint32_t source,
   MEMPHY_dump(proc->mram);
 #endif
   int val;
-  if (frmnum < 0) {
+  if (frmnum < 0 || !PAGING_PAGE_PRESENT(pte)) {
+    if (!PAGING_PAGE_PRESENT(pte) && GETVAL(pte, PAGING_PTE_SWAPPED_MASK, 0) == 0) 
+      return -1;
     int rgid;
     for (rgid = 0; rgid < PAGING_MAX_SYMTBL_SZ; rgid++) {
       if (proc->mm->symrgtbl[rgid] != NULL 
-      && proc->mm->symrgtbl[rgid]->rg_start <= addr 
-      && proc->mm->symrgtbl[rgid]->rg_end > addr) 
+      && proc->mm->symrgtbl[rgid]->rg_start == addr) 
         break;
     }
     if (rgid == PAGING_MAX_SYMTBL_SZ) {
@@ -149,18 +151,18 @@ int tlbread(struct pcb_t * proc, uint32_t source,
 #endif
       return -1;
     }
-    val = __read(proc, proc->mm->mmap->vm_id, rgid, offset + addr - proc->mm->symrgtbl[rgid]->rg_start, &data);
+    val = __read(proc, proc->mm->mmap->vm_id, rgid, offset, &data);
+    tlb_cache_write(proc->tlb, proc->pid, pgn, proc->mm->pgd[pgn]);
   } else {
-    int phyaddr = (frmnum << PAGING_ADDR_FPN_LOBIT) + offset;
+    int off = PAGING_OFFST(addr);
+    int phyaddr = (frmnum << PAGING_ADDR_FPN_LOBIT) + off;
     val = MEMPHY_read(proc->mram, phyaddr, &data);
   }
 
-  /* TODO update TLB CACHED with frame num of recent accessing page(s)*/
-  /* by using tlb_cache_read()/tlb_cache_write()*/
   if (val != 0) return -1;
   proc->regs[destination] = (uint32_t) data;
 #ifdef DEBUG
-  printf("Value read from register %d to register %d: %d\n", source, destination, proc->regs[destination]);
+  printf("Read value: %d\n", proc->regs[destination]);
 #endif
   return 0;
 }
@@ -197,12 +199,13 @@ int tlbwrite(struct pcb_t * proc, BYTE data,
 #endif
   MEMPHY_dump(proc->mram);
 #endif
-  if (frmnum < 0) {
+  if (frmnum < 0 || !PAGING_PAGE_PRESENT(pte)) {
+    if (!PAGING_PAGE_PRESENT(pte) && GETVAL(pte, PAGING_PTE_SWAPPED_MASK, 0) == 0) 
+      return -1;
     int rgid;
     for (rgid = 0; rgid < PAGING_MAX_SYMTBL_SZ; rgid++) {
       if (proc->mm->symrgtbl[rgid] != NULL 
-      && proc->mm->symrgtbl[rgid]->rg_start <= addr 
-      && proc->mm->symrgtbl[rgid]->rg_end > addr) 
+      && proc->mm->symrgtbl[rgid]->rg_start == addr) 
         break;
     }
     if (rgid == PAGING_MAX_SYMTBL_SZ) {
@@ -211,17 +214,18 @@ int tlbwrite(struct pcb_t * proc, BYTE data,
 #endif
       return -1;
     }
-    addr = offset + addr - proc->mm->symrgtbl[rgid]->rg_start;
-    val = __write(proc, proc->mm->mmap->vm_id, rgid, addr, data);
+    val = __write(proc, proc->mm->mmap->vm_id, rgid, offset, data);
+    tlb_cache_write(proc->tlb, proc->pid, pgn, proc->mm->pgd[pgn]);
   } else {
-    addr = (frmnum << PAGING_ADDR_FPN_LOBIT) + offset;
-    val = MEMPHY_write(proc->mram, addr, data);
+    int off = PAGING_OFFST(addr);
+    int phyaddr = (frmnum << PAGING_ADDR_FPN_LOBIT) + off;
+    val = MEMPHY_write(proc->mram, phyaddr, data);
   }
 
   /* TODO update TLB CACHED with frame num of recent accessing page(s)*/
   /* by using tlb_cache_read()/tlb_cache_write()*/
 #ifdef DEBUG
-  printf("Address written from register %d to %d: %d\n", destination, addr, proc->regs[destination]);
+  printf("Write frame: %d\n", frmnum);
 #endif
   return val;
 }

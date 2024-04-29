@@ -40,9 +40,9 @@ int tlb_cache_read(struct memphy_struct * mp, int pid, int pgnum, uint32_t *valu
    int id = (pgnum % (mp->maxsz / 3)) * 3;
    if (storage[id] != pgnum || storage[id + 1] != pid) return -1;
    *value = storage[id + 2];
-   #ifdef DEBUG
+#ifdef DEBUG
    printf("TLB read at %d for page %d\n", id, pgnum);
-   #endif
+#endif
    return 0;
 }
 

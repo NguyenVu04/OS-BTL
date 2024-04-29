@@ -157,20 +157,8 @@ int MEMPHY_get_freefp(struct memphy_struct *mp, int *retfpn)
 
 int MEMPHY_dump(struct memphy_struct * mp)
 {
-    /*TODO dump memphy contnt mp->storage 
-     *     for tracing the memory content
-     */
-    /*struct framephy_struct *fpit = mp->used_fp_list;
-    while (fpit != NULL) {
-       uint32_t addr = (fpit->fpn << PAGING_ADDR_FPN_LOBIT);
-       BYTE val;
-       MEMPHY_read(mp, addr, &val);
-       printf("frame %d: %d\n", fpit->fpn, val);
-       fpit = fpit->fp_next;
-    }*/
-    return 0;
+   return 0;
 }
-
 int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn)
 {
    struct framephy_struct *fp = mp->free_fp_list;

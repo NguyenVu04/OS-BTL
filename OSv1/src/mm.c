@@ -51,7 +51,8 @@ int init_pte(uint32_t *pte,
  */
 int pte_set_swap(uint32_t *pte, int swptyp, int swpoff)
 {
-  SETBIT(*pte, PAGING_PTE_PRESENT_MASK);
+  //SETBIT(*pte, PAGING_PTE_PRESENT_MASK);
+  CLRBIT(*pte, PAGING_PTE_PRESENT_MASK);
   SETBIT(*pte, PAGING_PTE_SWAPPED_MASK);
 
   SETVAL(*pte, swptyp, PAGING_PTE_SWPTYP_MASK, PAGING_PTE_SWPTYP_LOBIT);
@@ -100,8 +101,10 @@ int vmap_page_range(struct pcb_t *caller, // process call
   while (pgit < pgnum && fpit != NULL) {
     ret_rg->rg_end += PAGING_PAGESZ;
     init_pte(&caller->mm->pgd[pgn + pgit], 1, fpit->fpn, 0, 0, 0, 0);
-    enlist_pgn_node(&caller->mm->fifo_pgn, pgn + pgit);
+    enlist_pgn_node(caller->mm, pgn + pgit);
+    struct framephy_struct *node = fpit;
     fpit = fpit->fp_next;
+    free(node);
     pgit++;
   }
    /* Tracking for later page replacement activities (if needed)
@@ -230,6 +233,9 @@ int init_mm(struct mm_struct *mm, struct pcb_t *caller)
   for (int i = 0; i < PAGING_MAX_SYMTBL_SZ; i++) {
     mm->symrgtbl[i] = NULL;
   }
+
+  mm->fifo_pgn = NULL;
+  mm->pgn_tail = NULL;
   return 0;
 }
 
@@ -252,13 +258,20 @@ int enlist_vm_rg_node(struct vm_rg_struct **rglist, struct vm_rg_struct* rgnode)
   return 0;
 }
 
-int enlist_pgn_node(struct pgn_t **plist, int pgn)
+int enlist_pgn_node(struct mm_struct *mm, int pgn)
 {
   struct pgn_t* pnode = malloc(sizeof(struct pgn_t));
 
   pnode->pgn = pgn;
-  pnode->pg_next = *plist;
-  *plist = pnode;
+  pnode->pg_next = NULL;
+
+  if (mm->fifo_pgn == NULL) {
+    mm->fifo_pgn = mm->pgn_tail = pnode;
+  }
+  else {
+    mm->pgn_tail->pg_next = pnode;
+    mm->pgn_tail = pnode;
+  }
 
   return 0;
 }
