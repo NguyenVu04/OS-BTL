@@ -63,6 +63,7 @@ int tlballoc(struct pcb_t *proc, uint32_t size, uint32_t reg_index)
 
 #ifdef DEBUG
   printf("Allocated %d bytes at %d to register %d\n", size, addr, reg_index);
+  print_pgtbl(proc, 0, -1);
 #endif
   /* TODO update TLB CACHED frame num of the new allocated page(s)*/
   /* by using tlb_cache_read()/tlb_cache_write()*/
@@ -152,14 +153,13 @@ int tlbread(struct pcb_t * proc, uint32_t source,
       return -1;
     }
     val = __read(proc, proc->mm->mmap->vm_id, rgid, offset, &data);
-    tlb_cache_write(proc->tlb, proc->pid, pgn, proc->mm->pgd[pgn]);
   } else {
     int off = PAGING_OFFST(addr);
     int phyaddr = (frmnum << PAGING_ADDR_FPN_LOBIT) + off;
     val = MEMPHY_read(proc->mram, phyaddr, &data);
   }
 
-  if (val != 0) return -1;
+  if (val < 0) return -1;
   proc->regs[destination] = (uint32_t) data;
 #ifdef DEBUG
   printf("Read value: %d\n", proc->regs[destination]);
@@ -215,7 +215,6 @@ int tlbwrite(struct pcb_t * proc, BYTE data,
       return -1;
     }
     val = __write(proc, proc->mm->mmap->vm_id, rgid, offset, data);
-    tlb_cache_write(proc->tlb, proc->pid, pgn, proc->mm->pgd[pgn]);
   } else {
     int off = PAGING_OFFST(addr);
     int phyaddr = (frmnum << PAGING_ADDR_FPN_LOBIT) + off;

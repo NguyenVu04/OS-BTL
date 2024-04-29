@@ -152,10 +152,8 @@ int __free(struct pcb_t *caller, int vmaid, int rgid)
       
       // Extract the frame number from the page table entry
       unsigned long frnum = PAGING_FPN(pte);
-      
       // Free the frame using the frame number
       MEMPHY_put_freefp(caller->mram, frnum);
-      
       // Clear the page table entry
       caller->mm->pgd[i] = 0;
       
@@ -265,7 +263,6 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
 #ifdef CPU_TLB
     /* Update its online status of TLB (if needed) */
     tlb_cache_write(caller->tlb, caller->pid, vicpgn, mm->pgd[vicpgn]);
-    tlb_cache_write(caller->tlb, caller->pid, pgn, mm->pgd[pgn]);
 #endif
 
     enlist_pgn_node(mm, pgn);
@@ -286,7 +283,7 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
       enlist_pgn_node(mm, pgn);
     }
   }
-
+  tlb_cache_write(caller->tlb, caller->pid, pgn, mm->pgd[pgn]);
   *fpn = PAGING_FPN(mm->pgd[pgn]);
 
   return 0;
@@ -469,7 +466,7 @@ struct vm_rg_struct* get_vm_area_node_at_brk(struct pcb_t *caller, int vmaid, in
 
   newrg->rg_start = cur_vma->sbrk;
 
-  newrg->rg_end = newrg->rg_start + alignedsz;
+  newrg->rg_end = newrg->rg_start + size;
 
   return newrg;
 }
