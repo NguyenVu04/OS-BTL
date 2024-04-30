@@ -120,37 +120,69 @@ int vmap_page_range(struct pcb_t *caller, // process call
 
 int alloc_pages_range(struct pcb_t *caller, int req_pgnum, struct framephy_struct** frm_lst)
 {
-  int pgit, fpn;
-  struct framephy_struct *newfp_str;
-  for(pgit = 0; pgit < req_pgnum; pgit++)
-  {
-    if(MEMPHY_get_freefp(caller->mram, &fpn) == 0)
-   {
-     newfp_str = malloc(sizeof(struct framephy_struct));
-     newfp_str->fpn = fpn;
-     newfp_str->fp_next = *frm_lst;
-     *frm_lst = newfp_str;
-   } else {  // ERROR CODE of obtaining somes but not enough frames
-    int swpfpn;
-    if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn) < 0) return -3000;
-    struct framephy_struct *head = caller->mram->used_fp_list;
-    if (head == NULL) return -3000;
-    fpn = head->fpn;
-    struct mm_struct *vicmm = head->owner;
-    __swap_cp_page(caller->mram, fpn, caller->active_mswp, swpfpn);
-    pte_set_swap(&vicmm->pgd[head->pgn], 0, swpfpn);
-    tlb_cache_write(caller->tlb, caller->pid, head->pgn, vicmm->pgd[head->pgn]);
-    caller->mram->used_fp_list = head->fp_next;
-    if (caller->mram->used_fp_list == NULL) 
-      caller->mram->used_fp_tail = NULL;
-    free(head);
+// Declare variables for page index (pgit), frame number (fpn), and a pointer to a structure (newfp_str)
+int pgit, fpn;
+struct framephy_struct *newfp_str;
 
-    newfp_str = malloc(sizeof(struct framephy_struct));
-    newfp_str->fpn = fpn;
-    newfp_str->fp_next = *frm_lst;
-    *frm_lst = newfp_str;
-   } 
- }
+// Loop through each page index up to req_pgnum
+for(pgit = 0; pgit < req_pgnum; pgit++)
+{
+    // Check if a free physical frame is available
+    if(MEMPHY_get_freefp(caller->mram, &fpn) == 0)
+    {
+        // Allocate memory for a new frame physical structure
+        newfp_str = malloc(sizeof(struct framephy_struct));
+        // Assign the frame number to the new structure
+        newfp_str->fpn = fpn;
+        // Link the new structure to the beginning of the frame list
+        newfp_str->fp_next = *frm_lst;
+        // Update the frame list pointer to point to the new structure
+        *frm_lst = newfp_str;
+    } 
+    else 
+    {  
+        // ERROR CODE: Not enough free frames available, perform swapping
+        
+        // Declare a variable for the swapped frame number
+        int swpfpn;
+        // Try to get a free frame from the swap space of the caller's active memory
+        if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn) < 0) 
+            return -3000; // Return error code if unable to get a free frame from swap
+
+        // Get the head of the used frame list in main memory
+        struct framephy_struct *head = caller->mram->used_fp_list;
+        // If the head is NULL, return an error code
+        if (head == NULL) 
+            return -3000;
+
+        // Retrieve the frame number and virtual memory structure of the head
+        fpn = head->fpn;
+        struct mm_struct *vicmm = head->owner;
+
+        // Swap the contents of the main memory frame with the swap frame
+        __swap_cp_page(caller->mram, fpn, caller->active_mswp, swpfpn);
+        // Update the page table entry of the victim process to point to the swap frame
+        pte_set_swap(&vicmm->pgd[head->pgn], 0, swpfpn);
+        // Update the TLB cache with the swapped page
+        tlb_cache_write(caller->tlb, caller->pid, head->pgn, vicmm->pgd[head->pgn]);
+        // Remove the head from the used frame list
+        caller->mram->used_fp_list = head->fp_next;
+        // If the list becomes empty, update the tail pointer
+        if (caller->mram->used_fp_list == NULL) 
+            caller->mram->used_fp_tail = NULL;
+        // Free the memory occupied by the head
+        free(head);
+
+        // Allocate memory for a new frame physical structure
+        newfp_str = malloc(sizeof(struct framephy_struct));
+        // Assign the frame number to the new structure
+        newfp_str->fpn = fpn;
+        // Link the new structure to the beginning of the frame list
+        newfp_str->fp_next = *frm_lst;
+        // Update the frame list pointer to point to the new structure
+        *frm_lst = newfp_str;
+    } 
+}
 
   return 0;
 }
