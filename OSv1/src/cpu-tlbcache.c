@@ -37,9 +37,11 @@ int tlb_cache_read(struct memphy_struct * mp, int pid, int pgnum, uint32_t *valu
     *      direct mapped, associated mapping etc.
     */
    uint32_t* storage = (uint32_t*) mp->storage;
-   int id = (pgnum % (mp->maxsz / 3)) * 3;
-   if (storage[id] != pgnum || storage[id + 1] != pid) return -1;
-   *value = storage[id + 2];
+   uint32_t i = TLB_INDEX(pid, pgnum);
+   uint32_t id = (i % (mp->maxsz / 2)) * 2;
+   uint32_t tag = i / (mp->maxsz / 2);
+   if (storage[id] != tag) return -1;
+   *value = storage[id + 1];
 #ifdef DEBUG
    printf("TLB read at %d for page %d\n", id, pgnum);
 #endif
@@ -60,12 +62,11 @@ int tlb_cache_write(struct memphy_struct *mp, int pid, int pgnum, uint32_t value
     *      direct mapped, associated mapping etc.
     */
    uint32_t* storage = (uint32_t*) mp->storage;
-   
-   int id = (pgnum % (mp->maxsz / 3)) * 3;
-   
-   storage[id] = pgnum;
-   storage[id + 1] = pid;
-   storage[id + 2] = value;
+   uint32_t i = TLB_INDEX(pid, pgnum);
+   uint32_t id = (i % (mp->maxsz / 2)) * 2;
+   uint32_t tag = i / (mp->maxsz / 2);
+   storage[id] = tag;
+   storage[id + 1] = value;
 #ifdef DEBUG
    printf("TLB updated %08x for page %d\n", value, pgnum);
 #endif

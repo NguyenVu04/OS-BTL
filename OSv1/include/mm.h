@@ -91,6 +91,9 @@
 #define INCLUDE(x1,x2,y1,y2) (((y1-x1)*(x2-y2)>=0)?1:0)
 #define OVERLAP(x1,x2,y1,y2) (((y2-x1)*(x2-y1)>=0)?1:0)
 
+/*TLB Operator*/
+#define TLB_INDEX(pid, pgn) ((pid << (NBITS32(PAGING_MAX_PGN) + 1)) | pgn)
+
 /* VM region prototypes */
 struct vm_rg_struct * init_vm_rg(int rg_start, int rg_endi);
 int enlist_vm_rg_node(struct vm_rg_struct **rglist, struct vm_rg_struct* rgnode);
