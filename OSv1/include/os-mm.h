@@ -67,6 +67,7 @@ struct framephy_struct {
 
    /* Resereed for tracking allocated framed */
    struct mm_struct* owner;
+   int pgn;
 };
 
 struct memphy_struct {
@@ -81,6 +82,7 @@ struct memphy_struct {
    /* Management structure */
    struct framephy_struct *free_fp_list;
    struct framephy_struct *used_fp_list;
+   struct framephy_struct *used_fp_tail;
 };
 
 #endif

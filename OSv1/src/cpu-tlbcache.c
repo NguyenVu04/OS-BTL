@@ -67,7 +67,7 @@ int tlb_cache_write(struct memphy_struct *mp, int pid, int pgnum, uint32_t value
    storage[id + 1] = pid;
    storage[id + 2] = value;
 #ifdef DEBUG
-   printf("TLB updated at %d for page %d\n", id, pgnum);
+   printf("TLB updated %08x for page %d\n", value, pgnum);
 #endif
    return 0;
 }

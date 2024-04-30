@@ -150,45 +150,21 @@ int __free(struct pcb_t *caller, int vmaid, int rgid)
       // Get the page table entry from the caller's memory management structure
       uint32_t pte = caller->mm->pgd[i];
       
-      // Extract the frame number from the page table entry
-      unsigned long frnum = PAGING_FPN(pte);
-      // Free the frame using the frame number
-      MEMPHY_put_freefp(caller->mram, frnum);
-      // Clear the page table entry
-      caller->mm->pgd[i] = 0;
-      
-      // Get a pointer to the first page node in the FIFO list
-      struct pgn_t *pgnode = caller->mm->fifo_pgn;
-      
-      // If the FIFO list is empty, continue to the next iteration of the loop
-      if (pgnode == NULL) continue;
-      
-      // If the first page node in the FIFO list matches the current index i
-      if (pgnode->pgn == i) {
-          // Move the FIFO pointer to the next page node
-          caller->mm->fifo_pgn = pgnode->pg_next;
-          if (caller->mm->fifo_pgn == NULL) 
-            caller->mm->pgn_tail = NULL;
-          // Free the memory occupied by the current page node
-          free(pgnode);
+      if (PAGING_PAGE_PRESENT(pte)) {
+        // Extract the frame number from the page table entry
+        int frnum = PAGING_FPN(pte);
+        MEMPHY_get_usedfp(caller->mram, frnum);
+
+        // Free the frame using the frame number
+        MEMPHY_put_freefp(caller->mram, frnum);
       } else {
-          // Traverse the FIFO list until the end or until the matching page node is found
-          while (pgnode->pg_next != NULL && pgnode->pg_next->pgn != i) 
-              pgnode = pgnode->pg_next;
-          
-          // If a matching page node is found
-          if (pgnode->pg_next != NULL) {
-              struct pgn_t *node = pgnode->pg_next;
-              // Remove the matching page node from the list
-              pgnode->pg_next = node->pg_next;
-
-              if (node == caller->mm->pgn_tail)
-                caller->mm->pgn_tail = pgnode;
-
-              // Free the memory occupied by the removed page node
-              free(node);
-          }
+        int frnum = PAGING_SWP(pte);
+        MEMPHY_put_freefp(caller->active_mswp, frnum);
       }
+      
+      // Clear the page table entry
+      caller->mm->pgd[i] = 0;   
+      
   }
 
   return 0;
@@ -233,14 +209,15 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
   if (!PAGING_PAGE_PRESENT(pte))
   { /* Page is not online, make it actively living */
     int vicpgn, swpfpn; 
-    
     int tgtfpn = PAGING_SWP(pte);//the target frame storing our variable
-
     /* TODO: Play with your paging theory here */
     /* Find victim page */
-    if (find_victim_page(mm, &vicpgn) < 0) 
+    /*if (find_victim_page(mm, &vicpgn) < 0) 
+      return -1;*/
+    if (caller->mram->used_fp_list == NULL)
       return -1;
-
+    vicpgn = caller->mram->used_fp_list->pgn;
+    MEMPHY_get_usedfp(caller->mram, caller->mram->used_fp_list->fpn);
     uint32_t vicpte = mm->pgd[vicpgn];
     int vicfpn = PAGING_FPN(vicpte);
     /* Get free frame in MEMSWP */
@@ -253,6 +230,7 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
     /* Copy target frame from swap to mem */
     //__swap_cp_page();
     __swap_cp_page(caller->active_mswp, tgtfpn, caller->mram, vicfpn);
+    MEMPHY_put_freefp(caller->active_mswp, tgtfpn);
     /* Update page table */
     //pte_set_swap() &mm->pgd;
     pte_set_swap(&mm->pgd[vicpgn], 0, swpfpn);
@@ -265,23 +243,12 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
     tlb_cache_write(caller->tlb, caller->pid, vicpgn, mm->pgd[vicpgn]);
 #endif
 
-    enlist_pgn_node(mm, pgn);
+    //enlist_pgn_node(mm, pgn);
+    MEMPHY_put_usedfp(caller->mram, vicfpn, mm, pgn);
   } else {
-    /* Page is online */
-    if (mm->fifo_pgn == NULL) return -1;
-    if (mm->fifo_pgn->pgn != pgn) {
-      struct pgn_t *pgit = mm->fifo_pgn;
-      while (pgit->pg_next != NULL && pgit->pg_next->pgn != pgn) 
-        pgit = pgit->pg_next;
-      if (pgit->pg_next == NULL) 
-        return -1;
-      struct pgn_t *node = pgit->pg_next;
-      pgit->pg_next = node->pg_next;
-      if (node == mm->pgn_tail)
-        mm->pgn_tail = pgit;
-      free(node);
-      enlist_pgn_node(mm, pgn);
-    }
+    int tgtfpn = PAGING_FPN(pte);
+    MEMPHY_get_usedfp(caller->mram, tgtfpn);
+    MEMPHY_put_usedfp(caller->mram, tgtfpn, mm, pgn);
   }
   tlb_cache_write(caller->tlb, caller->pid, pgn, mm->pgd[pgn]);
   *fpn = PAGING_FPN(mm->pgd[pgn]);

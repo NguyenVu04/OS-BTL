@@ -60,7 +60,7 @@
 /* SWAPFPN */
 #define PAGING_SWP_LOBIT NBITS(PAGING_PAGESZ)
 #define PAGING_SWP_HIBIT (NBITS(PAGING_MEMSWPSZ) - 1)
-#define PAGING_SWP(pte) ((pte&PAGING_SWP_MASK) >> PAGING_SWPFPN_OFFSET)
+#define PAGING_SWP(pte) ((pte&PAGING_PTE_SWPOFF_MASK) >> PAGING_PTE_SWPOFF_LOBIT)
 
 /* Value operators */
 #define SETBIT(v,mask) (v=v|mask)
@@ -153,6 +153,8 @@ struct vm_area_struct *get_vma_by_num(struct mm_struct *mm, int vmaid);
 /* MEM/PHY protypes */
 int MEMPHY_get_freefp(struct memphy_struct *mp, int *fpn);
 int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn);
+int MEMPHY_get_usedfp(struct memphy_struct *mp, int fpn);
+int MEMPHY_put_usedfp(struct memphy_struct *mp, int fpn, struct mm_struct *owner, int pgn);
 int MEMPHY_read(struct memphy_struct * mp, int addr, BYTE *value);
 int MEMPHY_write(struct memphy_struct * mp, int addr, BYTE data);
 int MEMPHY_dump(struct memphy_struct * mp);

@@ -124,11 +124,14 @@ int MEMPHY_format(struct memphy_struct *mp, int pagesz)
     fst->fpn = iter;
     mp->free_fp_list = fst;
     mp->used_fp_list = NULL;
+    mp->used_fp_tail = NULL;
     /* We have list with first element, fill in the rest num-1 element member*/
     for (iter = 1; iter < numfp ; iter++)
     {
        newfst =  malloc(sizeof(struct framephy_struct));
        newfst->fpn = iter;
+       newfst->owner = NULL;
+       newfst->pgn = 0;
        newfst->fp_next = NULL;
        fst->fp_next = newfst;
        fst = newfst;
@@ -155,6 +158,51 @@ int MEMPHY_get_freefp(struct memphy_struct *mp, int *retfpn)
    return 0;
 }
 
+int MEMPHY_get_usedfp(struct memphy_struct *mp, int fpn) {
+   struct framephy_struct *usedframe = mp->used_fp_list;
+   if (usedframe == NULL)
+      return -1;
+   if (usedframe->fpn == fpn) {
+      // Remove the frame from the used frame list
+      mp->used_fp_list = usedframe->fp_next;
+      if (mp->used_fp_list == NULL)
+      mp->used_fp_tail = NULL;
+      // Free the frame
+      free(usedframe);
+   } else {
+      // Remove the frame from the used frame list
+      while (usedframe->fp_next != NULL 
+            && usedframe->fp_next->fpn != fpn) {
+      usedframe = usedframe->fp_next;
+      }
+      if (usedframe->fp_next != NULL) {
+      struct framephy_struct *node = usedframe->fp_next;
+      usedframe->fp_next = node->fp_next;
+      if (node == mp->used_fp_tail)
+         mp->used_fp_tail = usedframe;
+      // Free the frame
+      free(node);
+      }
+   }
+   return 0;
+}
+
+int MEMPHY_put_usedfp(struct memphy_struct *mp, int fpn, struct mm_struct *owner, int pgn) {
+   struct framephy_struct *fp = malloc(sizeof(struct framephy_struct));
+   fp->fpn = fpn;
+   fp->fp_next = NULL;
+   fp->owner = owner;
+   fp->pgn = pgn;
+   if (mp->used_fp_list == NULL) {
+      mp->used_fp_list = fp;
+      mp->used_fp_tail = fp;
+   } else {
+      mp->used_fp_tail->fp_next = fp;
+      mp->used_fp_tail = fp;
+   }
+   return 0;
+}
+
 int MEMPHY_dump(struct memphy_struct * mp)
 {
    return 0;
@@ -163,7 +211,6 @@ int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn)
 {
    struct framephy_struct *fp = mp->free_fp_list;
    struct framephy_struct *newnode = malloc(sizeof(struct framephy_struct));
-
    /* Create new node with value fpn */
    newnode->fpn = fpn;
    newnode->fp_next = fp;
