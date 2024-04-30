@@ -154,6 +154,7 @@ int tlbread(struct pcb_t * proc, uint32_t source,
     }
     val = __read(proc, proc->mm->mmap->vm_id, rgid, offset, &data);
   } else {
+    addr += offset;
     int off = PAGING_OFFST(addr);
     int phyaddr = (frmnum << PAGING_ADDR_FPN_LOBIT) + off;
     val = MEMPHY_read(proc->mram, phyaddr, &data);
@@ -216,6 +217,7 @@ int tlbwrite(struct pcb_t * proc, BYTE data,
     }
     val = __write(proc, proc->mm->mmap->vm_id, rgid, offset, data);
   } else {
+    addr += offset;
     int off = PAGING_OFFST(addr);
     int phyaddr = (frmnum << PAGING_ADDR_FPN_LOBIT) + off;
     val = MEMPHY_write(proc->mram, phyaddr, data);
@@ -224,7 +226,7 @@ int tlbwrite(struct pcb_t * proc, BYTE data,
   /* TODO update TLB CACHED with frame num of recent accessing page(s)*/
   /* by using tlb_cache_read()/tlb_cache_write()*/
 #ifdef DEBUG
-  printf("Write frame: %d\n", frmnum);
+  printf("Write frame: %d\n", PAGING_FPN(proc->mm->pgd[pgn]));
 #endif
   return val;
 }
