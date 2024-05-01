@@ -219,6 +219,19 @@ int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn)
    return 0;
 }
 
+int MEMPHY_pop_usedfp(struct memphy_struct *mp, int *fpn, int *pgn, struct mm_struct **mm) {
+   struct framephy_struct *usedframe = mp->used_fp_list;
+   if (usedframe == NULL)
+      return -1;
+   *fpn = usedframe->fpn;
+   *pgn = usedframe->pgn;
+   *mm = usedframe->owner;
+   mp->used_fp_list = usedframe->fp_next;
+   if (mp->used_fp_list == NULL)
+      mp->used_fp_tail = NULL;
+   free(usedframe);
+   return 0;
+}
 
 /*
  *  Init MEMPHY struct

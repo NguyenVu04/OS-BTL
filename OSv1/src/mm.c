@@ -148,30 +148,17 @@ for(pgit = 0; pgit < req_pgnum; pgit++)
         // Try to get a free frame from the swap space of the caller's active memory
         if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn) < 0) 
             return -3000; // Return error code if unable to get a free frame from swap
-
-        // Get the head of the used frame list in main memory
-        struct framephy_struct *head = caller->mram->used_fp_list;
-        // If the head is NULL, return an error code
-        if (head == NULL) 
-            return -3000;
-
-        // Retrieve the frame number and virtual memory structure of the head
-        fpn = head->fpn;
-        struct mm_struct *vicmm = head->owner;
+        struct mm_struct *vicmm;
+        int pgn;
+        if (MEMPHY_pop_usedfp(caller->mram, &fpn, &pgn, &vicmm) < 0)
+          return -1;
 
         // Swap the contents of the main memory frame with the swap frame
         __swap_cp_page(caller->mram, fpn, caller->active_mswp, swpfpn);
         // Update the page table entry of the victim process to point to the swap frame
-        pte_set_swap(&vicmm->pgd[head->pgn], 0, swpfpn);
+        pte_set_swap(&vicmm->pgd[pgn], 0, swpfpn);
         // Update the TLB cache with the swapped page
-        tlb_cache_write(caller->tlb, caller->pid, head->pgn, vicmm->pgd[head->pgn]);
-        // Remove the head from the used frame list
-        caller->mram->used_fp_list = head->fp_next;
-        // If the list becomes empty, update the tail pointer
-        if (caller->mram->used_fp_list == NULL) 
-            caller->mram->used_fp_tail = NULL;
-        // Free the memory occupied by the head
-        free(head);
+        tlb_cache_write(caller->tlb, caller->pid, pgn, vicmm->pgd[pgn]);        
 
         // Allocate memory for a new frame physical structure
         newfp_str = malloc(sizeof(struct framephy_struct));

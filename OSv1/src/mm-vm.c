@@ -208,18 +208,15 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
  
   if (!PAGING_PAGE_PRESENT(pte))
   { /* Page is not online, make it actively living */
-    int vicpgn, swpfpn; 
+    int vicpgn, swpfpn, vicfpn; 
+    struct mm_struct *vicmm;
     int tgtfpn = PAGING_SWP(pte);//the target frame storing our variable
     /* TODO: Play with your paging theory here */
     /* Find victim page */
     /*if (find_victim_page(mm, &vicpgn) < 0) 
       return -1;*/
-    if (caller->mram->used_fp_list == NULL)
+    if (MEMPHY_pop_usedfp(caller->mram, &vicfpn, &vicpgn, &vicmm) < 0)
       return -1;
-    vicpgn = caller->mram->used_fp_list->pgn;
-    MEMPHY_get_usedfp(caller->mram, caller->mram->used_fp_list->fpn);
-    uint32_t vicpte = mm->pgd[vicpgn];
-    int vicfpn = PAGING_FPN(vicpte);
     /* Get free frame in MEMSWP */
     if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn) < 0) 
       return -1;
@@ -233,7 +230,7 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
     MEMPHY_put_freefp(caller->active_mswp, tgtfpn);
     /* Update page table */
     //pte_set_swap() &mm->pgd;
-    pte_set_swap(&mm->pgd[vicpgn], 0, swpfpn);
+    pte_set_swap(&vicmm->pgd[vicpgn], 0, swpfpn);
     /* Update its online status of the target page */
     //pte_set_fpn() & mm->pgd[pgn];
     pte_set_fpn(&mm->pgd[pgn], vicfpn);
