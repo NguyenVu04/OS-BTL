@@ -7,11 +7,28 @@
 #include "mm.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <pthread.h>
 /*
  *  MEMPHY_mv_csr - move MEMPHY cursor
  *  @mp: memphy struct
  *  @offset: offset
  */
+
+pthread_mutex_t ram_lock;
+pthread_mutex_t swp_lock;
+
+int init_memphy_lock() {
+    pthread_mutex_init(&ram_lock, NULL);
+    pthread_mutex_init(&swp_lock, NULL);
+    return 0;
+}
+
+int destroy_memphy_lock() {
+    pthread_mutex_destroy(&ram_lock);
+    pthread_mutex_destroy(&swp_lock);
+    return 0;
+}
+
 int MEMPHY_mv_csr(struct memphy_struct *mp, int offset)
 {
    int numstep = 0;
@@ -52,16 +69,15 @@ int MEMPHY_seq_read(struct memphy_struct *mp, int addr, BYTE *value)
  *  @addr: address
  *  @value: obtained value
  */
-int MEMPHY_read(struct memphy_struct * mp, int addr, BYTE *value)
+int MEMPHY_read(struct memphy_struct *mp, int addr, BYTE *value)
 {
    if (mp == NULL)
      return -1;
-
+     
    if (mp->rdmflg)
       *value = mp->storage[addr];
    else /* Sequential access device */
       return MEMPHY_seq_read(mp, addr, value);
-
    return 0;
 }
 
@@ -92,16 +108,28 @@ int MEMPHY_seq_write(struct memphy_struct * mp, int addr, BYTE value)
  *  @addr: address
  *  @data: written data
  */
-int MEMPHY_write(struct memphy_struct * mp, int addr, BYTE data)
+int MEMPHY_write(struct memphy_struct *mp, int addr, BYTE data, BYTE option)
 {
    if (mp == NULL)
      return -1;
-
+   pthread_mutex_t *lock;
+   switch (option)
+   {
+   case RAM_LCK:
+      lock = &ram_lock;
+      break;
+   case SWP_LCK:
+      lock = &swp_lock;
+      break;   
+   default:
+      return -1;
+   }
+   pthread_mutex_lock(lock);
    if (mp->rdmflg)
       mp->storage[addr] = data;
    else /* Sequential access device */
       return MEMPHY_seq_write(mp, addr, data);
-
+   pthread_mutex_unlock(lock);
    return 0;
 }
 
@@ -140,13 +168,27 @@ int MEMPHY_format(struct memphy_struct *mp, int pagesz)
     return 0;
 }
 
-int MEMPHY_get_freefp(struct memphy_struct *mp, int *retfpn)
+int MEMPHY_get_freefp(struct memphy_struct *mp, int *retfpn, BYTE option)
 {
+   pthread_mutex_t *lock;
+   switch (option)
+   {
+   case RAM_LCK:
+      lock = &ram_lock;
+      break;
+   case SWP_LCK:
+      lock = &swp_lock;
+      break;   
+   default:
+      return -1;
+   }
+   pthread_mutex_lock(lock);
+   if (mp->free_fp_list == NULL){
+      pthread_mutex_unlock(lock);
+      return -1;
+   }
+   
    struct framephy_struct *fp = mp->free_fp_list;
-
-   if (fp == NULL)
-     return -1;
-
    *retfpn = fp->fpn;
    mp->free_fp_list = fp->fp_next;
 
@@ -154,14 +196,29 @@ int MEMPHY_get_freefp(struct memphy_struct *mp, int *retfpn)
     * No garbage collector acting then it not been released
     */
    free(fp);
-
+   pthread_mutex_unlock(lock);
    return 0;
 }
 
-int MEMPHY_get_usedfp(struct memphy_struct *mp, int fpn) {
-   struct framephy_struct *usedframe = mp->used_fp_list;
-   if (usedframe == NULL)
+int MEMPHY_get_usedfp(struct memphy_struct *mp, int fpn, BYTE option) {
+   pthread_mutex_t *lock;
+   switch (option)
+   {
+   case RAM_LCK:
+      lock = &ram_lock;
+      break;
+   case SWP_LCK:
+      lock = &swp_lock;
+      break;   
+   default:
       return -1;
+   }
+   pthread_mutex_lock(lock);
+   struct framephy_struct *usedframe = mp->used_fp_list;
+   if (usedframe == NULL) {
+      pthread_mutex_unlock(lock);
+      return -1;
+   }
    if (usedframe->fpn == fpn) {
       // Remove the frame from the used frame list
       mp->used_fp_list = usedframe->fp_next;
@@ -184,15 +241,29 @@ int MEMPHY_get_usedfp(struct memphy_struct *mp, int fpn) {
       free(node);
       }
    }
+   pthread_mutex_unlock(lock);
    return 0;
 }
 
-int MEMPHY_put_usedfp(struct memphy_struct *mp, int fpn, struct mm_struct *owner, int pgn) {
+int MEMPHY_put_usedfp(struct memphy_struct *mp, int fpn, struct mm_struct *owner, int pgn, BYTE option) {
    struct framephy_struct *fp = malloc(sizeof(struct framephy_struct));
    fp->fpn = fpn;
    fp->fp_next = NULL;
    fp->owner = owner;
    fp->pgn = pgn;
+   pthread_mutex_t *lock;
+   switch (option)
+   {
+   case RAM_LCK:
+      lock = &ram_lock;
+      break;
+   case SWP_LCK:
+      lock = &swp_lock;
+      break;   
+   default:
+      return -1;
+   }
+   pthread_mutex_lock(lock);
    if (mp->used_fp_list == NULL) {
       mp->used_fp_list = fp;
       mp->used_fp_tail = fp;
@@ -200,6 +271,7 @@ int MEMPHY_put_usedfp(struct memphy_struct *mp, int fpn, struct mm_struct *owner
       mp->used_fp_tail->fp_next = fp;
       mp->used_fp_tail = fp;
    }
+   pthread_mutex_unlock(lock);
    return 0;
 }
 
@@ -207,22 +279,50 @@ int MEMPHY_dump(struct memphy_struct * mp)
 {
    return 0;
 }
-int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn)
+int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn, BYTE option)
 {
+   pthread_mutex_t *lock;
+   switch (option)
+   {
+   case RAM_LCK:
+      lock = &ram_lock;
+      break;
+   case SWP_LCK:
+      lock = &swp_lock;
+      break;   
+   default:
+      return -1;
+   }
+   pthread_mutex_lock(lock);
    struct framephy_struct *fp = mp->free_fp_list;
    struct framephy_struct *newnode = malloc(sizeof(struct framephy_struct));
    /* Create new node with value fpn */
    newnode->fpn = fpn;
    newnode->fp_next = fp;
    mp->free_fp_list = newnode;
-
+   pthread_mutex_unlock(lock);
    return 0;
 }
 
-int MEMPHY_pop_usedfp(struct memphy_struct *mp, int *fpn, int *pgn, struct mm_struct **mm) {
-   struct framephy_struct *usedframe = mp->used_fp_list;
-   if (usedframe == NULL)
+int MEMPHY_pop_usedfp(struct memphy_struct *mp, int *fpn, int *pgn, struct mm_struct **mm, BYTE option) {
+   pthread_mutex_t *lock;
+   switch (option)
+   {
+   case RAM_LCK:
+      lock = &ram_lock;
+      break;
+   case SWP_LCK:
+      lock = &swp_lock;
+      break;   
+   default:
       return -1;
+   }
+   pthread_mutex_lock(lock);
+   struct framephy_struct *usedframe = mp->used_fp_list;
+   if (usedframe == NULL){
+      pthread_mutex_unlock(lock);
+      return -1;
+   }
    *fpn = usedframe->fpn;
    *pgn = usedframe->pgn;
    *mm = usedframe->owner;
@@ -230,6 +330,7 @@ int MEMPHY_pop_usedfp(struct memphy_struct *mp, int *fpn, int *pgn, struct mm_st
    if (mp->used_fp_list == NULL)
       mp->used_fp_tail = NULL;
    free(usedframe);
+   pthread_mutex_unlock(lock);
    return 0;
 }
 

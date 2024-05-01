@@ -20,9 +20,10 @@
 #include "mm.h"
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <pthread.h>
 #define init_tlbcache(mp,sz,...) init_memphy(mp, sz, (1, ##__VA_ARGS__))
 
+pthread_mutex_t tlb_lock;
 /*
  *  tlb_cache_read read TLB cache device
  *  @mp: memphy struct
@@ -40,10 +41,11 @@ int tlb_cache_read(struct memphy_struct * mp, int pid, int pgnum, uint32_t *valu
    uint32_t i = TLB_INDEX(pid, pgnum);
    uint32_t id = (i % (mp->maxsz / 2)) * 2;
    uint32_t tag = i / (mp->maxsz / 2);
-   if (storage[id] != tag) return -1;
+   if (storage[id] != tag) 
+      return -1;
    *value = storage[id + 1];
 #ifdef DEBUG
-   printf("TLB read at %d for page %d\n", id, pgnum);
+   printf("i pgn pid: %08x %d %d %d\n", i, pgnum, pid, PAGING_MAX_PGN);
 #endif
    return 0;
 }
@@ -65,10 +67,12 @@ int tlb_cache_write(struct memphy_struct *mp, int pid, int pgnum, uint32_t value
    uint32_t i = TLB_INDEX(pid, pgnum);
    uint32_t id = (i % (mp->maxsz / 2)) * 2;
    uint32_t tag = i / (mp->maxsz / 2);
+   pthread_mutex_lock(&tlb_lock);
    storage[id] = tag;
    storage[id + 1] = value;
+   pthread_mutex_unlock(&tlb_lock);
 #ifdef DEBUG
-   printf("TLB updated %08x for page %d\n", value, pgnum);
+   printf("i pgn pid: %08x %d %d %d\n", i, pgnum, pid, PAGING_MAX_PGN);
 #endif
    return 0;
 }
@@ -133,8 +137,12 @@ int init_tlbmemphy(struct memphy_struct *mp, int max_size)
    mp->maxsz = max_size;
 
    mp->rdmflg = 1;
-
+   pthread_mutex_init(&tlb_lock, NULL);
    return 0;
 }
 
+int TLBMEMPHY_destroy_lock() {
+   pthread_mutex_destroy(&tlb_lock);
+   return 0;
+}
 //#endif

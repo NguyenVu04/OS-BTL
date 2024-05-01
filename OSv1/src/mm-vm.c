@@ -153,13 +153,13 @@ int __free(struct pcb_t *caller, int vmaid, int rgid)
       if (PAGING_PAGE_PRESENT(pte)) {
         // Extract the frame number from the page table entry
         int frnum = PAGING_FPN(pte);
-        MEMPHY_get_usedfp(caller->mram, frnum);
+        MEMPHY_get_usedfp(caller->mram, frnum, RAM_LCK);
 
         // Free the frame using the frame number
-        MEMPHY_put_freefp(caller->mram, frnum);
+        MEMPHY_put_freefp(caller->mram, frnum, RAM_LCK);
       } else {
         int frnum = PAGING_SWP(pte);
-        MEMPHY_put_freefp(caller->active_mswp, frnum);
+        MEMPHY_put_freefp(caller->active_mswp, frnum, SWP_LCK);
       }
       
       // Clear the page table entry
@@ -215,19 +215,19 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
     /* Find victim page */
     /*if (find_victim_page(mm, &vicpgn) < 0) 
       return -1;*/
-    if (MEMPHY_pop_usedfp(caller->mram, &vicfpn, &vicpgn, &vicmm) < 0)
+    if (MEMPHY_pop_usedfp(caller->mram, &vicfpn, &vicpgn, &vicmm, RAM_LCK) < 0)
       return -1;
     /* Get free frame in MEMSWP */
-    if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn) < 0) 
+    if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn, SWP_LCK) < 0) 
       return -1;
 
     /* Do swap frame from MEMRAM to MEMSWP and vice versa*/
     /* Copy victim frame to swap */
-    __swap_cp_page(caller->mram, vicfpn, caller->active_mswp, swpfpn);
+    __swap_cp_page(caller->mram, vicfpn, RAM_LCK, caller->active_mswp, swpfpn, SWP_LCK);
     /* Copy target frame from swap to mem */
     //__swap_cp_page();
-    __swap_cp_page(caller->active_mswp, tgtfpn, caller->mram, vicfpn);
-    MEMPHY_put_freefp(caller->active_mswp, tgtfpn);
+    __swap_cp_page(caller->active_mswp, tgtfpn, SWP_LCK, caller->mram, vicfpn, RAM_LCK);
+    MEMPHY_put_freefp(caller->active_mswp, tgtfpn, SWP_LCK);
     /* Update page table */
     //pte_set_swap() &mm->pgd;
     pte_set_swap(&vicmm->pgd[vicpgn], 0, swpfpn);
@@ -241,11 +241,11 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
 #endif
 
     //enlist_pgn_node(mm, pgn);
-    MEMPHY_put_usedfp(caller->mram, vicfpn, mm, pgn);
+    MEMPHY_put_usedfp(caller->mram, vicfpn, mm, pgn, RAM_LCK);
   } else {
     int tgtfpn = PAGING_FPN(pte);
-    MEMPHY_get_usedfp(caller->mram, tgtfpn);
-    MEMPHY_put_usedfp(caller->mram, tgtfpn, mm, pgn);
+    MEMPHY_get_usedfp(caller->mram, tgtfpn, RAM_LCK);
+    MEMPHY_put_usedfp(caller->mram, tgtfpn, mm, pgn, RAM_LCK);
   }
   tlb_cache_write(caller->tlb, caller->pid, pgn, mm->pgd[pgn]);
   *fpn = PAGING_FPN(mm->pgd[pgn]);
@@ -271,7 +271,7 @@ int pg_getval(struct mm_struct *mm, int addr, BYTE *data, struct pcb_t *caller)
 
   int phyaddr = (fpn << PAGING_ADDR_FPN_LOBIT) + off;
 
-  MEMPHY_read(caller->mram,phyaddr, data);
+  MEMPHY_read(caller->mram, phyaddr, data);
   return 0;
 }
 
@@ -292,7 +292,7 @@ int pg_setval(struct mm_struct *mm, int addr, BYTE value, struct pcb_t *caller)
     return -1; /* invalid page access */
   int phyaddr = (fpn << PAGING_ADDR_FPN_LOBIT) + off;
   
-  MEMPHY_write(caller->mram, phyaddr, value);
+  MEMPHY_write(caller->mram, phyaddr, value, RAM_LCK);
   return 0;
 }
 
@@ -400,10 +400,10 @@ int free_pcb_memph(struct pcb_t *caller)
     if (!PAGING_PAGE_PRESENT(pte))
     {
       fpn = PAGING_FPN(pte);
-      MEMPHY_put_freefp(caller->mram, fpn);
+      MEMPHY_put_freefp(caller->mram, fpn, RAM_LCK);
     } else {
       fpn = PAGING_SWP(pte);
-      MEMPHY_put_freefp(caller->active_mswp, fpn);    
+      MEMPHY_put_freefp(caller->active_mswp, fpn, SWP_LCK);    
     }
   }
 

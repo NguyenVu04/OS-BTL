@@ -220,7 +220,7 @@ int tlbwrite(struct pcb_t * proc, BYTE data,
     addr += offset;
     int off = PAGING_OFFST(addr);
     int phyaddr = (frmnum << PAGING_ADDR_FPN_LOBIT) + off;
-    val = MEMPHY_write(proc->mram, phyaddr, data);
+    val = MEMPHY_write(proc->mram, phyaddr, data, RAM_LCK);
   }
 
   /* TODO update TLB CACHED with frame num of recent accessing page(s)*/

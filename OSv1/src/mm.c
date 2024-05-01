@@ -101,7 +101,7 @@ int vmap_page_range(struct pcb_t *caller, // process call
   while (pgit < pgnum && fpit != NULL) {
     ret_rg->rg_end += PAGING_PAGESZ;
     init_pte(&caller->mm->pgd[pgn + pgit], 1, fpit->fpn, 0, 0, 0, 0);
-    MEMPHY_put_usedfp(caller->mram, fpit->fpn, caller->mm, pgn + pgit);
+    MEMPHY_put_usedfp(caller->mram, fpit->fpn, caller->mm, pgn + pgit, RAM_LCK);
     struct framephy_struct *node = fpit;
     fpit = fpit->fp_next;
     free(node);
@@ -128,7 +128,7 @@ struct framephy_struct *newfp_str;
 for(pgit = 0; pgit < req_pgnum; pgit++)
 {
     // Check if a free physical frame is available
-    if(MEMPHY_get_freefp(caller->mram, &fpn) == 0)
+    if(MEMPHY_get_freefp(caller->mram, &fpn, RAM_LCK) == 0)
     {
         // Allocate memory for a new frame physical structure
         newfp_str = malloc(sizeof(struct framephy_struct));
@@ -146,15 +146,15 @@ for(pgit = 0; pgit < req_pgnum; pgit++)
         // Declare a variable for the swapped frame number
         int swpfpn;
         // Try to get a free frame from the swap space of the caller's active memory
-        if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn) < 0) 
+        if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn, SWP_LCK) < 0) 
             return -3000; // Return error code if unable to get a free frame from swap
         struct mm_struct *vicmm;
         int pgn;
-        if (MEMPHY_pop_usedfp(caller->mram, &fpn, &pgn, &vicmm) < 0)
+        if (MEMPHY_pop_usedfp(caller->mram, &fpn, &pgn, &vicmm, RAM_LCK) < 0)
           return -1;
 
         // Swap the contents of the main memory frame with the swap frame
-        __swap_cp_page(caller->mram, fpn, caller->active_mswp, swpfpn);
+        __swap_cp_page(caller->mram, fpn, RAM_LCK, caller->active_mswp, swpfpn, SWP_LCK);
         // Update the page table entry of the victim process to point to the swap frame
         pte_set_swap(&vicmm->pgd[pgn], 0, swpfpn);
         // Update the TLB cache with the swapped page
@@ -223,8 +223,8 @@ int vm_map_ram(struct pcb_t *caller, int astart, int aend, int mapstart, int inc
  * @mpdst  : destination memphy
  * @dstfpn : destination physical page number (FPN)
  **/
-int __swap_cp_page(struct memphy_struct *mpsrc, int srcfpn,
-                struct memphy_struct *mpdst, int dstfpn) 
+int __swap_cp_page(struct memphy_struct *mpsrc, int srcfpn, BYTE srcoption,
+                struct memphy_struct *mpdst, int dstfpn, BYTE dstoption) 
 {
   int cellidx;
   int addrsrc,addrdst;
@@ -235,7 +235,7 @@ int __swap_cp_page(struct memphy_struct *mpsrc, int srcfpn,
 
     BYTE data;
     MEMPHY_read(mpsrc, addrsrc, &data);
-    MEMPHY_write(mpdst, addrdst, data);
+    MEMPHY_write(mpdst, addrdst, data, dstoption);
   }
 
   return 0;

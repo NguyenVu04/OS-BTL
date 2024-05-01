@@ -265,7 +265,7 @@ int main(int argc, char * argv[]) {
 	int sit;
 	for(sit = 0; sit < PAGING_MAX_MMSWP; sit++)
 	       init_memphy(&mswp[sit], memswpsz[sit], rdmflag);
-
+	init_memphy_lock();
 	/* In Paging mode, it needs passing the system mem to each PCB through loader*/
 	struct mmpaging_ld_args *mm_ld_args = malloc(sizeof(struct mmpaging_ld_args));
 
@@ -306,7 +306,8 @@ int main(int argc, char * argv[]) {
 
 	/* Stop timer */
 	stop_timer();
-
+	destroy_memphy_lock();
+	TLBMEMPHY_destroy_lock();
 	return 0;
 
 }

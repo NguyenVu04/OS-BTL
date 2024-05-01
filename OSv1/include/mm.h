@@ -92,8 +92,11 @@
 #define OVERLAP(x1,x2,y1,y2) (((y2-x1)*(x2-y1)>=0)?1:0)
 
 /*TLB Operator*/
-#define TLB_INDEX(pid, pgn) ((pid << (NBITS32(PAGING_MAX_PGN) + 1)) | pgn)
+#define TLB_INDEX(pid, pgn) ((pid << NBITS32(PAGING_MAX_PGN)) | pgn)
 
+
+#define RAM_LCK 0
+#define SWP_LCK 1
 /* VM region prototypes */
 struct vm_rg_struct * init_vm_rg(int rg_start, int rg_endi);
 int enlist_vm_rg_node(struct vm_rg_struct **rglist, struct vm_rg_struct* rgnode);
@@ -102,8 +105,8 @@ int vmap_page_range(struct pcb_t *caller, int addr, int pgnum,
                     struct framephy_struct *frames, struct vm_rg_struct *ret_rg);
 int vm_map_ram(struct pcb_t *caller, int astart, int send, int mapstart, int incpgnum, struct vm_rg_struct *ret_rg);
 int alloc_pages_range(struct pcb_t *caller, int incpgnum, struct framephy_struct **frm_lst);
-int __swap_cp_page(struct memphy_struct *mpsrc, int srcfpn,
-                struct memphy_struct *mpdst, int dstfpn) ;
+int __swap_cp_page(struct memphy_struct *mpsrc, int srcfpn, BYTE srcoption,
+                struct memphy_struct *mpdst, int dstfpn, BYTE dstoption);
 int pte_set_fpn(uint32_t *pte, int fpn);
 int pte_set_swap(uint32_t *pte, int swptyp, int swpoff);
 int init_pte(uint32_t *pte,
@@ -132,6 +135,7 @@ int TLBMEMPHY_write(struct memphy_struct * mp, int addr, BYTE data);
 int TLBMEMPHY_dump(struct memphy_struct * mp);
 int tlb_cache_read(struct memphy_struct * mp, int pid, int pgnum, uint32_t *value);
 int tlb_cache_write(struct memphy_struct *mp, int pid, int pgnum, uint32_t value);
+int TLBMEMPHY_destroy_lock();
 /* VM prototypes */
 int pgalloc(struct pcb_t *proc, uint32_t size, uint32_t reg_index);
 int pgfree_data(struct pcb_t *proc, uint32_t reg_index);
@@ -154,15 +158,17 @@ int find_victim_page(struct mm_struct* mm, int *pgn);
 struct vm_area_struct *get_vma_by_num(struct mm_struct *mm, int vmaid);
 
 /* MEM/PHY protypes */
-int MEMPHY_get_freefp(struct memphy_struct *mp, int *fpn);
-int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn);
-int MEMPHY_get_usedfp(struct memphy_struct *mp, int fpn);
-int MEMPHY_pop_usedfp(struct memphy_struct *mp, int *fpn, int *pgn, struct mm_struct **mm);
-int MEMPHY_put_usedfp(struct memphy_struct *mp, int fpn, struct mm_struct *owner, int pgn);
-int MEMPHY_read(struct memphy_struct * mp, int addr, BYTE *value);
-int MEMPHY_write(struct memphy_struct * mp, int addr, BYTE data);
-int MEMPHY_dump(struct memphy_struct * mp);
+int MEMPHY_get_freefp(struct memphy_struct *mp, int *fpn, BYTE option);
+int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn, BYTE option);
+int MEMPHY_get_usedfp(struct memphy_struct *mp, int fpn, BYTE option);
+int MEMPHY_pop_usedfp(struct memphy_struct *mp, int *fpn, int *pgn, struct mm_struct **mm, BYTE option);
+int MEMPHY_put_usedfp(struct memphy_struct *mp, int fpn, struct mm_struct *owner, int pgn, BYTE option);
+int MEMPHY_read(struct memphy_struct *mp, int addr, BYTE *value);
+int MEMPHY_write(struct memphy_struct *mp, int addr, BYTE data, BYTE option);
+int MEMPHY_dump(struct memphy_struct *mp);
 int init_memphy(struct memphy_struct *mp, int max_size, int randomflg);
+int init_memphy_lock();
+int destroy_memphy_lock();
 /* DEBUG */
 int print_list_fp(struct framephy_struct *fp);
 int print_list_rg(struct vm_rg_struct *rg);
