@@ -39,8 +39,8 @@ int tlb_cache_read(struct memphy_struct * mp, int pid, int pgnum, uint32_t *valu
     */
    uint32_t* storage = (uint32_t*) mp->storage;
    uint32_t i = TLB_INDEX(pid, pgnum);
-   uint32_t id = (i % (mp->maxsz / 2)) * 2;
-   uint32_t tag = i / (mp->maxsz / 2);
+   uint32_t id = (i % (mp->maxsz / 8)) * 2;
+   uint32_t tag = i / (mp->maxsz / 8);
    if (storage[id] != tag) 
       return -1;
    *value = storage[id + 1];
@@ -65,8 +65,8 @@ int tlb_cache_write(struct memphy_struct *mp, int pid, int pgnum, uint32_t value
     */
    uint32_t* storage = (uint32_t*) mp->storage;
    uint32_t i = TLB_INDEX(pid, pgnum);
-   uint32_t id = (i % (mp->maxsz / 2)) * 2;
-   uint32_t tag = i / (mp->maxsz / 2);
+   uint32_t id = (i % (mp->maxsz / 8)) * 2;
+   uint32_t tag = i / (mp->maxsz / 8);
    pthread_mutex_lock(&tlb_lock);
    storage[id] = tag;
    storage[id + 1] = value;
