@@ -97,7 +97,7 @@ int __alloc(struct pcb_t *caller, int vmaid, int rgid, int size, uint32_t *alloc
   /* TODO get_free_vmrg_area FAILED handle the region management (Fig.6)*/
   
   /*Attempt to increate limit to get space */
-  struct vm_area_struct *cur_vma = caller->mm->mmap;
+  struct vm_area_struct *cur_vma = get_vma_by_num(caller->mm, vmaid);
   
   //int inc_limit_ret
   int old_sbrk ;
@@ -308,7 +308,7 @@ int __read(struct pcb_t *caller, int vmaid, int rgid, int offset, BYTE *data)
 {
   struct vm_rg_struct *currg = get_symrg_byid(caller->mm, rgid);
 
-  struct vm_area_struct *cur_vma = caller->mm->mmap;
+  struct vm_area_struct *cur_vma = get_vma_by_num(caller->mm, vmaid);
 
   if(currg == NULL || cur_vma == NULL) /* Invalid memory identify */
 	  return -1;
@@ -353,7 +353,7 @@ int __write(struct pcb_t *caller, int vmaid, int rgid, int offset, BYTE value)
 {
   struct vm_rg_struct *currg = get_symrg_byid(caller->mm, rgid);
   
-  struct vm_area_struct *cur_vma = caller->mm->mmap;
+  struct vm_area_struct *cur_vma = get_vma_by_num(caller->mm, vmaid);
   
   if(currg == NULL || cur_vma == NULL) /* Invalid memory identify */
 	  return -1;

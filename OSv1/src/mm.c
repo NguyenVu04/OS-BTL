@@ -253,7 +253,7 @@ int init_mm(struct mm_struct *mm, struct pcb_t *caller)
   mm->pgd = malloc(PAGING_MAX_PGN*sizeof(uint32_t));
 
   /* By default the owner comes with at least one vma */
-  vma->vm_id = 1;
+  vma->vm_id = 0;
   vma->vm_start = 0;
   vma->vm_end = vma->vm_start + PAGING_MAX_PGN * PAGING_PAGESZ;
   vma->sbrk = vma->vm_start;
