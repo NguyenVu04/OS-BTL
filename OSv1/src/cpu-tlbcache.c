@@ -41,9 +41,13 @@ int tlb_cache_read(struct memphy_struct * mp, int pid, int pgnum, uint32_t *valu
    uint32_t i = TLB_INDEX(pid, pgnum);
    uint32_t id = (i % (mp->maxsz / 8)) * 2;
    uint32_t tag = i / (mp->maxsz / 8);
-   if (storage[id] != tag) 
+   pthread_mutex_lock(&tlb_lock);
+   if (storage[id] != tag) {
+      pthread_mutex_unlock(&tlb_lock);
       return -1;
+   }
    *value = storage[id + 1];
+   pthread_mutex_unlock(&tlb_lock);
 #ifdef DEBUG
    printf("i pgn pid: %08x %d %d %d\n", i, pgnum, pid, PAGING_MAX_PGN);
 #endif
