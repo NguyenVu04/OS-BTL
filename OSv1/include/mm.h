@@ -165,7 +165,7 @@ int MEMPHY_pop_usedfp(struct memphy_struct *mp, int *fpn, int *pgn, struct mm_st
 int MEMPHY_put_usedfp(struct memphy_struct *mp, int fpn, struct mm_struct *owner, int pgn, BYTE option);
 int MEMPHY_read(struct memphy_struct *mp, int addr, BYTE *value);
 int MEMPHY_write(struct memphy_struct *mp, int addr, BYTE data, BYTE option);
-int MEMPHY_dump(struct memphy_struct *mp);
+int MEMPHY_dump(struct memphy_struct *mp, int fpn, int start, int end);
 int init_memphy(struct memphy_struct *mp, int max_size, int randomflg);
 int init_memphy_lock();
 int destroy_memphy_lock();

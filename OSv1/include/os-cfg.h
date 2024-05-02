@@ -12,6 +12,7 @@
 //#define MMDBG 1
 #define IODUMP 1
 #define PAGETBL_DUMP 1
+//#define MEMDUMP
 //#define DEBUG
 
 #endif

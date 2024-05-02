@@ -275,8 +275,17 @@ int MEMPHY_put_usedfp(struct memphy_struct *mp, int fpn, struct mm_struct *owner
    return 0;
 }
 
-int MEMPHY_dump(struct memphy_struct * mp)
+int MEMPHY_dump(struct memphy_struct * mp, int fpn, int start, int end)
 {
+   if (start < 0 || end > PAGING_PAGESZ || fpn < 0)
+      return -1;
+   if (end == -1)
+      end = PAGING_PAGESZ;
+   printf("MEMPHY dumped for frame %d from %d to %d:\n", fpn, start, end);
+   for (int i = start; i < end; i++) {
+      int phyaddr = (fpn << PAGING_ADDR_FPN_LOBIT) + i;
+      printf("%d: %02x\n", i, mp->storage[phyaddr]);
+   }
    return 0;
 }
 int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn, BYTE option)

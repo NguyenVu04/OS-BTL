@@ -134,7 +134,10 @@ int tlbread(struct pcb_t * proc, uint32_t source,
 #ifdef PAGETBL_DUMP
   print_pgtbl(proc, 0, -1); //print max TBL
 #endif
-  MEMPHY_dump(proc->mram);
+  
+#endif
+#ifdef MEMDUMP
+  MEMPHY_dump(proc->mram, frmnum, offset, offset + 1);
 #endif
   int val;
   if (frmnum < 0 || !PAGING_PAGE_PRESENT(pte)) {
@@ -198,7 +201,7 @@ int tlbwrite(struct pcb_t * proc, BYTE data,
 #ifdef PAGETBL_DUMP
   print_pgtbl(proc, 0, -1); //print max TBL
 #endif
-  MEMPHY_dump(proc->mram);
+  
 #endif
   if (frmnum < 0 || !PAGING_PAGE_PRESENT(pte)) {
     if (!PAGING_PAGE_PRESENT(pte) && GETVAL(pte, PAGING_PTE_SWAPPED_MASK, 0) == 0) 
@@ -227,6 +230,10 @@ int tlbwrite(struct pcb_t * proc, BYTE data,
   /* by using tlb_cache_read()/tlb_cache_write()*/
 #ifdef DEBUG
   printf("Write frame: %d\n", PAGING_FPN(proc->mm->pgd[pgn]));
+#endif
+
+#ifdef MEMDUMP
+  MEMPHY_dump(proc->mram, frmnum, offset, offset + 1);
 #endif
   return val;
 }
