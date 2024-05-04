@@ -1,32 +1,11 @@
-2 31
+1 10
 calc
 alloc 300 0
 alloc 300 4
 free 0
-alloc 200 1
-write 120 1 20
-read 1 20 2
-write 103 4 30
-read 4 30 8
+alloc 100 1
+write 100 1 20
+read 1 20 20
+write 103 3 20
+read 3 20 20
 free 4
-alloc 400 8
-free 1
-alloc 200 9
-write 113 8 100
-write 124 8 111
-read 8 100 6
-read 8 111 6
-write 96 9 123
-read 9 123 5
-alloc 100 6
-free 8
-free 9
-write 49 6 118
-read 6 118 9
-write 59 6 114
-read 6 114 3
-alloc 200 1
-write 69 1 15
-read 1 15 3
-free 1
-free 6
