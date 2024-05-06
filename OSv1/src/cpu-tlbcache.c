@@ -48,9 +48,7 @@ int tlb_cache_read(struct memphy_struct * mp, int pid, int pgnum, uint32_t *valu
    }
    *value = storage[id + 1];
    pthread_mutex_unlock(&tlb_lock);
-#ifdef DEBUG
-   printf("i pgn pid: %08x %d %d %d\n", i, pgnum, pid, PAGING_MAX_PGN);
-#endif
+
    return 0;
 }
 
@@ -75,9 +73,7 @@ int tlb_cache_write(struct memphy_struct *mp, int pid, int pgnum, uint32_t value
    storage[id] = tag;
    storage[id + 1] = value;
    pthread_mutex_unlock(&tlb_lock);
-#ifdef DEBUG
-   printf("i pgn pid: %08x %d %d %d\n", i, pgnum, pid, PAGING_MAX_PGN);
-#endif
+
    return 0;
 }
 
@@ -122,12 +118,15 @@ int TLBMEMPHY_write(struct memphy_struct * mp, int addr, BYTE data)
  */
 
 
-int TLBMEMPHY_dump(struct memphy_struct * mp)
+int TLBMEMPHY_dump(struct memphy_struct * mp, int start, int end)
 {
-   /*TODO dump memphy contnt mp->storage 
-    *     for tracing the memory content
-    */
-
+   if (end == -1)
+     end = mp->maxsz;
+   uint32_t *storage = (uint32_t *)mp->storage;
+   printf("TLBMEMPHY dump:\n");
+   for (int i = start; i < end; i+=2) {
+      printf("0x%08x: 0x%08x\n", i, storage[i]);
+   }
    return 0;
 }
 
@@ -145,7 +144,10 @@ int init_tlbmemphy(struct memphy_struct *mp, int max_size)
    return 0;
 }
 
-int TLBMEMPHY_destroy_lock() {
+int destroy_tlbmemphy(struct memphy_struct *mp) {
+   if (mp == NULL)
+      return -1;
+   free(mp->storage);
    pthread_mutex_destroy(&tlb_lock);
    return 0;
 }

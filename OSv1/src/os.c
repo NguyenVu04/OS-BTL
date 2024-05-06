@@ -64,9 +64,38 @@ static void * cpu_routine(void * args) {
                            continue; /* First load failed. skip dummy load */
                         }
 		}else if (proc->pc == proc->code->size) {
-			/* The porcess has finish it job */
+			/* The process has finish it job */
 			printf("\tCPU %d: Processed %2d has finished\n",
 				id ,proc->pid);
+			free(proc->code->text);
+			free(proc->code);
+#ifdef MM_PAGING
+			for (int i = 0; i < PAGING_MAX_SYMTBL_SZ; i++) {
+				if (proc->mm->symrgtbl[i] != NULL) {
+					free(proc->mm->symrgtbl[i]);
+				}
+			}
+			while (proc->mm->mmap->vm_freerg_list != NULL) {
+				struct vm_rg_struct *rg = proc->mm->mmap->vm_freerg_list;
+				proc->mm->mmap->vm_freerg_list = rg->rg_next;
+				free(rg);
+			}
+			int pgn_end = PAGING_PGN(proc->mm->mmap->sbrk);
+			for (int i = 0; i < pgn_end; i++) {
+				uint32_t pte = proc->mm->pgd[i];
+				if (PAGING_PAGE_PRESENT(pte)) {
+					int fpn = PAGING_FPN(pte);
+					if (MEMPHY_get_usedfp(proc->mram, fpn, RAM_LCK) == 0)
+						MEMPHY_put_freefp(proc->mram, fpn, RAM_LCK);
+				} else if (GETVAL(pte, PAGING_PTE_SWAPPED_MASK, 0) != 0) {
+					int fpn = PAGING_SWP(pte);
+					MEMPHY_put_freefp(proc->active_mswp, fpn, SWP_LCK);
+				}
+			}
+			free(proc->mm->pgd);
+			free(proc->mm->mmap);
+			free(proc->mm);
+#endif
 			free(proc);
 			proc = get_proc();
 			time_left = 0;
@@ -93,7 +122,6 @@ static void * cpu_routine(void * args) {
 				id, proc->pid);
 			time_left = time_slot;
 		}
-		
 		/* Run current process */
 		run(proc);
 		time_left--;
@@ -265,6 +293,7 @@ int main(int argc, char * argv[]) {
 	int sit;
 	for(sit = 0; sit < PAGING_MAX_MMSWP; sit++)
 	       init_memphy(&mswp[sit], memswpsz[sit], rdmflag);
+
 	init_memphy_lock();
 	/* In Paging mode, it needs passing the system mem to each PCB through loader*/
 	struct mmpaging_ld_args *mm_ld_args = malloc(sizeof(struct mmpaging_ld_args));
@@ -306,8 +335,13 @@ int main(int argc, char * argv[]) {
 
 	/* Stop timer */
 	stop_timer();
+#ifdef MM_PAGING
 	destroy_memphy_lock();
-	TLBMEMPHY_destroy_lock();
+	destroy_memphy(&mram);
+	for(sit = 0; sit < PAGING_MAX_MMSWP; sit++)
+		destroy_memphy(&mswp[sit]);
+	destroy_tlbmemphy(&tlb);
+#endif
 	return 0;
 
 }

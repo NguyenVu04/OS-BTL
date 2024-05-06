@@ -94,7 +94,6 @@ int __alloc(struct pcb_t *caller, int vmaid, int rgid, int size, uint32_t *alloc
     return 0;
   }
   free(rgnode);
-  /* TODO get_free_vmrg_area FAILED handle the region management (Fig.6)*/
   
   /*Attempt to increate limit to get space */
   struct vm_area_struct *cur_vma = get_vma_by_num(caller->mm, vmaid);
@@ -104,12 +103,8 @@ int __alloc(struct pcb_t *caller, int vmaid, int rgid, int size, uint32_t *alloc
 
   old_sbrk = cur_vma->sbrk;
 
-  /* TODO INCREASE THE LIMIT
-   * inc_vma_limit(caller, vmaid, inc_sz)
-   */
-  
   if (inc_vma_limit(caller, vmaid, inc_sz) < 0) return -1;
-  
+
   /*Successful increase limit */
   caller->mm->symrgtbl[rgid] = malloc(sizeof(struct vm_rg_struct));
   caller->mm->symrgtbl[rgid]->rg_start = old_sbrk;
@@ -152,19 +147,25 @@ int __free(struct pcb_t *caller, int vmaid, int rgid)
       
       if (PAGING_PAGE_PRESENT(pte)) {
         // Extract the frame number from the page table entry
-        int frnum = PAGING_FPN(pte);
-        MEMPHY_get_usedfp(caller->mram, frnum, RAM_LCK);
+        int frmnum = PAGING_FPN(pte);
+        MEMPHY_get_usedfp(caller->mram, frmnum, RAM_LCK);
 
         // Free the frame using the frame number
-        MEMPHY_put_freefp(caller->mram, frnum, RAM_LCK);
+        MEMPHY_put_freefp(caller->mram, frmnum, RAM_LCK);
+      } else if (GETVAL(pte, PAGING_PTE_SWAPPED_MASK, 0) != 0) {
+        int frmnum = PAGING_SWP(pte);
+        MEMPHY_put_freefp(caller->active_mswp, frmnum, SWP_LCK);
       } else {
-        int frnum = PAGING_SWP(pte);
-        MEMPHY_put_freefp(caller->active_mswp, frnum, SWP_LCK);
+#ifdef DEBUG
+        printf("Freed invalid page: %d\n", i);
+#endif
+        continue;
       }
       
       // Clear the page table entry
       caller->mm->pgd[i] = 0;   
-      
+      if (tlb_cache_read(caller->tlb, caller->pid, i, &pte) == 0)
+        tlb_cache_write(caller->tlb, caller->pid, i, 0);
   }
 
   return 0;
@@ -207,14 +208,13 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
   uint32_t pte = mm->pgd[pgn];
  
   if (!PAGING_PAGE_PRESENT(pte))
-  { /* Page is not online, make it actively living */
+  { 
+    /* Page is not online, make it actively living */
     int vicpgn, swpfpn, vicfpn; 
     struct mm_struct *vicmm;
     int tgtfpn = PAGING_SWP(pte);//the target frame storing our variable
     /* TODO: Play with your paging theory here */
     /* Find victim page */
-    /*if (find_victim_page(mm, &vicpgn) < 0) 
-      return -1;*/
     if (MEMPHY_pop_usedfp(caller->mram, &vicfpn, &vicpgn, &vicmm, RAM_LCK) < 0)
       return -1;
     /* Get free frame in MEMSWP */
@@ -223,24 +223,21 @@ int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
 
     /* Do swap frame from MEMRAM to MEMSWP and vice versa*/
     /* Copy victim frame to swap */
-    __swap_cp_page(caller->mram, vicfpn, RAM_LCK, caller->active_mswp, swpfpn, SWP_LCK);
+    __swap_cp_page(vicmm->owner->mram, vicfpn, vicmm->owner->active_mswp, swpfpn, SWP_LCK);
     /* Copy target frame from swap to mem */
-    //__swap_cp_page();
-    __swap_cp_page(caller->active_mswp, tgtfpn, SWP_LCK, caller->mram, vicfpn, RAM_LCK);
+    __swap_cp_page(caller->active_mswp, tgtfpn, caller->mram, vicfpn, RAM_LCK);
     MEMPHY_put_freefp(caller->active_mswp, tgtfpn, SWP_LCK);
     /* Update page table */
-    //pte_set_swap() &mm->pgd;
     pte_set_swap(&vicmm->pgd[vicpgn], 0, swpfpn);
     /* Update its online status of the target page */
-    //pte_set_fpn() & mm->pgd[pgn];
     pte_set_fpn(&mm->pgd[pgn], vicfpn);
 
 #ifdef CPU_TLB
-    /* Update its online status of TLB (if needed) */
-    tlb_cache_write(caller->tlb, caller->pid, vicpgn, mm->pgd[vicpgn]);
+    /* Update its online status of TLB */
+    uint32_t tmppte;
+    if (tlb_cache_read(vicmm->owner->tlb, vicmm->owner->pid, vicpgn, &tmppte) == 0)
+      tlb_cache_write(vicmm->owner->tlb, vicmm->owner->pid, vicpgn, vicmm->pgd[vicpgn]);
 #endif
-
-    //enlist_pgn_node(mm, pgn);
     MEMPHY_put_usedfp(caller->mram, vicfpn, mm, pgn, RAM_LCK);
   } else {
     int tgtfpn = PAGING_FPN(pte);
@@ -463,13 +460,13 @@ int inc_vma_limit(struct pcb_t *caller, int vmaid, int inc_sz)
   int incnumpage =  inc_amt / PAGING_PAGESZ;
   struct vm_rg_struct *area = get_vm_area_node_at_brk(caller, vmaid, inc_sz, inc_amt);
   struct vm_area_struct *cur_vma = caller->mm->mmap;
-
+  
   int old_end = cur_vma->sbrk;
 
   /*Validate overlap of obtained region */
   if (validate_overlap_vm_area(caller, vmaid, area->rg_start, area->rg_end) < 0)
     return -1; /*Overlap and failed allocation */
-
+  
   /* The obtained vm area (only) 
    * now will be alloc real ram region */
   cur_vma->sbrk += inc_sz;

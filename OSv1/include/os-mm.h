@@ -48,6 +48,8 @@ struct vm_area_struct {
 struct mm_struct {
    uint32_t *pgd;
 
+   struct pcb_t *owner;
+
    struct vm_area_struct *mmap;
 
    /* Currently we support a fixed number of symbol */
@@ -55,7 +57,6 @@ struct mm_struct {
 
    /* list of used page */
    struct pgn_t *fifo_pgn;
-   struct pgn_t *pgn_tail;
 };
 
 /*

@@ -94,7 +94,6 @@
 /*TLB Operator*/
 #define TLB_INDEX(pid, pgn) ((pid << NBITS32(PAGING_MAX_PGN)) | pgn)
 
-
 #define RAM_LCK 0
 #define SWP_LCK 1
 /* VM region prototypes */
@@ -105,7 +104,7 @@ int vmap_page_range(struct pcb_t *caller, int addr, int pgnum,
                     struct framephy_struct *frames, struct vm_rg_struct *ret_rg);
 int vm_map_ram(struct pcb_t *caller, int astart, int send, int mapstart, int incpgnum, struct vm_rg_struct *ret_rg);
 int alloc_pages_range(struct pcb_t *caller, int incpgnum, struct framephy_struct **frm_lst);
-int __swap_cp_page(struct memphy_struct *mpsrc, int srcfpn, BYTE srcoption,
+int __swap_cp_page(struct memphy_struct *mpsrc, int srcfpn,
                 struct memphy_struct *mpdst, int dstfpn, BYTE dstoption);
 int pte_set_fpn(uint32_t *pte, int fpn);
 int pte_set_swap(uint32_t *pte, int swptyp, int swpoff);
@@ -132,10 +131,10 @@ int tlbwrite(struct pcb_t * proc, BYTE data, uint32_t destination, uint32_t offs
 int init_tlbmemphy(struct memphy_struct *mp, int max_size);
 int TLBMEMPHY_read(struct memphy_struct * mp, int addr, BYTE *value);
 int TLBMEMPHY_write(struct memphy_struct * mp, int addr, BYTE data);
-int TLBMEMPHY_dump(struct memphy_struct * mp);
+int TLBMEMPHY_dump(struct memphy_struct * mp, int start, int end);
 int tlb_cache_read(struct memphy_struct * mp, int pid, int pgnum, uint32_t *value);
 int tlb_cache_write(struct memphy_struct *mp, int pid, int pgnum, uint32_t value);
-int TLBMEMPHY_destroy_lock();
+int destroy_tlbmemphy(struct memphy_struct *mp);
 /* VM prototypes */
 int pgalloc(struct pcb_t *proc, uint32_t size, uint32_t reg_index);
 int pgfree_data(struct pcb_t *proc, uint32_t reg_index);
@@ -167,6 +166,7 @@ int MEMPHY_read(struct memphy_struct *mp, int addr, BYTE *value);
 int MEMPHY_write(struct memphy_struct *mp, int addr, BYTE data, BYTE option);
 int MEMPHY_dump(struct memphy_struct *mp, int fpn, int start, int end);
 int init_memphy(struct memphy_struct *mp, int max_size, int randomflg);
+int destroy_memphy(struct memphy_struct *mp);
 int init_memphy_lock();
 int destroy_memphy_lock();
 /* DEBUG */

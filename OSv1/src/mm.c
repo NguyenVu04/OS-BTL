@@ -86,7 +86,6 @@ int vmap_page_range(struct pcb_t *caller, // process call
            struct framephy_struct *frames,// list of the mapped frames
               struct vm_rg_struct *ret_rg)// return mapped region, the real mapped fp
 {                                         // no guarantee all given pages are mapped
-  //uint32_t * pte = malloc(sizeof(uint32_t));
   struct framephy_struct *fpit = frames;
   int pgit = 0;
   int pgn = PAGING_PGN(addr);
@@ -94,10 +93,6 @@ int vmap_page_range(struct pcb_t *caller, // process call
   ret_rg->rg_end = ret_rg->rg_start = addr; // at least the very first space is usable
   ret_rg->rg_next = NULL;
   
-  /* TODO map range of frame to address space 
-   *      [addr to addr + pgnum*PAGING_PAGESZ
-   *      in page table caller->mm->pgd[]
-   */
   while (pgit < pgnum && fpit != NULL) {
     ret_rg->rg_end += PAGING_PAGESZ;
     init_pte(&caller->mm->pgd[pgn + pgit], 1, fpit->fpn, 0, 0, 0, 0);
@@ -141,20 +136,17 @@ for(pgit = 0; pgit < req_pgnum; pgit++)
     } 
     else 
     {  
-        // ERROR CODE: Not enough free frames available, perform swapping
-        
         // Declare a variable for the swapped frame number
         int swpfpn;
-        // Try to get a free frame from the swap space of the caller's active memory
-        if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn, SWP_LCK) < 0) 
-            return -3000; // Return error code if unable to get a free frame from swap
         struct mm_struct *vicmm;
         int pgn;
         if (MEMPHY_pop_usedfp(caller->mram, &fpn, &pgn, &vicmm, RAM_LCK) < 0)
           return -1;
-
+        // Try to get a free frame from the swap space of the caller's active memory
+        if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn, SWP_LCK) < 0) 
+            return -3000; // Return error code if unable to get a free frame from swap
         // Swap the contents of the main memory frame with the swap frame
-        __swap_cp_page(caller->mram, fpn, RAM_LCK, caller->active_mswp, swpfpn, SWP_LCK);
+        __swap_cp_page(caller->mram, fpn, caller->active_mswp, swpfpn, SWP_LCK);
         // Update the page table entry of the victim process to point to the swap frame
         pte_set_swap(&vicmm->pgd[pgn], 0, swpfpn);
         // Update the TLB cache with the swapped page
@@ -197,7 +189,7 @@ int vm_map_ram(struct pcb_t *caller, int astart, int aend, int mapstart, int inc
    *duplicate control mechanism, keep it simple
    */
   ret_alloc = alloc_pages_range(caller, incpgnum, &frm_lst);
-
+  
   if (ret_alloc < 0 && ret_alloc != -3000)
     return -1;
 
@@ -209,7 +201,7 @@ int vm_map_ram(struct pcb_t *caller, int astart, int aend, int mapstart, int inc
 #endif
      return -1;
   }
-
+  
   /* it leaves the case of memory is enough but half in ram, half in swap
    * do the swaping all to swapper to get the all in ram */
   vmap_page_range(caller, mapstart, incpgnum, frm_lst, ret_rg);
@@ -223,7 +215,7 @@ int vm_map_ram(struct pcb_t *caller, int astart, int aend, int mapstart, int inc
  * @mpdst  : destination memphy
  * @dstfpn : destination physical page number (FPN)
  **/
-int __swap_cp_page(struct memphy_struct *mpsrc, int srcfpn, BYTE srcoption,
+int __swap_cp_page(struct memphy_struct *mpsrc, int srcfpn,
                 struct memphy_struct *mpdst, int dstfpn, BYTE dstoption) 
 {
   int cellidx;
@@ -251,7 +243,7 @@ int init_mm(struct mm_struct *mm, struct pcb_t *caller)
   struct vm_area_struct * vma = malloc(sizeof(struct vm_area_struct));
 
   mm->pgd = malloc(PAGING_MAX_PGN*sizeof(uint32_t));
-
+  mm->owner = caller;
   /* By default the owner comes with at least one vma */
   vma->vm_id = 0;
   vma->vm_start = 0;
@@ -268,7 +260,6 @@ int init_mm(struct mm_struct *mm, struct pcb_t *caller)
   }
 
   mm->fifo_pgn = NULL;
-  mm->pgn_tail = NULL;
   return 0;
 }
 
@@ -296,16 +287,9 @@ int enlist_pgn_node(struct mm_struct *mm, int pgn)
   struct pgn_t* pnode = malloc(sizeof(struct pgn_t));
 
   pnode->pgn = pgn;
-  pnode->pg_next = NULL;
+  pnode->pg_next = mm->fifo_pgn;
 
-  if (mm->fifo_pgn == NULL) {
-    mm->fifo_pgn = mm->pgn_tail = pnode;
-  }
-  else {
-    mm->pgn_tail->pg_next = pnode;
-    mm->pgn_tail = pnode;
-  }
-
+  mm->fifo_pgn = pnode;
   return 0;
 }
 
