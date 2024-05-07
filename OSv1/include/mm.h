@@ -101,9 +101,9 @@ struct vm_rg_struct * init_vm_rg(int rg_start, int rg_endi);
 int enlist_vm_rg_node(struct vm_rg_struct **rglist, struct vm_rg_struct* rgnode);
 int enlist_pgn_node(struct mm_struct *mm, int pgn);
 int vmap_page_range(struct pcb_t *caller, int addr, int pgnum, 
-                    struct framephy_struct *frames, struct vm_rg_struct *ret_rg);
+                    struct framephy_struct *frames, struct framephy_struct *swpframes, struct vm_rg_struct *ret_rg);
 int vm_map_ram(struct pcb_t *caller, int astart, int send, int mapstart, int incpgnum, struct vm_rg_struct *ret_rg);
-int alloc_pages_range(struct pcb_t *caller, int incpgnum, struct framephy_struct **frm_lst);
+int alloc_pages_range(struct pcb_t *caller, int incpgnum, struct framephy_struct **frm_lst, struct framephy_struct **swp_lst);
 int __swap_cp_page(struct memphy_struct *mpsrc, int srcfpn,
                 struct memphy_struct *mpdst, int dstfpn, BYTE dstoption);
 int pte_set_fpn(uint32_t *pte, int fpn);

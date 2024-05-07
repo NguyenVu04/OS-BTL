@@ -84,25 +84,57 @@ int vmap_page_range(struct pcb_t *caller, // process call
                                 int addr, // start address which is aligned to pagesz
                                int pgnum, // num of mapping page
            struct framephy_struct *frames,// list of the mapped frames
+           struct framephy_struct *swpframes,// list of the swapped frames
               struct vm_rg_struct *ret_rg)// return mapped region, the real mapped fp
 {                                         // no guarantee all given pages are mapped
-  struct framephy_struct *fpit = frames;
-  int pgit = 0;
-  int pgn = PAGING_PGN(addr);
+  /* Iterate through each page to be mapped and set up the page table entries (PTEs)
+   * for the process's page directory (PGD) and update the region information. */
+  struct framephy_struct *fpit = frames;  // Pointer to the first frame in the list
+  int pgit = 0;  // Page index
+  int pgn = PAGING_PGN(addr);  // Page number
 
-  ret_rg->rg_end = ret_rg->rg_start = addr; // at least the very first space is usable
+  /* Initialize region end and start to the start address, and set the next pointer to NULL. */
+  ret_rg->rg_end = ret_rg->rg_start = addr;  // First space is usable
   ret_rg->rg_next = NULL;
   
-  while (pgit < pgnum && fpit != NULL) {
+  /* Loop through each page to be mapped, updating the page table entry (PTE) for the
+   * process's page directory (PGD) and updating the region information. */
+  while (fpit != NULL) {
+    /* Move the end of the region to the next page boundary. */
     ret_rg->rg_end += PAGING_PAGESZ;
+    
+    /* Initialize the page table entry (PTE) for the process's page directory (PGD). */
     init_pte(&caller->mm->pgd[pgn + pgit], 1, fpit->fpn, 0, 0, 0, 0);
+    
+    /* Move the frame from the list to the used frame list in the memory. */
     MEMPHY_put_usedfp(caller->mram, fpit->fpn, caller->mm, pgn + pgit, RAM_LCK);
+    
+    /* Update the TLB with the new PTE. */
+    tlb_cache_write(caller->tlb, caller->pid, pgn + pgit, caller->mm->pgd[pgn + pgit]);
+    
+    /* Free the frame structure from the list and move to the next. */
     struct framephy_struct *node = fpit;
     fpit = fpit->fp_next;
     free(node);
+    
+    /* Move to the next page. */
     pgit++;
   }
-   
+  
+  fpit = swpframes;
+  while (fpit != NULL) {
+    /* Move the end of the region to the next page boundary. */
+    ret_rg->rg_end += PAGING_PAGESZ;
+    /* Initialize the page table entry (PTE) for the process's page directory (PGD). */
+    pte_set_swap(&caller->mm->pgd[pgn + pgit], 0, fpit->fpn);
+    struct framephy_struct *node = fpit;
+    fpit = fpit->fp_next;
+    free(node);
+    
+    /* Move to the next page. */
+    pgit++;
+  }
+  /* Return 0, indicating success. */
   return 0;
 }
 
@@ -113,11 +145,17 @@ int vmap_page_range(struct pcb_t *caller, // process call
  * @frm_lst   : frame list
  */
 
-int alloc_pages_range(struct pcb_t *caller, int req_pgnum, struct framephy_struct** frm_lst)
+int alloc_pages_range(struct pcb_t *caller, int req_pgnum, struct framephy_struct** frm_lst, struct framephy_struct** swp_lst)
 {
 // Declare variables for page index (pgit), frame number (fpn), and a pointer to a structure (newfp_str)
 int pgit, fpn;
 struct framephy_struct *newfp_str;
+
+int ram_frm_num = caller->mram->maxsz / PAGING_PAGESZ;
+int swp_frm_num = caller->active_mswp->maxsz / PAGING_PAGESZ;
+
+if (req_pgnum > ram_frm_num + swp_frm_num)
+  return -3000;
 
 // Loop through each page index up to req_pgnum
 for(pgit = 0; pgit < req_pgnum; pgit++)
@@ -140,8 +178,18 @@ for(pgit = 0; pgit < req_pgnum; pgit++)
         int swpfpn;
         struct mm_struct *vicmm;
         int pgn;
-        if (MEMPHY_pop_usedfp(caller->mram, &fpn, &pgn, &vicmm, RAM_LCK) < 0)
-          return -1;
+        if (MEMPHY_pop_usedfp(caller->mram, &fpn, &pgn, &vicmm, RAM_LCK) < 0) {
+          // Try to get a free frame from the swap space of the caller's active memory
+          if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn, SWP_LCK) < 0) 
+              return -3000;
+          
+          newfp_str = malloc(sizeof(struct framephy_struct));
+          newfp_str->fpn = swpfpn;
+          newfp_str->fp_next = *swp_lst;
+          *swp_lst = newfp_str;
+          continue;
+        }
+          
         // Try to get a free frame from the swap space of the caller's active memory
         if (MEMPHY_get_freefp(caller->active_mswp, &swpfpn, SWP_LCK) < 0) 
             return -3000; // Return error code if unable to get a free frame from swap
@@ -179,16 +227,10 @@ for(pgit = 0; pgit < req_pgnum; pgit++)
 int vm_map_ram(struct pcb_t *caller, int astart, int aend, int mapstart, int incpgnum, struct vm_rg_struct *ret_rg)
 {
   struct framephy_struct *frm_lst = NULL;
+  struct framephy_struct *swp_lst = NULL;
   int ret_alloc;
-
-  /*@bksysnet: author provides a feasible solution of getting frames
-   *FATAL logic in here, wrong behaviour if we have not enough page
-   *i.e. we request 1000 frames meanwhile our RAM has size of 3 frames
-   *Don't try to perform that case in this simple work, it will result
-   *in endless procedure of swap-off to get frame and we have not provide 
-   *duplicate control mechanism, keep it simple
-   */
-  ret_alloc = alloc_pages_range(caller, incpgnum, &frm_lst);
+  
+  ret_alloc = alloc_pages_range(caller, incpgnum, &frm_lst, &swp_lst);
   
   if (ret_alloc < 0 && ret_alloc != -3000)
     return -1;
@@ -202,9 +244,8 @@ int vm_map_ram(struct pcb_t *caller, int astart, int aend, int mapstart, int inc
      return -1;
   }
   
-  /* it leaves the case of memory is enough but half in ram, half in swap
-   * do the swaping all to swapper to get the all in ram */
-  vmap_page_range(caller, mapstart, incpgnum, frm_lst, ret_rg);
+  
+  vmap_page_range(caller, mapstart, incpgnum, frm_lst, swp_lst, ret_rg);
 
   return 0;
 }

@@ -61,7 +61,7 @@ static void * cpu_routine(void * args) {
 			proc = get_proc();
 			if (proc == NULL) {
                            next_slot(timer_id);
-                           continue; /* First load failed. skip dummy load */
+                           //continue; /* First load failed. skip dummy load */
                         }
 		}else if (proc->pc == proc->code->size) {
 			/* The process has finish it job */

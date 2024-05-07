@@ -39,7 +39,7 @@ int tlb_flush_tlb_of(struct pcb_t *proc, struct memphy_struct * mp)
 /*tlballoc - CPU TLB-based allocate a region memory
  *@proc:  Process executing the instruction
  *@size: allocated size 
- *@reg_index: memory region ID (used to identify variable in symbole table)
+ *@reg_index: register index
  */
 int tlballoc(struct pcb_t *proc, uint32_t size, uint32_t reg_index)
 {
@@ -58,30 +58,23 @@ int tlballoc(struct pcb_t *proc, uint32_t size, uint32_t reg_index)
   }
   
   int val = __alloc(proc, 0, rgid, size, &addr);
- 
-  if (val < 0) 
-    return -1;
+
 #ifdef DEBUG
   printf("Allocated %d for memory region %d:\n", size, rgid);
   print_pgtbl(proc, 0, -1);
 #endif
+
+  if (val < 0) 
+    return -1;
+
   proc->regs[reg_index] = addr;
 
-  unsigned long rgstart = proc->mm->symrgtbl[rgid]->rg_start;
-  unsigned long rgend = proc->mm->symrgtbl[rgid]->rg_end;
-  unsigned long pgnum = (rgend - rgstart) / PAGING_PAGESZ;
-  int pgstart = PAGING_PGN(rgstart);
-  for (int i = 0; i < pgnum; i++) {
-    int pgid = pgstart + i;
-    tlb_cache_write(proc->tlb, proc->pid, pgid, proc->mm->pgd[pgid]);
-  }
-  return val;
+  return 0;
 }
 
 /*pgfree - CPU TLB-based free a region memory
  *@proc: Process executing the instruction
- *@size: allocated size 
- *@reg_index: memory region ID (used to identify variable in symbole table)
+ *@reg_index: register index
  */
 int tlbfree_data(struct pcb_t *proc, uint32_t reg_index)
 {
@@ -94,13 +87,12 @@ int tlbfree_data(struct pcb_t *proc, uint32_t reg_index)
   }
   if (rgid == PAGING_MAX_SYMTBL_SZ) 
     return -1;
-  if (__free(proc, 0, rgid) < 0)
-    return -1;
+  int val = __free(proc, 0, rgid);
 #ifdef DEBUG
   printf("Freed region %d:\n", rgid);
   print_pgtbl(proc, 0, -1);
 #endif
-  return 0;
+  return val;
 }
 
 
@@ -173,7 +165,7 @@ int tlbread(struct pcb_t * proc, uint32_t source,
   if (val < 0) 
     return -1;
   proc->regs[destination] = (uint32_t) data;
-#ifdef IODUMP
+#ifdef DEBUG
   printf("read data=%d\n", data);
   frmnum = PAGING_FPN(proc->mm->pgd[pgn]);
   MEMPHY_dump(proc->mram, frmnum, offset, offset + 1);
@@ -244,7 +236,7 @@ int tlbwrite(struct pcb_t * proc, BYTE data,
       return -1;
     }
   }
-#ifdef IODUMP
+#ifdef DEBUG
   frmnum = PAGING_FPN(proc->mm->pgd[pgn]);
   MEMPHY_dump(proc->mram, frmnum, offset, offset + 1);
 #endif

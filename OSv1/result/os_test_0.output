@@ -1,2086 +1,586 @@
 Time slot   0
 ld_routine
 	Loaded a process at input/proc/__0, PID: 1 PRIO: 0
+	CPU 7: Dispatched process  1
 Time slot   1
-	CPU 0: Dispatched process  1
-Time slot   2
 	Loaded a process at input/proc/__1, PID: 2 PRIO: 5
+	CPU 5: Dispatched process  2
+Time slot   2
 Time slot   3
-Time slot   4
 	Loaded a process at input/proc/__3, PID: 3 PRIO: 2
-Time slot   5
-	CPU 0: Put process  1 to run queue
-	CPU 0: Dispatched process  1
+	CPU 7: Put process  1 to run queue
+	CPU 7: Dispatched process  1
 TLB hit at write destination=1 offset=20 value=102
 print_pgtbl: 0 - 768
-00000000: 80000000
+00000000: 80000003
 00000004: 00000000
-00000008: 80000002
-MEMPHY dumped for frame 2 from 20 to 20:
-532: 66
-	Loaded a process at input/proc/__2, PID: 4 PRIO: 45
-Time slot   6
+00000008: 40000000
+	CPU 4: Dispatched process  3
+Time slot   4
 TLB hit at write destination=2 offset=50 value=1
 print_pgtbl: 0 - 768
-00000000: 80000000
+00000000: 80000003
 00000004: 00000000
+00000008: 40000000
+Time slot   5
+	Loaded a process at input/proc/__2, PID: 4 PRIO: 100
+TLB hit at read source=2 offset=50
+print_pgtbl: 0 - 768
+00000000: 80000003
+00000004: 00000000
+00000008: 40000000
+	CPU 5: Put process  2 to run queue
+	CPU 6: Dispatched process  4
+	CPU 5: Dispatched process  2
+TLB hit at write destination=2 offset=400 value=-100
+print_pgtbl: 0 - 768
+00000000: 80000001
+00000004: 80000000
 00000008: 80000002
-MEMPHY dumped for frame 0 from 50 to 50:
-50: 01
-	Loaded a process at input/proc/__0, PID: 5 PRIO: 129
+Time slot   6
+	Loaded a process at input/proc/__0, PID: 5 PRIO: 95
+TLB miss at write destination=2 offset=70 value=10
+print_pgtbl: 0 - 768
+00000000: 40000020
+00000004: 00000000
+00000008: 40000000
+TLB miss at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 40000060
+00000004: 40000080
+00000008: 40000040
 Time slot   7
-TLB hit at read source=2 offset=50 value=1
+	CPU 7: Put process  1 to run queue
+	CPU 7: Dispatched process  5
+TLB hit at read source=2 offset=400
 print_pgtbl: 0 - 768
-00000000: 80000000
-00000004: 00000000
-00000008: 80000002
-MEMPHY dumped for frame 0 from 50 to 50:
-50: 01
-	Loaded a process at input/proc/__0, PID: 6 PRIO: 100
-Time slot   8
-TLB hit at write destination=2 offset=70 value=10
+00000000: 40000060
+00000004: 80000003
+00000008: 40000040
+	CPU 4: Put process  3 to run queue
+	CPU 4: Dispatched process  1
+TLB miss at read source=2 offset=10
 print_pgtbl: 0 - 768
-00000000: 80000000
+00000000: 40000100
 00000004: 00000000
-00000008: 80000002
-MEMPHY dumped for frame 0 from 70 to 70:
-70: 0a
-Time slot   9
-	CPU 0: Put process  1 to run queue
-	CPU 0: Dispatched process  1
-TLB hit at read source=2 offset=10 value=0
-print_pgtbl: 0 - 768
-00000000: 80000000
-00000004: 00000000
-00000008: 80000002
-MEMPHY dumped for frame 0 from 10 to 10:
-10: 00
-Time slot  10
-	Loaded a process at input/proc/__3, PID: 7 PRIO: 56
-TLB hit at write destination=2 offset=90 value=10
-print_pgtbl: 0 - 768
-00000000: 80000000
-00000004: 00000000
-00000008: 80000002
-MEMPHY dumped for frame 0 from 90 to 90:
-90: 0a
-Time slot  11
-TLB hit at read source=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000000
-00000004: 00000000
-00000008: 80000002
-MEMPHY dumped for frame 2 from 20 to 20:
-532: 66
-Time slot  12
-Time slot  13
-	CPU 0: Put process  1 to run queue
-	CPU 0: Dispatched process  1
-Time slot  14
-	Loaded a process at input/proc/__2, PID: 8 PRIO: 78
-	CPU 0: Processed  1 has finished
-	CPU 0: Dispatched process  3
-Time slot  15
-	Loaded a process at input/proc/__1, PID: 9 PRIO: 15
-Time slot  16
-Time slot  17
-Time slot  18
-	CPU 0: Put process  3 to run queue
-	CPU 0: Dispatched process  3
+00000008: 40000000
+	CPU 3: Dispatched process  3
 TLB hit at write destination=2 offset=750 value=111
 print_pgtbl: 0 - 1280
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-00000012: 80000000
-00000016: 80000004
-Time slot  19
-TLB hit at write destination=2 offset=756 value=111
+00000000: 400000a0
+00000004: 40000020
+00000008: 400000c0
+00000012: 400000e0
+00000016: 40000140
+Time slot   8
+TLB miss at write destination=2 offset=333 value=123
+print_pgtbl: 0 - 768
+00000000: 40000060
+00000004: 40000160
+00000008: 40000040
+TLB hit at write destination=2 offset=90 value=10
+print_pgtbl: 0 - 768
+00000000: 80000001
+00000004: 00000000
+00000008: 40000000
+TLB miss at write destination=2 offset=756 value=111
 print_pgtbl: 0 - 1280
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-00000012: 80000000
-00000016: 80000004
-Time slot  20
+00000000: 400000a0
+00000004: 40000020
+00000008: 400000c0
+00000012: 400000e0
+00000016: 40000140
+Time slot   9
+	Loaded a process at input/proc/__2, PID: 6 PRIO: 31
+	CPU 6: Put process  4 to run queue
+	CPU 6: Dispatched process  6
+	CPU 5: Put process  2 to run queue
+	CPU 5: Dispatched process  4
+TLB miss at read source=1 offset=20
+print_pgtbl: 0 - 768
+00000000: 80000001
+00000004: 00000000
+00000008: 40000000
 TLB hit at write destination=3 offset=119 value=111
 print_pgtbl: 0 - 1280
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-00000012: 80000000
-00000016: 80000004
-MEMPHY dumped for frame 4 from 119 to 119:
-1143: 6f
-Time slot  21
-	Loaded a process at input/proc/__0, PID: 10 PRIO: 29
-TLB hit at read source=2 offset=756 value=111
+00000000: 400000a0
+00000004: 40000020
+00000008: 80000000
+00000012: 400000e0
+00000016: 40000140
+	CPU 2: Dispatched process  2
+TLB miss at write destination=1 offset=99 value=124
+print_pgtbl: 0 - 768
+00000000: 40000060
+00000004: 80000003
+00000008: 40000040
+Time slot  10
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 400000c0
+00000004: 00000000
+00000008: 40000120
+00000012: 40000160
+TLB miss at read source=2 offset=756
 print_pgtbl: 0 - 1280
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-00000012: 80000000
-00000016: 80000004
-Time slot  22
-	CPU 0: Put process  3 to run queue
-	CPU 0: Dispatched process  3
-TLB hit at read source=3 offset=119 value=111
+00000000: 400000a0
+00000004: 40000020
+00000008: 40000040
+00000012: 400000e0
+00000016: 40000140
+TLB miss at read source=1 offset=99
+print_pgtbl: 0 - 768
+00000000: 40000060
+00000004: 40000000
+00000008: 80000003
+Time slot  11
+	CPU 7: Put process  5 to run queue
+TLB miss at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 400000c0
+00000004: 00000000
+00000008: 40000120
+00000012: 40000160
+	CPU 7: Dispatched process  5
+TLB miss at write destination=1 offset=20 value=102
+print_pgtbl: 0 - 768
+00000000: 80000002
+00000004: 00000000
+00000008: 40000180
+	CPU 4: Put process  1 to run queue
+	CPU 4: Dispatched process  1
+	CPU 3: Put process  3 to run queue
+	CPU 3: Dispatched process  3
+TLB hit at read source=3 offset=119
 print_pgtbl: 0 - 1280
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-00000012: 80000000
-00000016: 80000004
-MEMPHY dumped for frame 4 from 119 to 119:
-1143: 6f
-Time slot  23
-	Loaded a process at input/proc/__2, PID: 11 PRIO: 86
-Time slot  24
+00000000: 400000a0
+00000004: 40000020
+00000008: 80000003
+00000012: 400000e0
+00000016: 40000140
+TLB miss at read source=2 offset=333
+print_pgtbl: 0 - 768
+00000000: 40000060
+00000004: 40000000
+00000008: 400001e0
+Time slot  12
+	CPU 4: Processed  1 has finished
+Time slot  13
+TLB miss at write destination=4 offset=30 value=103
+TLB miss at write destination=2 offset=50 value=1
+print_pgtbl: 0 - 768
+00000000: 400001c0
+print_pgtbl: 0 - 1024
+00000000: 80000002
+00000004: 00000000
+00000008: 40000120
+00000012: 40000160
+00000004: 00000000
+00000008: 80000003
+TLB hit at read source=2 offset=50
+print_pgtbl: 0 - 768	CPU 5: Put process  4 to run queue
+	CPU 5: Dispatched process  4
+TLB hit at read source=4 offset=30
+
+print_pgtbl: 0 - 102400000000: 80000003
+00000004: 00000000
+00000008: 40000100
+	CPU 6: Put process  6 to run queue
 TLB hit at write destination=6 offset=200 value=100
 print_pgtbl: 0 - 1792
-00000000: 80000003
-00000004: 80000001
+00000000: 400000a0
+00000004: 40000020
+00000008: 40000180
+00000012: 400000e0
+00000016: 40000140
+00000020: 80000001
+00000024: 80000000
+	CPU 2: Put process  2 to run queue
+	CPU 6: Dispatched process  2
+
+00000000: 40000040
+Time slot  14
+00000004: 00000000
 00000008: 80000002
-00000012: 80000000
-00000016: 80000004
-00000020: 80000006
-00000024: 80000005
-MEMPHY dumped for frame 6 from 200 to 200:
-1736: 64
-	Loaded a process at input/proc/__2, PID: 12 PRIO: 49
-Time slot  25
-TLB hit at read source=2 offset=750 value=111
+00000012: 40000160
+	CPU 2: Dispatched process  6
+TLB hit at write destination=2 offset=70 value=10
+print_pgtbl: 0 - 768
+00000000: 80000003
+00000004: 00000000
+00000008: 40000100
+	CPU 6: Processed  2 has finished
+TLB miss at read source=2 offset=750
 print_pgtbl: 0 - 1792
+00000000: 400000a0
+00000004: 40000020
+00000008: 40000180
+00000012: 400000e0
+00000016: 40000140
+00000020: 80000001
+00000024: 80000000
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
 00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-00000012: 80000000
-00000016: 80000004
-00000020: 80000006
-00000024: 80000005
-	Loaded a process at input/proc/__0, PID: 13 PRIO: 64
-Time slot  26
-	CPU 0: Put process  3 to run queue
-	CPU 0: Dispatched process  3
-	Loaded a process at input/proc/__1, PID: 14 PRIO: 61
-Time slot  27
-	Loaded a process at input/proc/__0, PID: 15 PRIO: 63
-Time slot  28
-TLB hit at read source=6 offset=200 value=100
+00000004: 00000000
+00000008: 40000000
+00000012: 400000c0
+Time slot  15
+	CPU 7: Put process  5 to run queue
+	CPU 6: Dispatched process  5
+TLB hit at read source=2 offset=10
+print_pgtbl: 0 - 768
+00000000: 80000003
+00000004: 00000000
+00000008: 40000100
+	CPU 3: Put process  3 to run queue
+	CPU 3: Dispatched process  3
+Time slot  16
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 80000003
+00000004: 00000000
+00000008: 40000000
+00000012: 400000c0
+TLB hit at write destination=2 offset=90 value=10
+print_pgtbl: 0 - 768
+00000000: 80000003
+00000004: 00000000
+00000008: 40000100
+TLB miss at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024
+00000000: 80000003
+00000004: 00000000
+00000008: 40000000
+00000012: 400000c0
+Time slot  17
+TLB miss at read source=6 offset=200
 print_pgtbl: 0 - 1792
 00000000: 00000000
 00000004: 00000000
 00000008: 00000000
 00000012: 00000000
 00000016: 00000000
-00000020: 80000006
-00000024: 80000005
-MEMPHY dumped for frame 6 from 200 to 200:
-1736: 64
+00000020: 40000160
+00000024: 40000180
+Time slot  18
+	CPU 2: Put process  6 to run queue
+	CPU 5: Put process  4 to run queue
+	CPU 2: Dispatched process  6
+TLB hit at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 40000000
+00000004: 00000000
+00000008: 80000003
+	CPU 5: Dispatched process  4
+00000012: 400000c0
+TLB miss at read source=1 offset=20
+print_pgtbl: 0 - 768
+00000000: 40000140
+00000004: 00000000
+00000008: 40000100
+TLB miss at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 80000001
+00000004: 00000000
+00000008: 40000160
+00000012: 80000002
+Time slot  19
+	CPU 6: Put process  5 to run queue
+	CPU 6: Dispatched process  5
+TLB hit at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000001
+00000004: 00000000
+	CPU 3: Processed  3 has finished
+00000008: 80000002
+00000012: 40000100
+Time slot  20
+	CPU 6: Processed  5 has finished
+TLB miss at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 80000001
+00000004: 00000000
+00000008: 80000002
+00000012: 40000100
+Time slot  21
+	CPU 5: Put process  4 to run queue
+	CPU 5: Dispatched process  4
+TLB hit at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 80000001
+00000004: 00000000
+00000008: 80000002
+00000012: 40000100
+	CPU 2: Put process  6 to run queue
+	CPU 2: Dispatched process  6
+Time slot  22
+TLB miss at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 80000001
+00000004: 00000000
+00000008: 80000002
+00000012: 40000100
+TLB miss at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 80000003
+00000012: 80000003
+Time slot  23
+TLB hit at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000001
+00000004: 00000000
+00000008: 80000002
+00000012: 40000100
+TLB hit at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 80000003
+00000012: 80000003
+Time slot  24
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 80000003
+00000012: 40000000
+Time slot  25
+	CPU 5: Put process  4 to run queue
+	CPU 5: Dispatched process  4
+	CPU 2: Put process  6 to run queue
+	CPU 2: Dispatched process  6
+TLB hit at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 80000003
+00000012: 40000000
+Time slot  26
+TLB miss at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 80000003
+00000012: 40000000
+Time slot  27
+TLB hit at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000003
+00000008: 00000000
+00000012: 00000000
+TLB hit at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 80000003
+00000012: 40000000
+Time slot  28
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000003
+00000008: 00000000
+00000012: 00000000
 Time slot  29
+	CPU 5: Put process  4 to run queue
+	CPU 5: Dispatched process  4
+TLB miss at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000003
+00000008: 00000000
+00000012: 00000000
+	CPU 2: Put process  6 to run queue
+	CPU 2: Dispatched process  6
 Time slot  30
-	CPU 0: Processed  3 has finished
-	CPU 0: Dispatched process  2
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000003
+00000008: 00000000
+00000012: 00000000
 Time slot  31
+TLB miss at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000001
+00000008: 00000000
+00000012: 00000000
 Time slot  32
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 80000003
+00000008: 00000000
+00000012: 00000000
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000001
+00000008: 00000000
+00000012: 00000000
 Time slot  33
+	CPU 5: Put process  4 to run queue
+	CPU 5: Dispatched process  4
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 80000003
+00000008: 00000000
+00000012: 00000000
+	CPU 2: Put process  6 to run queue
+	CPU 2: Dispatched process  6
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000001
+00000008: 00000000
+00000012: 00000000
 Time slot  34
-	CPU 0: Put process  2 to run queue
-	CPU 0: Dispatched process  2
-TLB hit at write destination=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 80000005
-00000008: 80000004
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000001
+00000008: 00000000
+00000012: 00000000
 Time slot  35
-TLB hit at read source=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 80000005
-00000008: 80000004
 Time slot  36
-TLB hit at read source=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 80000005
-00000008: 80000004
+	CPU 5: Processed  4 has finished
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000003
+00000004: 80000001
+00000008: 00000000
+00000012: 00000000
 Time slot  37
-TLB hit at write destination=2 offset=333 value=123
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 80000005
-00000008: 80000004
+	CPU 2: Put process  6 to run queue
+	CPU 2: Dispatched process  6
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000003
+00000004: 80000001
+00000008: 00000000
+00000012: 00000000
 Time slot  38
-	CPU 0: Put process  2 to run queue
-	CPU 0: Dispatched process  2
-TLB hit at write destination=1 offset=99 value=124
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 80000005
-00000008: 80000004
-MEMPHY dumped for frame 4 from 99 to 99:
-1123: 7c
 Time slot  39
-TLB hit at read source=1 offset=99 value=124
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 80000005
-00000008: 80000004
-MEMPHY dumped for frame 4 from 99 to 99:
-1123: 7c
 Time slot  40
-	Loaded a process at input/proc/__1, PID: 16 PRIO: 31
-TLB hit at read source=2 offset=333 value=123
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 80000005
-00000008: 80000004
+	CPU 2: Processed  6 has finished
 Time slot  41
 Time slot  42
-	CPU 0: Put process  2 to run queue
-	CPU 0: Dispatched process  2
 Time slot  43
-	CPU 0: Processed  2 has finished
-	CPU 0: Dispatched process  9
 Time slot  44
 Time slot  45
 Time slot  46
 Time slot  47
-	CPU 0: Put process  9 to run queue
-	CPU 0: Dispatched process  9
-TLB hit at write destination=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000004
-00000008: 80000006
 Time slot  48
-TLB hit at read source=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000004
-00000008: 80000006
-	Loaded a process at input/proc/__2, PID: 17 PRIO: 1
 Time slot  49
-TLB hit at read source=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000004
-00000008: 80000006
 Time slot  50
-TLB hit at write destination=2 offset=333 value=123
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000004
-00000008: 80000006
 Time slot  51
-	CPU 0: Put process  9 to run queue
-	CPU 0: Dispatched process  9
-TLB hit at write destination=1 offset=99 value=124
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000004
-00000008: 80000006
-MEMPHY dumped for frame 6 from 99 to 99:
-1635: 7c
 Time slot  52
-TLB hit at read source=1 offset=99 value=124
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000004
-00000008: 80000006
-MEMPHY dumped for frame 6 from 99 to 99:
-1635: 7c
 Time slot  53
-TLB hit at read source=2 offset=333 value=123
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000004
-00000008: 80000006
 Time slot  54
 Time slot  55
-	CPU 0: Put process  9 to run queue
-	CPU 0: Dispatched process  9
 Time slot  56
-	CPU 0: Processed  9 has finished
-	CPU 0: Dispatched process 10
 Time slot  57
 Time slot  58
 Time slot  59
-	Loaded a process at input/proc/__0, PID: 18 PRIO: 6
+	Loaded a process at input/proc/__3, PID: 7 PRIO: 99
+	CPU 6: Dispatched process  7
 Time slot  60
-	CPU 0: Put process 10 to run queue
-	CPU 0: Dispatched process 10
-TLB hit at write destination=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 00000000
-00000008: 80000005
-MEMPHY dumped for frame 5 from 20 to 20:
-1300: 66
+	CPU 5 stopped
+	CPU 4 stopped
+	CPU 2 stopped
+	CPU 1 stopped
 Time slot  61
-TLB hit at write destination=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 00000000
-00000008: 80000005
-MEMPHY dumped for frame 6 from 50 to 50:
-1586: 01
-Time slot  62
-TLB hit at read source=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 00000000
-00000008: 80000005
-MEMPHY dumped for frame 6 from 50 to 50:
-1586: 01
-Time slot  63
-	Loaded a process at input/proc/__2, PID: 19 PRIO: 8
-TLB hit at write destination=2 offset=70 value=10
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 00000000
-00000008: 80000005
-MEMPHY dumped for frame 6 from 70 to 70:
-1606: 0a
-Time slot  64
-	CPU 0: Put process 10 to run queue
-	CPU 0: Dispatched process 10
-TLB hit at read source=2 offset=10 value=0
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 00000000
-00000008: 80000005
-MEMPHY dumped for frame 6 from 10 to 10:
-1546: 00
-Time slot  65
-TLB hit at write destination=2 offset=90 value=10
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 00000000
-00000008: 80000005
-MEMPHY dumped for frame 6 from 90 to 90:
-1626: 0a
-Time slot  66
-TLB hit at read source=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000006
-00000004: 00000000
-00000008: 80000005
-MEMPHY dumped for frame 5 from 20 to 20:
-1300: 66
-Time slot  67
-Time slot  68
-	CPU 0: Put process 10 to run queue
-	CPU 0: Dispatched process 10
-	Loaded a process at input/proc/__3, PID: 20 PRIO: 14
-Time slot  69
-	CPU 0: Processed 10 has finished
-	CPU 0: Dispatched process 16
-Time slot  70
-Time slot  71
-Time slot  72
-Time slot  73
-	CPU 0: Put process 16 to run queue
-	CPU 0: Dispatched process 16
-TLB hit at write destination=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000006
-00000008: ac000004
-Time slot  74
-TLB hit at read source=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000006
-00000008: ac000004
-Time slot  75
-TLB hit at read source=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000006
-00000008: ac000004
-Time slot  76
-TLB hit at write destination=2 offset=333 value=123
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000006
-00000008: ac000004
-Time slot  77
-	CPU 0: Put process 16 to run queue
-	CPU 0: Dispatched process 16
-TLB hit at write destination=1 offset=99 value=124
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000006
-00000008: ac000004
-MEMPHY dumped for frame 4 from 99 to 99:
-1123: 7c
-Time slot  78
-TLB hit at read source=1 offset=99 value=124
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000006
-00000008: ac000004
-MEMPHY dumped for frame 4 from 99 to 99:
-1123: 7c
-Time slot  79
-TLB hit at read source=2 offset=333 value=123
-print_pgtbl: 0 - 768
-00000000: 80000005
-00000004: 80000006
-00000008: ac000004
-Time slot  80
-Time slot  81
-	CPU 0: Put process 16 to run queue
-	CPU 0: Dispatched process 16
-Time slot  82
-	CPU 0: Processed 16 has finished
-	CPU 0: Dispatched process  4
-Time slot  83
-Time slot  84
-Time slot  85
-Time slot  86
-	CPU 0: Put process  4 to run queue
-	CPU 0: Dispatched process  4
-Time slot  87
-TLB hit at write destination=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 4 from 20 to 20:
-1044: 78
-Time slot  88
-TLB hit at read source=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 4 from 20 to 20:
-1044: 78
-Time slot  89
-TLB hit at write destination=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 30 to 30:
-30: 67
-Time slot  90
-	CPU 0: Put process  4 to run queue
-	CPU 0: Dispatched process  4
-TLB hit at read source=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 30 to 30:
-30: 67
-Time slot  91
-Time slot  92
-Time slot  93
-Time slot  94
-	CPU 0: Put process  4 to run queue
-	CPU 0: Dispatched process  4
-Time slot  95
-TLB hit at write destination=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 100 to 100:
-100: 71
-Time slot  96
-TLB hit at write destination=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 111 to 111:
-111: 7c
-Time slot  97
-TLB hit at read source=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 100 to 100:
-100: 71
-Time slot  98
-	CPU 0: Put process  4 to run queue
-	CPU 0: Dispatched process  4
-TLB hit at read source=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 111 to 111:
-111: 7c
-Time slot  99
-TLB hit at write destination=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 4 from 123 to 123:
-1147: 60
-Time slot 100
-TLB hit at read source=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 4 from 123 to 123:
-1147: 60
-Time slot 101
-Time slot 102
-	CPU 0: Put process  4 to run queue
-	CPU 0: Dispatched process  4
-Time slot 103
-Time slot 104
-TLB hit at write destination=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000006
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 6 from 118 to 118:
-1654: 31
-Time slot 105
-TLB hit at read source=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000006
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 6 from 118 to 118:
-1654: 31
-Time slot 106
-	CPU 0: Put process  4 to run queue
-	CPU 0: Dispatched process  4
-TLB hit at write destination=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000006
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 6 from 114 to 114:
-1650: 3b
-Time slot 107
-TLB hit at read source=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000006
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 6 from 114 to 114:
-1650: 3b
-Time slot 108
-Time slot 109
-TLB hit at write destination=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 80000006
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 4 from 15 to 15:
-1039: 45
-Time slot 110
-	CPU 0: Put process  4 to run queue
-	CPU 0: Dispatched process  4
-TLB hit at read source=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000004
-00000004: 80000006
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 4 from 15 to 15:
-1039: 45
-Time slot 111
-Time slot 112
-Time slot 113
-	CPU 0: Processed  4 has finished
-	CPU 0: Dispatched process 12
-Time slot 114
-Time slot 115
-Time slot 116
-Time slot 117
-	CPU 0: Put process 12 to run queue
-	CPU 0: Dispatched process 12
-Time slot 118
-TLB hit at write destination=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 6 from 20 to 20:
-1556: 78
-Time slot 119
-TLB hit at read source=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 6 from 20 to 20:
-1556: 78
-Time slot 120
-TLB hit at write destination=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 30 to 30:
-30: 67
-Time slot 121
-	CPU 0: Put process 12 to run queue
-	CPU 0: Dispatched process 12
-TLB hit at read source=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 30 to 30:
-30: 67
-Time slot 122
-Time slot 123
-Time slot 124
-Time slot 125
-	CPU 0: Put process 12 to run queue
-	CPU 0: Dispatched process 12
-Time slot 126
-TLB hit at write destination=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 100 to 100:
-100: 71
-Time slot 127
-TLB hit at write destination=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 111 to 111:
-111: 7c
-Time slot 128
-TLB hit at read source=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 100 to 100:
-100: 71
-Time slot 129
-	CPU 0: Put process 12 to run queue
-	CPU 0: Dispatched process 12
-TLB hit at read source=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 0 from 111 to 111:
-111: 7c
-Time slot 130
-TLB hit at write destination=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 6 from 123 to 123:
-1659: 60
-Time slot 131
-TLB hit at read source=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 00000000
-00000008: 80000000
-00000012: 80000005
-MEMPHY dumped for frame 6 from 123 to 123:
-1659: 60
-Time slot 132
-Time slot 133
-	CPU 0: Put process 12 to run queue
-	CPU 0: Dispatched process 12
-Time slot 134
-Time slot 135
-TLB hit at write destination=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000004
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 4 from 118 to 118:
-1142: 31
-Time slot 136
-TLB hit at read source=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000004
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 4 from 118 to 118:
-1142: 31
-Time slot 137
-	CPU 0: Put process 12 to run queue
-	CPU 0: Dispatched process 12
-TLB hit at write destination=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000004
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 4 from 114 to 114:
-1138: 3b
-Time slot 138
-TLB hit at read source=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000004
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 4 from 114 to 114:
-1138: 3b
-Time slot 139
-Time slot 140
-TLB hit at write destination=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 80000004
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 6 from 15 to 15:
-1551: 45
-Time slot 141
-	CPU 0: Put process 12 to run queue
-	CPU 0: Dispatched process 12
-TLB hit at read source=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000006
-00000004: 80000004
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 6 from 15 to 15:
-1551: 45
-Time slot 142
-Time slot 143
-Time slot 144
-	CPU 0: Processed 12 has finished
-	CPU 0: Dispatched process  7
-Time slot 145
-Time slot 146
-Time slot 147
-Time slot 148
-	CPU 0: Put process  7 to run queue
-	CPU 0: Dispatched process  7
-TLB hit at write destination=2 offset=750 value=111
-print_pgtbl: 0 - 1280
-00000000: 80000000
-00000004: 80000005
-00000008: 80000006
-00000012: 80000004
-00000016: 80000002
-Time slot 149
-TLB hit at write destination=2 offset=756 value=111
-print_pgtbl: 0 - 1280
-00000000: 80000000
-00000004: 80000005
-00000008: 80000006
-00000012: 80000004
-00000016: 80000002
-Time slot 150
-TLB hit at write destination=3 offset=119 value=111
-print_pgtbl: 0 - 1280
-00000000: 80000000
-00000004: 80000005
-00000008: 80000006
-00000012: 80000004
-00000016: 80000002
-MEMPHY dumped for frame 2 from 119 to 119:
-631: 6f
-Time slot 151
-TLB hit at read source=2 offset=756 value=111
-print_pgtbl: 0 - 1280
-00000000: 80000000
-00000004: 80000005
-00000008: 80000006
-00000012: 80000004
-00000016: 80000002
-Time slot 152
-	CPU 0: Put process  7 to run queue
-	CPU 0: Dispatched process  7
-TLB hit at read source=3 offset=119 value=111
-print_pgtbl: 0 - 1280
-00000000: 80000000
-00000004: 80000005
-00000008: 80000006
-00000012: 80000004
-00000016: 80000002
-MEMPHY dumped for frame 2 from 119 to 119:
-631: 6f
-Time slot 153
-Time slot 154
-TLB hit at write destination=6 offset=200 value=100
-print_pgtbl: 0 - 1792
-00000000: 80000000
-00000004: 80000005
-00000008: 80000006
-00000012: 80000004
-00000016: 80000002
-00000020: 80000003
-00000024: 80000001
-MEMPHY dumped for frame 3 from 200 to 200:
-968: 64
-Time slot 155
-TLB hit at read source=2 offset=750 value=111
-print_pgtbl: 0 - 1792
-00000000: 80000000
-00000004: 80000005
-00000008: 80000006
-00000012: 80000004
-00000016: 80000002
-00000020: 80000003
-00000024: 80000001
-Time slot 156
-	CPU 0: Put process  7 to run queue
-	CPU 0: Dispatched process  7
-Time slot 157
-Time slot 158
-TLB hit at read source=6 offset=200 value=100
-print_pgtbl: 0 - 1792
-00000000: 00000000
-00000004: 00000000
-00000008: 00000000
-00000012: 00000000
-00000016: 00000000
-00000020: 80000003
-00000024: 80000001
-MEMPHY dumped for frame 3 from 200 to 200:
-968: 64
-Time slot 159
-Time slot 160
-	CPU 0: Processed  7 has finished
-	CPU 0: Dispatched process 14
-Time slot 161
-Time slot 162
-Time slot 163
-Time slot 164
-	CPU 0: Put process 14 to run queue
-	CPU 0: Dispatched process 14
-TLB hit at write destination=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-Time slot 165
-TLB hit at read source=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-Time slot 166
-TLB hit at read source=2 offset=400 value=-100
-print_pgtbl: 0 - 768
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-Time slot 167
-TLB hit at write destination=2 offset=333 value=123
-print_pgtbl: 0 - 768
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-Time slot 168
-	CPU 0: Put process 14 to run queue
-	CPU 0: Dispatched process 14
-TLB hit at write destination=1 offset=99 value=124
-print_pgtbl: 0 - 768
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-MEMPHY dumped for frame 2 from 99 to 99:
-611: 7c
-Time slot 169
-TLB hit at read source=1 offset=99 value=124
-print_pgtbl: 0 - 768
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-MEMPHY dumped for frame 2 from 99 to 99:
-611: 7c
-Time slot 170
-TLB hit at read source=2 offset=333 value=123
-print_pgtbl: 0 - 768
-00000000: 80000003
-00000004: 80000001
-00000008: 80000002
-Time slot 171
-Time slot 172
-	CPU 0: Put process 14 to run queue
-	CPU 0: Dispatched process 14
-Time slot 173
-	CPU 0: Processed 14 has finished
-	CPU 0: Dispatched process 15
-Time slot 174
-Time slot 175
-Time slot 176
-Time slot 177
-	CPU 0: Put process 15 to run queue
-	CPU 0: Dispatched process 15
-TLB hit at write destination=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 3 from 20 to 20:
-788: 66
-Time slot 178
-TLB hit at write destination=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 2 from 50 to 50:
-562: 01
-Time slot 179
-TLB hit at read source=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 2 from 50 to 50:
-562: 01
-Time slot 180
-TLB hit at write destination=2 offset=70 value=10
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 2 from 70 to 70:
-582: 0a
-Time slot 181
-	CPU 0: Put process 15 to run queue
-	CPU 0: Dispatched process 15
-TLB hit at read source=2 offset=10 value=0
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 2 from 10 to 10:
-522: 00
-Time slot 182
-TLB hit at write destination=2 offset=90 value=10
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 2 from 90 to 90:
-602: 0a
-Time slot 183
-TLB hit at read source=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 3 from 20 to 20:
-788: 66
-Time slot 184
-Time slot 185
-	CPU 0: Put process 15 to run queue
-	CPU 0: Dispatched process 15
-Time slot 186
-	CPU 0: Processed 15 has finished
-	CPU 0: Dispatched process 13
-Time slot 187
-Time slot 188
-Time slot 189
-Time slot 190
-	CPU 0: Put process 13 to run queue
-	CPU 0: Dispatched process 13
-TLB hit at write destination=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 1 from 20 to 20:
-276: 66
-Time slot 191
-TLB hit at write destination=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 2 from 50 to 50:
-562: 01
-Time slot 192
-TLB hit at read source=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 2 from 50 to 50:
-562: 01
-Time slot 193
-TLB hit at write destination=2 offset=70 value=10
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 2 from 70 to 70:
-582: 0a
-Time slot 194
-	CPU 0: Put process 13 to run queue
-	CPU 0: Dispatched process 13
-TLB hit at read source=2 offset=10 value=0
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 2 from 10 to 10:
-522: 00
-Time slot 195
-TLB hit at write destination=2 offset=90 value=10
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 2 from 90 to 90:
-602: 0a
-Time slot 196
-TLB hit at read source=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 1 from 20 to 20:
-276: 66
-Time slot 197
-Time slot 198
-	CPU 0: Put process 13 to run queue
-	CPU 0: Dispatched process 13
-Time slot 199
-	CPU 0: Processed 13 has finished
-	CPU 0: Dispatched process  8
-Time slot 200
-Time slot 201
-Time slot 202
-Time slot 203
-	CPU 0: Put process  8 to run queue
-	CPU 0: Dispatched process  8
-Time slot 204
-TLB hit at write destination=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 2 from 20 to 20:
-532: 78
-Time slot 205
-TLB hit at read source=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 2 from 20 to 20:
-532: 78
-Time slot 206
-TLB hit at write destination=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 30 to 30:
-1054: 67
-Time slot 207
-	CPU 0: Put process  8 to run queue
-	CPU 0: Dispatched process  8
-TLB hit at read source=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 30 to 30:
-1054: 67
-Time slot 208
-Time slot 209
-Time slot 210
-Time slot 211
-	CPU 0: Put process  8 to run queue
-	CPU 0: Dispatched process  8
-Time slot 212
-TLB hit at write destination=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 100 to 100:
-1124: 71
-Time slot 213
-TLB hit at write destination=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 111 to 111:
-1135: 7c
-Time slot 214
-TLB hit at read source=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 100 to 100:
-1124: 71
-Time slot 215
-	CPU 0: Put process  8 to run queue
-	CPU 0: Dispatched process  8
-TLB hit at read source=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 111 to 111:
-1135: 7c
-Time slot 216
-TLB hit at write destination=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 2 from 123 to 123:
-635: 60
-Time slot 217
-TLB hit at read source=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 2 from 123 to 123:
-635: 60
-Time slot 218
-Time slot 219
-	CPU 0: Put process  8 to run queue
-	CPU 0: Dispatched process  8
-Time slot 220
-Time slot 221
-TLB hit at write destination=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 118 to 118:
-374: 31
-Time slot 222
-TLB hit at read source=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 118 to 118:
-374: 31
-Time slot 223
-	CPU 0: Put process  8 to run queue
-	CPU 0: Dispatched process  8
-TLB hit at write destination=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 114 to 114:
-370: 3b
-Time slot 224
-TLB hit at read source=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 114 to 114:
-370: 3b
-Time slot 225
-Time slot 226
-TLB hit at write destination=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 2 from 15 to 15:
-527: 45
-Time slot 227
-	CPU 0: Put process  8 to run queue
-	CPU 0: Dispatched process  8
-TLB hit at read source=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 2 from 15 to 15:
-527: 45
-Time slot 228
-Time slot 229
-Time slot 230
-	CPU 0: Processed  8 has finished
-	CPU 0: Dispatched process 11
-Time slot 231
-Time slot 232
-Time slot 233
-Time slot 234
-	CPU 0: Put process 11 to run queue
-	CPU 0: Dispatched process 11
-Time slot 235
-TLB hit at write destination=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 1 from 20 to 20:
-276: 78
-Time slot 236
-TLB hit at read source=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 1 from 20 to 20:
-276: 78
-Time slot 237
-TLB hit at write destination=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 30 to 30:
-1054: 67
-Time slot 238
-	CPU 0: Put process 11 to run queue
-	CPU 0: Dispatched process 11
-TLB hit at read source=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 30 to 30:
-1054: 67
-Time slot 239
-Time slot 240
-Time slot 241
-Time slot 242
-	CPU 0: Put process 11 to run queue
-	CPU 0: Dispatched process 11
-Time slot 243
-TLB hit at write destination=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 100 to 100:
-1124: 71
-Time slot 244
-TLB hit at write destination=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 111 to 111:
-1135: 7c
-Time slot 245
-TLB hit at read source=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 100 to 100:
-1124: 71
-Time slot 246
-	CPU 0: Put process 11 to run queue
-	CPU 0: Dispatched process 11
-TLB hit at read source=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 111 to 111:
-1135: 7c
-Time slot 247
-TLB hit at write destination=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 1 from 123 to 123:
-379: 60
-Time slot 248
-TLB hit at read source=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 1 from 123 to 123:
-379: 60
-Time slot 249
-Time slot 250
-	CPU 0: Put process 11 to run queue
-	CPU 0: Dispatched process 11
-Time slot 251
-Time slot 252
-TLB hit at write destination=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000002
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 2 from 118 to 118:
-630: 31
-Time slot 253
-TLB hit at read source=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000002
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 2 from 118 to 118:
-630: 31
-Time slot 254
-	CPU 0: Put process 11 to run queue
-	CPU 0: Dispatched process 11
-TLB hit at write destination=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000002
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 2 from 114 to 114:
-626: 3b
-Time slot 255
-TLB hit at read source=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000002
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 2 from 114 to 114:
-626: 3b
-Time slot 256
-Time slot 257
-TLB hit at write destination=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 80000002
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 15 to 15:
-271: 45
-Time slot 258
-	CPU 0: Put process 11 to run queue
-	CPU 0: Dispatched process 11
-TLB hit at read source=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 80000002
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 15 to 15:
-271: 45
-Time slot 259
-Time slot 260
-Time slot 261
-	CPU 0: Processed 11 has finished
-	CPU 0: Dispatched process  6
-Time slot 262
-Time slot 263
-Time slot 264
-Time slot 265
-	CPU 0: Put process  6 to run queue
-	CPU 0: Dispatched process  6
-TLB hit at write destination=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 3 from 20 to 20:
-788: 66
-Time slot 266
-TLB hit at write destination=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 2 from 50 to 50:
-562: 01
-Time slot 267
-TLB hit at read source=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 2 from 50 to 50:
-562: 01
-Time slot 268
-TLB hit at write destination=2 offset=70 value=10
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 2 from 70 to 70:
-582: 0a
-Time slot 269
-	CPU 0: Put process  6 to run queue
-	CPU 0: Dispatched process  6
-TLB hit at read source=2 offset=10 value=0
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 2 from 10 to 10:
-522: 00
-Time slot 270
-TLB hit at write destination=2 offset=90 value=10
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 2 from 90 to 90:
-602: 0a
-Time slot 271
-TLB hit at read source=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000003
-MEMPHY dumped for frame 3 from 20 to 20:
-788: 66
-Time slot 272
-Time slot 273
-	CPU 0: Put process  6 to run queue
-	CPU 0: Dispatched process  6
-Time slot 274
-	CPU 0: Processed  6 has finished
-	CPU 0: Dispatched process  5
-Time slot 275
-Time slot 276
-Time slot 277
-Time slot 278
-	CPU 0: Put process  5 to run queue
-	CPU 0: Dispatched process  5
-TLB hit at write destination=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 1 from 20 to 20:
-276: 66
-Time slot 279
-TLB hit at write destination=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 2 from 50 to 50:
-562: 01
-Time slot 280
-TLB hit at read source=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 2 from 50 to 50:
-562: 01
-Time slot 281
-TLB hit at write destination=2 offset=70 value=10
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 2 from 70 to 70:
-582: 0a
-Time slot 282
-	CPU 0: Put process  5 to run queue
-	CPU 0: Dispatched process  5
-TLB hit at read source=2 offset=10 value=0
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 2 from 10 to 10:
-522: 00
-Time slot 283
-TLB hit at write destination=2 offset=90 value=10
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 2 from 90 to 90:
-602: 0a
-Time slot 284
-TLB hit at read source=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000002
-00000004: 00000000
-00000008: 80000001
-MEMPHY dumped for frame 1 from 20 to 20:
-276: 66
-Time slot 285
-Time slot 286
-	CPU 0: Put process  5 to run queue
-	CPU 0: Dispatched process  5
-Time slot 287
-	CPU 0: Processed  5 has finished
-	CPU 0: Dispatched process 17
-Time slot 288
-Time slot 289
-Time slot 290
-Time slot 291
-	CPU 0: Put process 17 to run queue
-	CPU 0: Dispatched process 17
-Time slot 292
-TLB hit at write destination=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: ac000004
-00000012: 80006003
-MEMPHY dumped for frame 2 from 20 to 20:
-532: 78
-Time slot 293
-TLB hit at read source=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: ac000004
-00000012: 80006003
-MEMPHY dumped for frame 2 from 20 to 20:
-532: 78
-Time slot 294
-TLB hit at write destination=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: ac000004
-00000012: 80006003
-MEMPHY dumped for frame 4 from 30 to 30:
-1054: 67
-Time slot 295
-	CPU 0: Put process 17 to run queue
-	CPU 0: Dispatched process 17
-TLB hit at read source=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: ac000004
-00000012: 80006003
-MEMPHY dumped for frame 4 from 30 to 30:
-1054: 67
-Time slot 296
-Time slot 297
-Time slot 298
-Time slot 299
-	CPU 0: Put process 17 to run queue
-	CPU 0: Dispatched process 17
-Time slot 300
-TLB hit at write destination=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 100 to 100:
-1124: 71
-Time slot 301
-TLB hit at write destination=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 111 to 111:
-1135: 7c
-Time slot 302
-TLB hit at read source=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 100 to 100:
-1124: 71
-Time slot 303
-	CPU 0: Put process 17 to run queue
-	CPU 0: Dispatched process 17
-TLB hit at read source=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 4 from 111 to 111:
-1135: 7c
-Time slot 304
-TLB hit at write destination=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 2 from 123 to 123:
-635: 60
-Time slot 305
-TLB hit at read source=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 00000000
-00000008: 80000004
-00000012: 80000003
-MEMPHY dumped for frame 2 from 123 to 123:
-635: 60
-Time slot 306
-Time slot 307
-	CPU 0: Put process 17 to run queue
-	CPU 0: Dispatched process 17
-Time slot 308
-Time slot 309
-TLB hit at write destination=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 118 to 118:
-374: 31
-Time slot 310
-TLB hit at read source=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 118 to 118:
-374: 31
-Time slot 311
-	CPU 0: Put process 17 to run queue
-	CPU 0: Dispatched process 17
-TLB hit at write destination=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 114 to 114:
-370: 3b
-Time slot 312
-TLB hit at read source=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 114 to 114:
-370: 3b
-Time slot 313
-Time slot 314
-TLB hit at write destination=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 2 from 15 to 15:
-527: 45
-Time slot 315
-	CPU 0: Put process 17 to run queue
-	CPU 0: Dispatched process 17
-TLB hit at read source=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000002
-00000004: 80000001
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 2 from 15 to 15:
-527: 45
-Time slot 316
-Time slot 317
-Time slot 318
-	CPU 0: Processed 17 has finished
-	CPU 0: Dispatched process 18
-Time slot 319
-Time slot 320
-Time slot 321
-Time slot 322
-	CPU 0: Put process 18 to run queue
-	CPU 0: Dispatched process 18
-TLB hit at write destination=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000001
-00000004: 00000000
-00000008: ac000003
-MEMPHY dumped for frame 3 from 20 to 20:
-788: 66
-Time slot 323
-TLB hit at write destination=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000001
-00000004: 00000000
-00000008: ac000003
-MEMPHY dumped for frame 1 from 50 to 50:
-306: 01
-Time slot 324
-TLB hit at read source=2 offset=50 value=1
-print_pgtbl: 0 - 768
-00000000: 80000001
-00000004: 00000000
-00000008: ac000003
-MEMPHY dumped for frame 1 from 50 to 50:
-306: 01
-Time slot 325
-TLB hit at write destination=2 offset=70 value=10
-print_pgtbl: 0 - 768
-00000000: 80000001
-00000004: 00000000
-00000008: ac000003
-MEMPHY dumped for frame 1 from 70 to 70:
-326: 0a
-Time slot 326
-	CPU 0: Put process 18 to run queue
-	CPU 0: Dispatched process 18
-TLB hit at read source=2 offset=10 value=0
-print_pgtbl: 0 - 768
-00000000: 80000001
-00000004: 00000000
-00000008: ac000003
-MEMPHY dumped for frame 1 from 10 to 10:
-266: 00
-Time slot 327
-TLB hit at write destination=2 offset=90 value=10
-print_pgtbl: 0 - 768
-00000000: 80000001
-00000004: 00000000
-00000008: ac000003
-MEMPHY dumped for frame 1 from 90 to 90:
-346: 0a
-Time slot 328
-TLB hit at read source=1 offset=20 value=102
-print_pgtbl: 0 - 768
-00000000: 80000001
-00000004: 00000000
-00000008: ac000003
-MEMPHY dumped for frame 3 from 20 to 20:
-788: 66
-Time slot 329
-Time slot 330
-	CPU 0: Put process 18 to run queue
-	CPU 0: Dispatched process 18
-Time slot 331
-	CPU 0: Processed 18 has finished
-	CPU 0: Dispatched process 19
-Time slot 332
-Time slot 333
-Time slot 334
-Time slot 335
-	CPU 0: Put process 19 to run queue
-	CPU 0: Dispatched process 19
-Time slot 336
-TLB hit at write destination=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000002
-MEMPHY dumped for frame 1 from 20 to 20:
-276: 78
-Time slot 337
-TLB hit at read source=1 offset=20 value=120
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000002
-MEMPHY dumped for frame 1 from 20 to 20:
-276: 78
-Time slot 338
-TLB hit at write destination=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000002
-MEMPHY dumped for frame 4 from 30 to 30:
-1054: 67
-Time slot 339
-	CPU 0: Put process 19 to run queue
-	CPU 0: Dispatched process 19
-TLB hit at read source=4 offset=30 value=103
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000002
-MEMPHY dumped for frame 4 from 30 to 30:
-1054: 67
-Time slot 340
-Time slot 341
-Time slot 342
-Time slot 343
-	CPU 0: Put process 19 to run queue
-	CPU 0: Dispatched process 19
-Time slot 344
-TLB hit at write destination=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000002
-MEMPHY dumped for frame 4 from 100 to 100:
-1124: 71
-Time slot 345
-TLB hit at write destination=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000002
-MEMPHY dumped for frame 4 from 111 to 111:
-1135: 7c
-Time slot 346
-TLB hit at read source=8 offset=100 value=113
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000002
-MEMPHY dumped for frame 4 from 100 to 100:
-1124: 71
-Time slot 347
-	CPU 0: Put process 19 to run queue
-	CPU 0: Dispatched process 19
-TLB hit at read source=8 offset=111 value=124
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000002
-MEMPHY dumped for frame 4 from 111 to 111:
-1135: 7c
-Time slot 348
-TLB hit at write destination=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000002
-MEMPHY dumped for frame 1 from 123 to 123:
-379: 60
-Time slot 349
-TLB hit at read source=9 offset=123 value=96
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 00000000
-00000008: 80000004
-00000012: 80000002
-MEMPHY dumped for frame 1 from 123 to 123:
-379: 60
-Time slot 350
-Time slot 351
-	CPU 0: Put process 19 to run queue
-	CPU 0: Dispatched process 19
-Time slot 352
-Time slot 353
-TLB hit at write destination=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000003
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 3 from 118 to 118:
-886: 31
-Time slot 354
-TLB hit at read source=6 offset=118 value=49
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000003
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 3 from 118 to 118:
-886: 31
-Time slot 355
-	CPU 0: Put process 19 to run queue
-	CPU 0: Dispatched process 19
-TLB hit at write destination=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000003
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 3 from 114 to 114:
-882: 3b
-Time slot 356
-TLB hit at read source=6 offset=114 value=59
-print_pgtbl: 0 - 1024
-00000000: 00000000
-00000004: 80000003
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 3 from 114 to 114:
-882: 3b
-Time slot 357
-Time slot 358
-TLB hit at write destination=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 80000003
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 15 to 15:
-271: 45
-Time slot 359
-	CPU 0: Put process 19 to run queue
-	CPU 0: Dispatched process 19
-TLB hit at read source=1 offset=15 value=69
-print_pgtbl: 0 - 1024
-00000000: 80000001
-00000004: 80000003
-00000008: 00000000
-00000012: 00000000
-MEMPHY dumped for frame 1 from 15 to 15:
-271: 45
-Time slot 360
-Time slot 361
-Time slot 362
-	CPU 0: Processed 19 has finished
-	CPU 0: Dispatched process 20
-Time slot 363
-Time slot 364
-Time slot 365
-Time slot 366
-	CPU 0: Put process 20 to run queue
-	CPU 0: Dispatched process 20
-TLB hit at write destination=2 offset=750 value=111
-print_pgtbl: 0 - 1280
-00000000: 80000004
-00000004: 80000002
-00000008: 80000001
-00000012: 80000003
-00000016: 80000006
-Time slot 367
-TLB hit at write destination=2 offset=756 value=111
-print_pgtbl: 0 - 1280
-00000000: 80000004
-00000004: 80000002
-00000008: 80000001
-00000012: 80000003
-00000016: 80000006
-Time slot 368
-TLB hit at write destination=3 offset=119 value=111
-print_pgtbl: 0 - 1280
-00000000: 80000004
-00000004: 80000002
-00000008: 80000001
-00000012: 80000003
-00000016: 80000006
-MEMPHY dumped for frame 6 from 119 to 119:
-1655: 6f
-Time slot 369
-TLB hit at read source=2 offset=756 value=111
-print_pgtbl: 0 - 1280
-00000000: 80000004
-00000004: 80000002
-00000008: 80000001
-00000012: 80000003
-00000016: 80000006
-Time slot 370
-	CPU 0: Put process 20 to run queue
-	CPU 0: Dispatched process 20
-TLB hit at read source=3 offset=119 value=111
-print_pgtbl: 0 - 1280
-00000000: 80000004
-00000004: 80000002
-00000008: 80000001
-00000012: 80000003
-00000016: 80000006
-MEMPHY dumped for frame 6 from 119 to 119:
-1655: 6f
-Time slot 371
-Time slot 372
-TLB hit at write destination=6 offset=200 value=100
-print_pgtbl: 0 - 1792
-00000000: 80000004
-00000004: 80000002
-00000008: 80000001
-00000012: 80000003
-00000016: 80000006
-00000020: 80000000
-00000024: 80000005
-MEMPHY dumped for frame 0 from 200 to 200:
-200: 64
-Time slot 373
-TLB hit at read source=2 offset=750 value=111
-print_pgtbl: 0 - 1792
-00000000: 80000004
-00000004: 80000002
-00000008: 80000001
-00000012: 80000003
-00000016: 80000006
-00000020: 80000000
-00000024: 80000005
-Time slot 374
-	CPU 0: Put process 20 to run queue
-	CPU 0: Dispatched process 20
-Time slot 375
-Time slot 376
-TLB hit at read source=6 offset=200 value=100
-print_pgtbl: 0 - 1792
-00000000: 00000000
-00000004: 00000000
-00000008: 00000000
-00000012: 00000000
-00000016: 00000000
-00000020: 80000000
-00000024: 80000005
-MEMPHY dumped for frame 0 from 200 to 200:
-200: 64
-Time slot 377
-Time slot 378
-	CPU 0: Processed 20 has finished
 	CPU 0 stopped
+	CPU 7 stopped
+Time slot  62
+	CPU 3 stopped
+Time slot  63
+Time slot  64
+	CPU 6: Put process  7 to run queue
+	CPU 6: Dispatched process  7
+TLB hit at write destination=2 offset=750 value=111
+print_pgtbl: 0 - 1280
+00000000: 84036003
+00000004: 80006000
+00000008: 84002003
+00000012: 80006001
+00000016: 80000002
+Time slot  65
+TLB hit at write destination=2 offset=756 value=111
+print_pgtbl: 0 - 1280
+00000000: 84036003
+00000004: 80006000
+00000008: 84002003
+00000012: 80006001
+00000016: 80000002
+Time slot  66
+TLB hit at write destination=3 offset=119 value=111
+print_pgtbl: 0 - 1280
+00000000: 84036003
+00000004: 80006000
+00000008: 84002003
+00000012: 80006001
+00000016: 80000002
+Time slot  67
+TLB hit at read source=2 offset=756
+print_pgtbl: 0 - 1280
+00000000: 84036003
+00000004: 80006000
+00000008: 84002003
+00000012: 80006001
+00000016: 80000002
+Time slot  68
+	CPU 6: Put process  7 to run queue
+	CPU 6: Dispatched process  7
+TLB hit at read source=3 offset=119
+print_pgtbl: 0 - 1280
+00000000: 84036003
+00000004: 80006000
+00000008: 84002003
+00000012: 80006001
+00000016: 80000002
+Time slot  69
+Time slot  70
+TLB hit at write destination=6 offset=200 value=100
+print_pgtbl: 0 - 1792
+00000000: 44000000
+00000004: 40000100
+00000008: 84002003
+00000012: 80006001
+00000016: 80000002
+00000020: 80000000
+00000024: 80000003
+Time slot  71
+TLB hit at read source=2 offset=750
+print_pgtbl: 0 - 1792
+00000000: 44000000
+00000004: 40000100
+00000008: 84002003
+00000012: 80006001
+00000016: 80000002
+00000020: 80000000
+00000024: 80000003
+Time slot  72
+	CPU 6: Put process  7 to run queue
+	CPU 6: Dispatched process  7
+Time slot  73
+Time slot  74
+TLB hit at read source=6 offset=200
+print_pgtbl: 0 - 1792
+00000000: 00000000
+00000004: 00000000
+00000008: 00000000
+00000012: 00000000
+00000016: 00000000
+00000020: 80000000
+00000024: 80000003
+Time slot  75
+Time slot  76
+	CPU 6: Processed  7 has finished
+	CPU 6 stopped
