@@ -107,9 +107,7 @@ int tlbread(struct pcb_t * proc, uint32_t source,
 {
   BYTE data;
 	int frmnum = -1;
-  /* TODO retrieve TLB CACHED frame num of accessing page(s)*/
-  /* by using tlb_cache_read()/tlb_cache_write()*/
-  /* frmnum is return value of tlb_cache_read/write value*/
+  
   addr_t addr = proc->regs[source];
   int pgn = PAGING_PGN((addr + offset));
 	uint32_t pte;
@@ -165,8 +163,10 @@ int tlbread(struct pcb_t * proc, uint32_t source,
   if (val < 0) 
     return -1;
   proc->regs[destination] = (uint32_t) data;
-#ifdef DEBUG
+#ifdef IODUMP
   printf("read data=%d\n", data);
+#endif
+#ifdef DEBUG
   frmnum = PAGING_FPN(proc->mm->pgd[pgn]);
   MEMPHY_dump(proc->mram, frmnum, offset, offset + 1);
 #endif

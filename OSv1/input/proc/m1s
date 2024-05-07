@@ -1,9 +1,11 @@
-1 8
+1 10
 alloc 600 0
 alloc 300 1
 write 102 1 35
 write 98 0 40
+read 1 35 4
 free 1
+read 1 35 4
 read 0 40 4
 alloc 100 2
 free 2
