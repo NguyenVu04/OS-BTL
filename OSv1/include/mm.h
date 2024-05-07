@@ -131,7 +131,7 @@ int tlbwrite(struct pcb_t * proc, BYTE data, uint32_t destination, uint32_t offs
 int init_tlbmemphy(struct memphy_struct *mp, int max_size);
 int TLBMEMPHY_read(struct memphy_struct * mp, int addr, BYTE *value);
 int TLBMEMPHY_write(struct memphy_struct * mp, int addr, BYTE data);
-int TLBMEMPHY_dump(struct memphy_struct * mp, int start, int end);
+int TLBMEMPHY_dump(struct memphy_struct * mp, int pid, int pgnum);
 int tlb_cache_read(struct memphy_struct * mp, int pid, int pgnum, uint32_t *value);
 int tlb_cache_write(struct memphy_struct *mp, int pid, int pgnum, uint32_t value);
 int destroy_tlbmemphy(struct memphy_struct *mp);

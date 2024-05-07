@@ -24,56 +24,77 @@
 #define init_tlbcache(mp,sz,...) init_memphy(mp, sz, (1, ##__VA_ARGS__))
 
 pthread_mutex_t tlb_lock;
-/*
- *  tlb_cache_read read TLB cache device
- *  @mp: memphy struct
- *  @pid: process id
- *  @pgnum: page number
- *  @value: obtained value
+
+/**
+ * Read from the TLB cache device.
+ *
+ * @param mp The memory struct.
+ * @param pid The process ID.
+ * @param pgnum The page number.
+ * @param value The value to write.
+ *
+ * @return 0 on success, -1 if the tag does not match.
+ *
+ * @throws None.
  */
 int tlb_cache_read(struct memphy_struct * mp, int pid, int pgnum, uint32_t *value)
 {
-   /* TODO: the identify info is mapped to 
-    *      cache line by employing:
-    *      direct mapped, associated mapping etc.
-    */
+   /* Cast the storage to uint32_t*. */
    uint32_t* storage = (uint32_t*) mp->storage;
+   
+   /* Calculate the index. */
    uint32_t i = TLB_INDEX(pid, pgnum);
+   
+   /* Calculate the id and tag. */
    uint32_t id = (i % (mp->maxsz / 8)) * 2;
    uint32_t tag = i / (mp->maxsz / 8);
+   
+   /* Lock the TLB cache. */
    pthread_mutex_lock(&tlb_lock);
+   
+   /* Check if the tag matches. */
    if (storage[id] != tag) {
+      /* Unlock and return -1. */
       pthread_mutex_unlock(&tlb_lock);
       return -1;
    }
+   
+   /* Store the value and unlock. */
    *value = storage[id + 1];
    pthread_mutex_unlock(&tlb_lock);
-
+   
+   /* Return 0. */
    return 0;
 }
 
-/*
- *  tlb_cache_write write TLB cache device
- *  @mp: memphy struct
- *  @pid: process id
- *  @pgnum: page number
- *  @value: obtained value
+/**
+ * Write to TLB cache device
+ *
+ * @param mp The memphy struct
+ * @param pid The process id
+ * @param pgnum The page number
+ * @param value The value to write
+ *
+ * @return 0 on success
  */
 int tlb_cache_write(struct memphy_struct *mp, int pid, int pgnum, uint32_t value)
 {
-   /* TODO: the identify info is mapped to 
-    *      cache line by employing:
-    *      direct mapped, associated mapping etc.
-    */
    uint32_t* storage = (uint32_t*) mp->storage;
    uint32_t i = TLB_INDEX(pid, pgnum);
    uint32_t id = (i % (mp->maxsz / 8)) * 2;
    uint32_t tag = i / (mp->maxsz / 8);
+
+   /* Lock the TLB cache */
    pthread_mutex_lock(&tlb_lock);
+
+   /* Store the tag and value */
    storage[id] = tag;
    storage[id + 1] = value;
+
+   /* Unlock the TLB cache */
    pthread_mutex_unlock(&tlb_lock);
 
+   /* Return success */
    return 0;
 }
 
@@ -112,21 +133,28 @@ int TLBMEMPHY_write(struct memphy_struct * mp, int addr, BYTE data)
    return 0;
 }
 
-/*
- *  TLBMEMPHY_format natively supports MEMPHY device interfaces
- *  @mp: memphy struct
+/**
+ * TLBMEMPHY_dump prints the TLB cache entry for the given process and page number
+ *
+ * @param mp The TLBMEMPHY struct
+ * @param pid The process id
+ * @param pgnum The page number
+ *
+ * @return 0 on success
  */
-
-
-int TLBMEMPHY_dump(struct memphy_struct * mp, int start, int end)
+int TLBMEMPHY_dump(struct memphy_struct * mp, int pid, int pgnum)
 {
-   if (end == -1)
-     end = mp->maxsz;
+   /* Cast storage to uint32_t *. */
    uint32_t *storage = (uint32_t *)mp->storage;
+   
+   /* Calculate index. */
+   uint32_t i = TLB_INDEX(pid, pgnum);
+   uint32_t id = (i % (mp->maxsz / 8)) * 2;
+   /* Print the TLB cache entry. */
    printf("TLBMEMPHY dump:\n");
-   for (int i = start; i < end; i+=2) {
-      printf("0x%08x: 0x%08x\n", i, storage[i]);
-   }
+   printf("%08x: %08x\n", storage[id], storage[id + 1]);
+   
+   /* Return 0. */
    return 0;
 }
 

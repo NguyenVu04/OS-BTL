@@ -8,27 +8,29 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
-/*
- *  MEMPHY_mv_csr - move MEMPHY cursor
- *  @mp: memphy struct
- *  @offset: offset
- */
 
 pthread_mutex_t ram_lock;
 pthread_mutex_t swp_lock;
 
-int init_memphy_lock() {
+int init_memphy_lock() 
+{
     pthread_mutex_init(&ram_lock, NULL);
     pthread_mutex_init(&swp_lock, NULL);
     return 0;
 }
 
-int destroy_memphy_lock() {
+int destroy_memphy_lock() 
+{
     pthread_mutex_destroy(&ram_lock);
     pthread_mutex_destroy(&swp_lock);
     return 0;
 }
 
+/*
+ *  MEMPHY_mv_csr - move MEMPHY cursor
+ *  @mp: memphy struct
+ *  @offset: offset
+ */
 int MEMPHY_mv_csr(struct memphy_struct *mp, int offset)
 {
    int numstep = 0;
