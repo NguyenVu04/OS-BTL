@@ -28,8 +28,11 @@ void init_scheduler(void) {
 #ifdef MLQ_SCHED
 	int i ;
 
-	for (i = 0; i < MAX_PRIO; i ++)
+	for (i = 0; i < MAX_PRIO; i ++){
 		mlq_ready_queue[i].size = 0;
+		slot[i] = MAX_PRIO - i; //Init slot for each queue in ready_queue
+	}
+		
 #endif
 	ready_queue.size = 0;
 	run_queue.size = 0;
