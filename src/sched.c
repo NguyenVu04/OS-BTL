@@ -11,6 +11,7 @@ static pthread_mutex_t queue_lock;
 
 #ifdef MLQ_SCHED
 static struct queue_t mlq_ready_queue[MAX_PRIO];
+static int32_t slot[MAX_PRIO];
 #endif
 
 int queue_empty(void) {
@@ -48,7 +49,7 @@ struct pcb_t * get_mlq_proc(void) {
 	 * Remember to use lock to protect the queue.
 	 */
 	//proc = dequeue(&mlq_ready_queue[0]);
-	
+	/*
 	pthread_mutex_lock(&queue_lock);
 	for (int i = 0; i < MAX_PRIO; i++) {
 	//	pthread_mutex_lock(&queue_lock);
@@ -62,14 +63,25 @@ struct pcb_t * get_mlq_proc(void) {
 	}
 	pthread_mutex_unlock(&queue_lock);
 	return proc;	
-	/*
-	for (int i = 0; i < MAX_PRIO && proc == NULL; i++) {
-		pthread_mutex_lock(&queue_lock);
-		proc = dequeue(&mlq_ready_queue[i]);
-		pthread_mutex_unlock(&queue_lock);
+ 	*/
+	pthread_mutex_lock(&queue_lock);
+	for (int i = 0; i < MAX_PRIO; i++)
+	{
+		if (empty(&mlq_ready_queue[i]) || slot[i] == 0){
+			slot[i] = MAX_PRIO - 1;
+			continue;
+		}
+		else if (mlq_ready_queue[i].size > 0 && slot[i] > 0)
+		{
+
+			proc = dequeue(&mlq_ready_queue[i]);
+			slot[i]--;
+			break;
+		}
 	}
-	return proc;	
-	*/
+	pthread_mutex_unlock(&queue_lock);
+	return proc;
+
 }
 
 void put_mlq_proc(struct pcb_t * proc) {
