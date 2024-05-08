@@ -13,6 +13,7 @@ static pthread_mutex_t queue_lock;
 static struct queue_t mlq_ready_queue[MAX_PRIO];
 int curr_slot;
 int curr_queue;
+static int32_t slot[MAX_PRIO];
 #endif
 
 int queue_empty(void) {
@@ -30,8 +31,11 @@ void init_scheduler(void) {
 	int i ;
 	curr_slot = MAX_PRIO;
 	curr_queue = 0;
-	for (i = 0; i < MAX_PRIO; i ++)
+	for (i = 0; i < MAX_PRIO; i ++){
 		mlq_ready_queue[i].size = 0;
+		slot[i] = MAX_PRIO - i; //Init slot for each queue in ready_queue
+	}
+		
 #endif
 	ready_queue.size = 0;
 	run_queue.size = 0;
@@ -48,30 +52,34 @@ void init_scheduler(void) {
 struct pcb_t * get_mlq_proc(void) 
 {
 	struct pcb_t * proc = NULL;
-	
-	for (int i = 0; i < MAX_PRIO; i++) {
-		pthread_mutex_lock(&queue_lock);
-		proc = dequeue(&mlq_ready_queue[curr_queue]);
-		if (proc != NULL) {
-			curr_slot--;
-			if (curr_slot == 0) {
-				curr_queue = (curr_queue + 1) % MAX_PRIO;
-				curr_slot = MAX_PRIO - curr_queue;
-			}
-			pthread_mutex_unlock(&queue_lock);
-			break;
-		} else {
-			curr_queue = (curr_queue + 1) % MAX_PRIO;
-			curr_slot = MAX_PRIO - curr_queue;
+	pthread_mutex_lock(&queue_lock);
+	if (empty(&mlq_ready_queue[curr_queue]) || slot[curr_queue] == 0){
+		int i;
+		for (i = 0; i < MAX_PRIO; i++) {
+			if (i == curr_queue)
+				continue;
+			proc = dequeue(&mlq_ready_queue[i]);
+			if (proc != NULL)
+				break;
 		}
-		pthread_mutex_unlock(&queue_lock);
+		slot[curr_queue] = MAX_PRIO - curr_queue;
+		if (proc == NULL) {
+			proc = dequeue(&mlq_ready_queue[curr_queue]);
+			curr_queue = proc == NULL ? 0 : curr_queue;
+		} else {
+			curr_queue = i;
+		}
+	} else {
+		proc = dequeue(&mlq_ready_queue[curr_queue]);
 	}
-	return proc;	
+	pthread_mutex_unlock(&queue_lock);
+	return proc;
 }
 
 void put_mlq_proc(struct pcb_t * proc) 
 {
 	pthread_mutex_lock(&queue_lock);
+	slot[proc->prio]--;
 	enqueue(&mlq_ready_queue[proc->prio], proc);
 	pthread_mutex_unlock(&queue_lock);
 }
