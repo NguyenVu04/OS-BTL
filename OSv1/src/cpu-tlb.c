@@ -165,7 +165,7 @@ int tlbread(struct pcb_t * proc, uint32_t source, uint32_t offset, uint32_t dest
   print_pgtbl(proc, 0, -1);
 #endif  
 #endif
-#ifdef DEBUG
+#ifdef TLBDUMP
   /* Dump TLB memory physical address */
   TLBMEMPHY_dump(proc->tlb, proc->pid, pgn);
 #endif
@@ -259,7 +259,7 @@ int tlbwrite(struct pcb_t * proc, BYTE data,
   print_pgtbl(proc, 0, -1); //print max TBL
 #endif
 #endif
-#ifdef DEBUG
+#ifdef TLBDUMP
   /* Dump TLB memory physical address */
   TLBMEMPHY_dump(proc->tlb, proc->pid, pgn);
 #endif

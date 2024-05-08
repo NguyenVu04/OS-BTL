@@ -48,23 +48,27 @@ void init_scheduler(void) {
 struct pcb_t * get_mlq_proc(void) 
 {
 	struct pcb_t * proc = NULL;
-	for (int i = 0; i < MAX_PRIO; i++) {
+	int queue_id = curr_queue;
+	int i = queue_id;
+	do {
 		pthread_mutex_lock(&queue_lock);
 		proc = dequeue(&mlq_ready_queue[curr_queue]);
 		if (proc != NULL) {
 			curr_slot--;
 			if (curr_slot == 0) {
 				curr_queue = (curr_queue + 1) % MAX_PRIO;
+				i = curr_queue;
 				curr_slot = MAX_PRIO - curr_queue;
 			}
 			pthread_mutex_unlock(&queue_lock);
 			break;
 		} else {
 			curr_queue = (curr_queue + 1) % MAX_PRIO;
+			i = curr_queue;
 			curr_slot = MAX_PRIO - curr_queue;
 		}
 		pthread_mutex_unlock(&queue_lock);
-	}
+	} while (i != queue_id);
 	return proc;	
 }
 

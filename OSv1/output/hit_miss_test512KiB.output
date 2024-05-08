@@ -1,0 +1,3018 @@
+Time slot   0
+ld_routine
+	Loaded a process at input/proc/__0, PID: 1 PRIO: 0
+Time slot   1
+	CPU 7: Dispatched process  1
+Time slot   2
+	Loaded a process at input/proc/__1, PID: 2 PRIO: 5
+	CPU 0: Dispatched process  2
+Time slot   3
+	Loaded a process at input/proc/__3, PID: 3 PRIO: 2
+	CPU 7: Put process  1 to ready queue
+	CPU 7: Dispatched process  1
+	CPU 3: Dispatched process  3
+Time slot   4
+	CPU 0: Put process  2 to ready queue
+	CPU 0: Dispatched process  2
+Time slot   5
+	Loaded a process at input/proc/__2, PID: 4 PRIO: 100
+	CPU 3: Put process  3 to ready queue
+	CPU 4: Dispatched process  4
+Time slot   6
+	CPU 0: Put process  2 to ready queue
+	CPU 3: Dispatched process  3
+	CPU 7: Put process  1 to ready queue
+	CPU 7: Dispatched process  1
+TLB hit at write destination=1 offset=20 value=102
+print_pgtbl: 0 - 768	CPU 6: Dispatched process  2
+TLB hit at write destination=2 offset=400 value=-100
+print_pgtbl: 0 - 768
+00000000: 80000000
+00000004: 80000003
+00000008: 80000005
+
+00000000: 80000002
+00000004: 00000000
+00000008: 80000004
+	Loaded a process at input/proc/__0, PID: 5 PRIO: 95
+TLB hit at write destination=2 offset=50 value=1
+print_pgtbl: 0 - 768
+00000000: 80000002
+00000004: 00000000
+00000008: 80000004
+TLB hit at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 80000000
+00000004: 80000003
+00000008: 80000005
+read data=-100
+Time slot   7
+	CPU 0: Dispatched process  5
+	CPU 7: Put process  1 to ready queue
+	CPU 7: Dispatched process  1
+TLB miss at read source=2 offset=50
+print_pgtbl: 0 - 768
+00000000: 80000002
+00000004: 00000000
+00000008: 80000004
+read data=1
+	CPU 6: Put process  2 to ready queue
+	CPU 6: Dispatched process  2
+TLB hit at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 80000000
+00000004: 80000003
+00000008: 80000005
+read data=-100
+	CPU 3: Put process  3 to ready queue
+	CPU 3: Dispatched process  3
+TLB hit at write destination=2 offset=750 value=111
+print_pgtbl: 0 - 1280
+00000000: 80000008
+00000004: 80000007
+00000008: 80000006
+00000012: 80000001
+00000016: 80000009
+Time slot   8
+	CPU 4: Put process  4 to ready queue
+	CPU 4: Dispatched process  4
+TLB hit at write destination=2 offset=70 value=10
+print_pgtbl: 0 - 768
+00000000: 80000002
+00000004: 00000000
+00000008: 80000004
+TLB hit at write destination=2 offset=333 value=123
+print_pgtbl: 0 - 768
+00000000: 80000000
+00000004: 80000003
+00000008: 80000005
+TLB hit at write destination=2 offset=756 value=111
+print_pgtbl: 0 - 1280
+00000000: 80000008
+00000004: 80000007
+00000008: 80000006
+00000012: 80000001
+00000016: 80000009
+Time slot   9
+	CPU 0: Put process  5 to ready queue
+	CPU 0: Dispatched process  5
+	Loaded a process at input/proc/__2, PID: 6 PRIO: 31
+	CPU 6: Put process  2 to ready queue
+	CPU 7: Put process  1 to ready queue
+	CPU 6: Dispatched process  2
+TLB hit at write destination=1 offset=99 value=124
+print_pgtbl: 0 - 768	CPU 4: Put process  4 to ready queue
+	CPU 7: Dispatched process  6
+	CPU 3: Put process  3 to ready queue
+	CPU 3: Dispatched process  4
+	CPU 4: Dispatched process  1
+
+TLB hit at read source=2 offset=10
+00000000: 80000000
+	CPU 2: Dispatched process  3
+TLB hit at write destination=3 offset=119 value=111
+print_pgtbl: 0 - 1280
+00000000: 80000008
+00000004: 80000007
+00000008: 80000006
+00000012: 80000001
+00000016: 80000009
+Time slot  10
+00000004: 80000003
+00000008: 80000005
+print_pgtbl: 0 - 768
+00000000: 80000002
+00000004: 00000000
+00000008: 80000004
+read data=0
+TLB hit at read source=1 offset=99
+print_pgtbl: 0 - 768
+00000000: 80000000
+00000004: 80000003
+00000008: 80000005
+read data=124
+TLB miss at write destination=2 offset=90 value=10
+print_pgtbl: 0 - 768
+00000000: 80000002
+00000004: 00000000
+00000008: 80000004
+TLB hit at read source=2 offset=756
+print_pgtbl: 0 - 1280
+00000000: 80000008
+00000004: 80000007
+00000008: 80000006
+00000012: 80000001
+00000016: 80000009
+read data=111
+Time slot  11
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 8000000c
+00000004: 00000000
+00000008: 80000010
+00000012: 8000000f
+	CPU 0: Put process  5 to ready queue
+	CPU 0: Dispatched process  5
+TLB hit at write destination=1 offset=20 value=102
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 00000000
+00000008: 8000000e
+	CPU 7: Put process  6 to ready queue
+	CPU 4: Put process  1 to ready queue
+	CPU 6: Put process  2 to ready queue
+	Loaded a process at input/proc/__3, PID: 7 PRIO: 2
+	CPU 2: Put process  3 to ready queue
+	CPU 2: Dispatched process  7
+	CPU 7: Dispatched process  3
+TLB hit at read source=3 offset=119
+print_pgtbl: 0 - 1280
+00000000: 80000008
+00000004: 80000007
+00000008: 80000006
+00000012: 80000001
+00000016: 80000009
+read data=111
+Time slot  12
+TLB miss at write destination=2 offset=50 value=1
+	CPU 3: Put process  4 to ready queue
+	CPU 4: Dispatched process  6
+	CPU 3: Dispatched process  4
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 8000000c
+00000004: 00000000
+00000008: 80000010
+00000012: 8000000f
+read data=120
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 00000000
+00000008: 8000000e
+	CPU 6: Dispatched process  1
+TLB miss at read source=1 offset=20
+print_pgtbl: 0 - 768
+00000000: 80000002
+00000004: 00000000
+00000008: 80000004
+read data=102
+TLB hit at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024
+00000000: 8000000c
+00000004: 00000000
+00000008: 80000010
+00000012: 8000000f
+Time slot  13
+	CPU 0: Put process  5 to ready queue
+	CPU 0: Dispatched process  2
+TLB miss at read source=2 offset=333
+print_pgtbl: 0 - 768
+00000000: 80000000
+00000004: 80000003
+00000008: 80000005
+read data=123
+	CPU 5: Dispatched process  5
+TLB hit at read source=2 offset=50
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 00000000
+00000008: 8000000e
+read data=1
+	Loaded a process at input/proc/__1, PID: 8 PRIO: 10
+	CPU 4: Put process  6 to ready queue
+	CPU 4: Dispatched process  8
+	CPU 7: Put process  3 to ready queue
+	CPU 7: Dispatched process  6
+	CPU 2: Put process  7 to ready queue
+Time slot  14
+	CPU 6: Put process  1 to ready queue
+	CPU 2: Dispatched process  3
+	CPU 1: Dispatched process  7
+	CPU 6: Dispatched process  1
+	CPU 3: Put process  4 to ready queue
+	CPU 3: Dispatched process  4
+TLB hit at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 8000000c
+00000004: 00000000
+00000008: 80000010
+00000012: 8000000f
+read data=103
+TLB hit at write destination=6 offset=200 value=100
+print_pgtbl: 0 - 1792
+00000000: 80000008
+00000004: 80000007
+00000008: 80000006
+00000012: 80000001
+00000016: 80000009
+00000020: 80000014
+00000024: 80000013
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 80000004
+00000004: 00000000
+00000008: 80000012
+00000012: 80000011
+	CPU 6: Processed  1 has finished
+TLB hit at write destination=2 offset=70 value=10
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 00000000
+00000008: 8000000e
+TLB miss at read source=2 offset=750
+print_pgtbl: 0 - 1792
+00000000: 80000008
+00000004: 80000007
+00000008: 80000006
+00000012: 80000001
+00000016: 80000009
+00000020: 80000014
+00000024: 80000013
+Time slot  15
+	CPU 0: Put process  2 to ready queue
+	CPU 0: Dispatched process  2
+read data=111
+	CPU 7: Put process  6 to ready queue
+	CPU 7: Dispatched process  6
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 80000004
+00000004: 00000000
+00000008: 80000012
+00000012: 80000011
+read data=120
+	CPU 5: Put process  5 to ready queue
+	CPU 5: Dispatched process  5
+TLB hit at read source=2 offset=10
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 00000000
+00000008: 8000000e
+read data=0
+	Loaded a process at input/proc/__0, PID: 9 PRIO: 95
+	CPU 4: Put process  8 to ready queue
+	CPU 4: Dispatched process  9
+	CPU 3: Put process  4 to ready queue
+	CPU 3: Dispatched process  4
+	CPU 2: Put process  3 to ready queue
+	CPU 2: Dispatched process  3
+	CPU 1: Put process  7 to ready queue
+	CPU 1: Dispatched process  7
+TLB miss at write destination=2 offset=750 value=111
+print_pgtbl: 0 - 1280
+Time slot  16
+00000000: 80000015
+00000004: 80000000
+00000008: 80000003
+00000012: 80000002
+00000016: 8000000f
+	CPU 0: Processed  2 has finished
+	CPU 0: Dispatched process  8
+TLB hit at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024
+00000000: 80000004
+00000004: 00000000
+00000008: 80000012
+00000012: 80000011
+TLB miss at write destination=2 offset=90 value=10
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 00000000
+00000008: 8000000e
+Time slot  17
+TLB hit at write destination=2 offset=756 value=111
+print_pgtbl: 0 - 1280
+00000000: 80000015
+00000004: 80000000
+00000008: 80000003
+00000012: 80000002
+00000016: 8000000f
+	CPU 5: Put process  5 to ready queue
+	CPU 5: Dispatched process  5
+TLB miss at read source=1 offset=20
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 00000000
+00000008: 8000000e
+read data=102
+	CPU 4: Put process  9 to ready queue
+	CPU 2: Put process  3 to ready queue
+	CPU 3: Put process  4 to ready queue
+	CPU 2: Dispatched process  3
+TLB hit at read source=6 offset=200
+print_pgtbl: 0 - 1792
+00000000: 00000000
+00000004: 00000000
+00000008: 00000000
+00000012: 00000000
+00000016: 00000000
+00000020: 80000014
+00000024: 80000013
+	CPU 4: Dispatched process  9
+	CPU 3: Dispatched process  4
+Time slot  18
+	CPU 1: Put process  7 to ready queue
+	CPU 1: Dispatched process  7
+TLB hit at write destination=3 offset=119 value=111
+print_pgtbl: 0 - 1280
+00000000: 80000015
+00000004: 80000000
+00000008: 80000003
+00000012: 80000002
+00000016: 8000000f
+	CPU 0: Put process  8 to ready queue
+	CPU 0: Dispatched process  8
+TLB hit at write destination=2 offset=400 value=-100
+print_pgtbl: 0 - 768
+00000000: 8000000c
+00000004: 80000009
+00000008: 80000016
+read data=100
+	CPU 7: Put process  6 to ready queue
+	CPU 7: Dispatched process  6
+TLB hit at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 80000004
+00000004: 00000000
+00000008: 80000012
+00000012: 80000011
+read data=103
+TLB hit at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 8000000b
+00000004: 00000000
+00000008: 80000018
+00000012: 80000017
+Time slot  19
+TLB hit at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 8000000c
+00000004: 80000009
+00000008: 80000016
+read data=-100
+TLB hit at read source=2 offset=756
+print_pgtbl: 0 - 1280
+00000000: 80000015
+00000004: 80000000
+00000008: 80000003
+00000012: 80000002
+00000016: 8000000f
+read data=111
+	CPU 7: Put process  6 to ready queue
+	CPU 5: Put process  5 to ready queue
+	CPU 5: Dispatched process  5
+	CPU 7: Dispatched process  6
+	CPU 3: Put process  4 to ready queue
+	CPU 3: Dispatched process  4
+TLB hit at write destination=8 offset=111 value=124
+	CPU 4: Put process  9 to ready queue
+	CPU 4: Dispatched process  9
+TLB miss at write destination=1 offset=20 value=102
+print_pgtbl: 0 - 768
+00000000: 80000011
+00000004: 00000000
+print_pgtbl: 0 - 1024	CPU 2: Processed  3 has finished
+
+00000000: 8000000b
+00000004: 00000000
+00000008: 80000018
+00000012: 80000017
+	CPU 1: Put process  7 to ready queue
+Time slot  20
+00000008: 8000000a
+	Loaded a process at input/proc/__2, PID: 10 PRIO: 31
+	CPU 0: Put process  8 to ready queue
+	CPU 0: Dispatched process  8
+TLB hit at read source=2 offset=400
+	CPU 1: Dispatched process  7
+TLB hit at read source=3 offset=119
+print_pgtbl: 0 - 1280
+00000000: 80000015
+00000004: 80000000
+00000008: 80000003
+00000012: 80000002
+00000016: 8000000f
+read data=111
+print_pgtbl: 0 - 768
+00000000: 8000000c
+00000004: 80000009
+00000008: 80000016
+read data=-100
+	CPU 5: Processed  5 has finished
+	CPU 5: Dispatched process 10
+TLB hit at write destination=2 offset=50 value=1
+print_pgtbl: 0 - 768
+00000000: 80000011
+00000004: 00000000
+00000008: 8000000a
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 8000000b
+00000004: 00000000
+00000008: 80000018
+00000012: 80000017
+read data=113
+Time slot  21
+TLB hit at write destination=2 offset=333 value=123
+print_pgtbl: 0 - 768
+00000000: 8000000c
+00000004: 80000009
+00000008: 80000016
+	CPU 4: Put process  9 to ready queue
+	CPU 7: Put process  6 to ready queue
+	CPU 7: Dispatched process  6
+	CPU 4: Dispatched process  9
+TLB hit at read source=2 offset=50
+print_pgtbl: 0 - 768
+00000000: 80000011
+00000004: 00000000
+00000008: 8000000a
+read data=1
+	CPU 1: Put process  7 to ready queue
+Time slot  22
+	CPU 1: Dispatched process  7
+TLB hit at write destination=6 offset=200 value=100
+print_pgtbl: 0 - 1792
+00000000: 80000015
+00000004: 80000000
+00000008: 80000003
+00000012: 80000002
+00000016: 8000000f
+00000020: 80000014
+00000024: 80000004
+	CPU 0: Put process  8 to ready queue
+	CPU 0: Dispatched process  8
+TLB miss at write destination=1 offset=99 value=124
+print_pgtbl: 0 - 768
+00000000: 8000000c
+00000004: 80000009
+00000008: 80000016
+	CPU 3: Put process  4 to ready queue
+	CPU 3: Dispatched process  4
+TLB miss at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 8000000b
+00000004: 00000000
+00000008: 80000018
+00000012: 80000017
+read data=124
+TLB hit at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 80000013
+00000012: 8000000d
+	CPU 5: Put process 10 to ready queue
+	CPU 5: Dispatched process 10
+TLB hit at write destination=2 offset=70 value=10
+print_pgtbl: 0 - 768
+00000000: 80000011
+00000004: 00000000
+00000008: 8000000a
+TLB hit at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 8000000b
+00000004: 00000000
+00000008: 80000018
+00000012: 80000017
+TLB hit at read source=2 offset=750
+print_pgtbl: 0 - 1792
+00000000: 80000015
+00000004: 80000000
+00000008: 80000003
+00000012: 80000002
+00000016: 8000000f
+00000020: 80000014
+00000024: 80000004
+read data=111
+Time slot  23
+TLB miss at read source=1 offset=99
+print_pgtbl: 0 - 768
+00000000: 8000000c
+00000004: 80000009
+00000008: 80000016
+read data=124
+	Loaded a process at input/proc/__3, PID: 11 PRIO: 2
+	CPU 7: Put process  6 to ready queue
+	CPU 7: Dispatched process  6
+TLB miss at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 80000013
+00000012: 8000000d
+	CPU 4: Put process  9 to ready queue
+	CPU 4: Dispatched process  9
+TLB hit at read source=2 offset=10
+print_pgtbl: 0 - 768
+00000000: 80000011
+00000004: 00000000
+00000008: 8000000a
+read data=0
+	CPU 3: Put process  4 to ready queue
+	CPU 3: Dispatched process  4
+TLB hit at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 8000000b
+00000004: 00000000
+00000008: 80000018
+00000012: 80000017
+read data=96
+Time slot  24
+	CPU 1: Put process  7 to ready queue
+	CPU 1: Dispatched process 11
+	CPU 0: Put process  8 to ready queue
+	CPU 0: Dispatched process  7
+	CPU 5: Put process 10 to ready queue
+	CPU 5: Dispatched process  8
+TLB hit at write destination=2 offset=90 value=10
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024print_pgtbl: 0 - 768TLB hit at read source=2 offset=333
+print_pgtbl: 0 - 768
+00000000: 8000000c
+00000004: 80000009
+00000008: 80000016
+read data=123
+
+00000000: 80000005
+00000004: 00000000
+00000008: 80000013
+00000012: 8000000d
+read data=113
+
+00000000: 80000011
+00000004: 00000000
+00000008: 8000000a
+	CPU 2: Dispatched process 10
+Time slot  25
+	Loaded a process at input/proc/__3, PID: 12 PRIO: 100
+	CPU 7: Put process  6 to ready queue
+	CPU 6: Dispatched process 12
+	CPU 7: Dispatched process  6
+TLB hit at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 80000013
+00000012: 8000000d
+read data=124
+	CPU 4: Put process  9 to ready queue
+	CPU 4: Dispatched process  9
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 768
+00000000: 80000011
+00000004: 00000000
+00000008: 8000000a
+read data=102
+	CPU 3: Put process  4 to ready queue
+	CPU 3: Dispatched process  4
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 80000003
+00000004: 00000000
+00000008: 8c000001
+00000012: 80006010
+	CPU 1: Put process 11 to ready queue
+	CPU 1: Dispatched process 11
+Time slot  26
+	CPU 0: Put process  7 to ready queue
+	CPU 0: Dispatched process  7
+TLB hit at read source=6 offset=200
+print_pgtbl: 0 - 1792
+00000000: 00000000
+00000004: 00000000
+00000008: 00000000
+00000012: 00000000
+00000016: 00000000
+00000020: 80000014
+00000024: 80000004
+read data=100
+	Loaded a process at input/proc/__1, PID: 13 PRIO: 85
+	CPU 5: Put process  8 to ready queue
+	CPU 5: Dispatched process  8
+TLB miss at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 80000013
+00000012: 8000000d
+	CPU 2: Put process 10 to ready queue
+	CPU 2: Dispatched process 10
+TLB miss at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 80000003
+00000004: 00000000
+00000008: 8c000001
+00000012: 80006010
+read data=120
+Time slot  27
+	CPU 5: Processed  8 has finished
+	CPU 7: Put process  6 to ready queue
+	CPU 5: Dispatched process 13
+	CPU 7: Dispatched process  6
+TLB miss at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 80000013
+00000012: 8000000d
+read data=96
+	CPU 4: Put process  9 to ready queue
+	CPU 4: Dispatched process  9
+	CPU 3: Put process  4 to ready queue
+	CPU 3: Dispatched process  4
+TLB hit at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+TLB miss at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024
+00000000: 80000003
+00000004: 00000000
+00000008: 8c000001
+00000012: 80006010
+	CPU 1: Put process 11 to ready queue
+	CPU 1: Dispatched process 11
+TLB hit at write destination=2 offset=750 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c024018
+00000012: 80006017
+00000016: 8000000a
+Time slot  28
+	CPU 6: Put process 12 to ready queue
+	CPU 0: Processed  7 has finished
+	CPU 0: Dispatched process 12
+	CPU 4: Processed  9 has finished
+TLB miss at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=49
+	CPU 2: Put process 10 to ready queue
+	CPU 2: Dispatched process 10
+TLB hit at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 80000003
+00000004: 00000000
+00000008: 8c000001
+00000012: 80006010
+read data=103
+Time slot  29
+TLB hit at write destination=2 offset=756 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c024018
+00000012: 80006017
+00000016: 8000000a
+	Loaded a process at input/proc/__2, PID: 14 PRIO: 31
+	CPU 5: Put process 13 to ready queue
+	CPU 5: Dispatched process 14
+	CPU 4: Dispatched process 13
+	CPU 7: Put process  6 to ready queue
+	CPU 7: Dispatched process  6
+	CPU 3: Put process  4 to ready queue
+	CPU 3: Dispatched process  4
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+	CPU 1: Put process 11 to ready queue
+	CPU 1: Dispatched process 11
+TLB hit at write destination=3 offset=119 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c024018
+00000012: 80006017
+00000016: 8000000a
+Time slot  30
+	CPU 0: Put process 12 to ready queue
+	CPU 0: Dispatched process 12
+TLB hit at write destination=2 offset=750 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000f
+00000004: 80006016
+00000008: 8c00000b
+00000012: 80006011
+00000016: 8c024012
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=59
+	CPU 2: Put process 10 to ready queue
+	CPU 2: Dispatched process 10
+Time slot  31
+TLB hit at read source=2 offset=756
+print_pgtbl: 0 - 1280
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c024018
+00000012: 80006017
+00000016: 8000000a
+read data=111
+TLB hit at write destination=2 offset=756 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000f
+00000004: 80006016
+00000008: 8c00000b
+00000012: 80006011
+00000016: 8c024012
+	CPU 4: Put process 13 to ready queue
+	CPU 5: Put process 14 to ready queue
+	CPU 4: Dispatched process 13
+TLB hit at write destination=2 offset=400 value=-100
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 80000005
+	CPU 5: Dispatched process 14
+00000008: 80000015
+	CPU 7: Put process  6 to ready queue
+	CPU 7: Dispatched process  6
+TLB miss at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000000
+00000008: 00000000
+00000012: 00000000
+	CPU 3: Put process  4 to ready queue
+	CPU 3: Dispatched process  4
+	CPU 1: Put process 11 to ready queue
+Time slot  32
+	CPU 0: Put process 12 to ready queue
+	CPU 1: Dispatched process 11
+	CPU 0: Dispatched process 12
+TLB hit at read source=3 offset=119
+TLB hit at write destination=3 offset=119 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000f
+00000004: 80006016
+00000008: 8c00000b
+00000012: 80006011
+00000016: 8c024012
+print_pgtbl: 0 - 1280
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c024018
+00000012: 80006017
+00000016: 8000000a
+read data=111
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000006
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+TLB hit at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 80000005
+00000008: 80000015
+read data=-100
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000000
+00000008: 00000000
+00000012: 00000000
+read data=49
+	CPU 2: Put process 10 to ready queue
+	CPU 2: Dispatched process 10
+Time slot  33
+TLB hit at read source=2 offset=756
+print_pgtbl: 0 - 1280
+00000000: 8c00000f
+00000004: 80006016
+00000008: 8c00000b
+00000012: 80006011
+00000016: 8c024012
+read data=111
+	Loaded a process at input/proc/__3, PID: 15 PRIO: 12
+	CPU 7: Put process  6 to ready queue
+	CPU 7: Dispatched process  6
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+	CPU 4: Put process 13 to ready queue
+	CPU 4: Dispatched process 13
+TLB hit at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 80000005
+00000008: 80000015
+read data=-100
+	CPU 3: Put process  4 to ready queue
+	CPU 3: Dispatched process  4
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000006
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+TLB miss at write destination=8 offset=100 value=113
+	CPU 5: Put process 14 to ready queue
+	CPU 1: Put process 11 to ready queue
+	CPU 1: Dispatched process 11
+TLB hit at write destination=6 offset=200 value=100
+print_pgtbl: 0 - 1792Time slot  34
+print_pgtbl: 0 - 1024
+00000000: 80000010
+00000004: 00000000
+00000008: 80000004
+00000012: 80000013
+	CPU 0: Put process 12 to ready queue
+	CPU 0: Dispatched process 15
+read data=69
+	CPU 5: Dispatched process 14
+
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c024018
+00000012: 80006017
+00000016: 8000000a
+00000020: 80000003
+00000024: 80000001
+00000004: 80000000
+00000008: 00000000
+00000012: 00000000
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000000
+00000008: 00000000
+00000012: 00000000
+read data=59
+TLB hit at write destination=2 offset=333 value=123
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 80000005
+00000008: 80000015
+TLB hit at write destination=1 offset=20 value=120
+	CPU 6: Dispatched process 12
+TLB hit at read source=3 offset=119
+print_pgtbl: 0 - 1280
+00000000: 8c00000f
+00000004: 80006016
+00000008: 8c00000b
+00000012: 80006011
+00000016: 8c024012
+read data=111
+Time slot  35
+print_pgtbl: 0 - 1024
+00000000: 80000007
+00000004: 00000000
+00000008: 8c07c00e
+TLB hit at read source=2 offset=750
+	CPU 2: Put process 10 to ready queue
+	CPU 2: Dispatched process 10
+TLB hit at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000010
+00000004: 00000000
+00000008: 80000004
+00000012: 80000013
+print_pgtbl: 0 - 1792
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c024018
+00000012: 80006017
+00000016: 8000000a
+00000020: 80000003
+00000024: 80000001
+read data=111
+00000012: 80006014
+	Loaded a process at input/proc/__1, PID: 16 PRIO: 100
+	CPU 7: Put process  6 to ready queue
+	CPU 7: Dispatched process  6
+	CPU 5: Put process 14 to ready queue
+	CPU 3: Put process  4 to ready queue
+	CPU 5: Dispatched process 14
+	CPU 3: Dispatched process 16
+TLB miss at read source=1 offset=20
+print_pgtbl: 0 - 1024
+	CPU 4: Put process 13 to ready queue
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 80000010
+	CPU 1: Put process 11 to ready queue
+	CPU 1: Dispatched process  4
+Time slot  36
+00000004: 00000000
+00000008: 80000004
+00000012: 80000013
+read data=113
+	CPU 4: Dispatched process 11
+00000000: 80000007
+00000004: 00000000
+00000008: 8c07c00e
+00000012: 80006014
+read data=120
+	CPU 0: Put process 15 to ready queue
+	CPU 0: Dispatched process 15
+	Loaded a process at input/proc/__2, PID: 17 PRIO: 95
+TLB miss at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024
+00000000: 80000007
+00000004: 00000000
+00000008: 8c07c00e
+00000012: 80006014
+	CPU 6: Put process 12 to ready queue
+	CPU 6: Dispatched process 13
+TLB hit at write destination=1 offset=99 value=124
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 80000005
+00000008: 80000015
+Time slot  37
+	CPU 2: Put process 10 to ready queue
+	CPU 2: Dispatched process 17
+TLB miss at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000019
+00000004: 80000000
+00000008: 00000000
+00000012: 00000000
+	CPU 1: Processed  4 has finished
+	CPU 1: Dispatched process 12
+TLB hit at write destination=6 offset=200 value=100
+print_pgtbl: 0 - 1792
+00000000: 8c00000f
+00000004: 80006016
+00000008: 8c00000b
+00000012: 80006011
+00000016: 8c024012
+00000020: 80006008
+00000024: 8c024006
+	CPU 7: Put process  6 to ready queue
+	CPU 7: Dispatched process 10
+TLB miss at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 80000010
+00000004: 00000000
+00000008: 80000004
+00000012: 80000013
+read data=124
+TLB hit at read source=1 offset=99
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 80000005
+00000008: 80000015
+read data=124
+	CPU 5: Put process 14 to ready queue
+	CPU 5: Dispatched process  6
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000019
+00000004: 80000000
+00000008: 00000000
+00000012: 00000000
+read data=69
+	CPU 4: Put process 11 to ready queue
+	CPU 4: Dispatched process 14
+TLB miss at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 80000007
+00000004: 00000000
+00000008: 8c07c00e
+00000012: 80006014
+read data=103
+	CPU 3: Put process 16 to ready queue
+	CPU 3: Dispatched process 16
+Time slot  38
+TLB miss at read source=2 offset=750
+print_pgtbl: 0 - 1792
+00000000: 8c00000f
+00000004: 80006016
+00000008: 8c00000b
+00000012: 80006011
+00000016: 8c024012
+00000020: 80006008
+00000024: 8c024006
+read data=111
+	CPU 0: Put process 15 to ready queue
+	CPU 0: Dispatched process 11
+TLB hit at read source=6 offset=200
+print_pgtbl: 0 - 1792
+00000000: 00000000
+00000004: 00000000
+00000008: 00000000
+00000012: 00000000
+00000016: 00000000
+00000020: 80000003
+00000024: 80000001
+read data=100
+TLB miss at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 80000010
+00000004: 00000000
+00000008: 80000004
+00000012: 80000013
+	CPU 6: Put process 13 to ready queue
+	CPU 6: Dispatched process 15
+TLB hit at write destination=2 offset=750 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c07c018
+00000012: 80006017
+00000016: 8000000a
+	CPU 2: Put process 17 to ready queue
+	CPU 2: Dispatched process 13
+TLB miss at read source=2 offset=333
+print_pgtbl: 0 - 768
+00000000: 8000000d
+00000004: 80000005
+00000008: 80000015
+read data=123
+	CPU 1: Put process 12 to ready queue
+	CPU 1: Dispatched process 17
+Time slot  39
+	Loaded a process at input/proc/__2, PID: 18 PRIO: 31
+TLB hit at write destination=2 offset=756 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c07c018
+00000012: 80006017
+00000016: 8000000a
+	CPU 5: Put process  6 to ready queue
+	CPU 5: Dispatched process 12
+	CPU 7: Put process 10 to ready queue
+	CPU 7: Dispatched process 18
+	CPU 3: Put process 16 to ready queue
+	CPU 3: Dispatched process  6
+	CPU 4: Put process 14 to ready queue
+	CPU 4: Dispatched process 10
+TLB hit at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000010
+00000004: 00000000
+00000008: 80000004
+00000012: 80000013
+Time slot  40
+read data=96
+	CPU 0: Processed 11 has finished
+	CPU 0: Dispatched process 14
+	CPU 6: Put process 15 to ready queue
+	CPU 6: Dispatched process 16
+TLB hit at write destination=2 offset=400 value=-100
+print_pgtbl: 0 - 768
+00000000: 8000000e
+00000004: 80000014
+00000008: 8c000002
+	CPU 3: Processed  6 has finished
+	CPU 3: Dispatched process 15
+TLB hit at write destination=3 offset=119 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c07c018
+00000012: 80006017
+00000016: 8000000a
+	CPU 2: Put process 13 to ready queue
+	CPU 2: Dispatched process 13
+	CPU 1: Put process 17 to ready queue
+	CPU 1: Dispatched process 17
+Time slot  41
+	Loaded a process at input/proc/__1, PID: 19 PRIO: 2
+TLB hit at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 8000000e
+00000004: 80000014
+00000008: 8c000002
+read data=-100
+	CPU 4: Put process 10 to ready queue
+Time slot  42
+	CPU 5: Put process 12 to ready queue
+	CPU 2: Processed 13 has finished
+	CPU 5: Dispatched process 12
+TLB hit at read source=6 offset=200
+print_pgtbl: 0 - 1792
+00000000: 00000000
+	CPU 4: Dispatched process 19
+	CPU 7: Put process 18 to ready queue
+	CPU 7: Dispatched process 10
+	CPU 2: Dispatched process 18
+00000004: 00000000
+00000008: 00000000
+00000012: 00000000
+00000016: 00000000
+00000020: 80006008
+00000024: 8c024006
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 80000015
+00000004: 00000000
+00000008: 8000001c
+00000012: 80000019
+read data=100
+	CPU 0: Put process 14 to ready queue
+TLB hit at read source=2 offset=756
+print_pgtbl: 0 - 1280
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c07c018
+00000012: 80006017
+00000016: 8000000a
+read data=111
+	CPU 0: Dispatched process 14
+	CPU 6: Put process 16 to ready queue
+	CPU 6: Dispatched process 16
+TLB hit at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 8000000e
+00000004: 80000014
+00000008: 8c000002
+read data=-100
+	CPU 3: Put process 15 to ready queue
+	CPU 3: Dispatched process 15
+TLB hit at read source=3 offset=119
+print_pgtbl: 0 - 1280
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c07c018
+00000012: 80006017
+00000016: 8000000a
+read data=111
+	CPU 1: Put process 17 to ready queue
+	CPU 1: Dispatched process 17
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 80000015
+Time slot  43
+00000004: 00000000
+00000008: 8000001c
+00000012: 80000019
+read data=120
+TLB miss at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 80000013
+00000004: 00000000
+00000008: 8000001b
+00000012: 8000001a
+	CPU 7: Put process 10 to ready queue
+	CPU 7: Dispatched process 10
+TLB miss at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000012
+00000008: 00000000
+00000012: 00000000
+	CPU 4: Put process 19 to ready queue
+	CPU 4: Dispatched process 19
+TLB hit at write destination=4 offset=30 value=103
+	CPU 2: Put process 18 to ready queue
+print_pgtbl: 0 - 1024
+00000000: 80000015
+00000004: 00000000
+00000008: 8000001c
+00000012: 80000019
+	CPU 0: Put process 14 to ready queue
+	CPU 0: Dispatched process 14
+TLB hit at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000013
+	CPU 5: Processed 12 has finished
+00000004: 00000000
+	CPU 2: Dispatched process 18
+00000008: 8000001b
+00000012: 8000001a
+TLB hit at write destination=2 offset=333 value=123
+print_pgtbl: 0 - 768
+00000000: 8000000e
+00000004: 80000014
+00000008: 8c000002
+Time slot  44
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000012
+00000008: 00000000
+00000012: 00000000
+read data=49
+	CPU 6: Put process 16 to ready queue
+	Loaded a process at input/proc/__2, PID: 20 PRIO: 10
+	CPU 3: Put process 15 to ready queue
+Time slot  45
+	CPU 6: Dispatched process 16
+TLB miss at write destination=1 offset=99 value=124
+print_pgtbl: 0 - 768
+00000000: 8000000e
+00000004: 80000014
+00000008: 8c000002
+	CPU 3: Dispatched process 20
+	CPU 1: Put process 17 to ready queue
+	CPU 1: Dispatched process 17
+TLB hit at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 80000015
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 80000013
+00000004: 00000000
+00000008: 8000001b
+00000012: 8000001a
+read data=113
+00000004: 00000000
+00000008: 8000001c
+00000012: 80000019
+read data=103
+	CPU 5: Dispatched process 15
+TLB hit at write destination=6 offset=200 value=100
+print_pgtbl: 0 - 1792
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c07c018
+00000012: 80006017
+00000016: 8000000a
+00000020: 8000000d
+00000024: 80000005
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 80000007
+00000004: 00000000
+00000008: 8c00000b
+00000012: 80006011
+TLB hit at read source=1 offset=99
+print_pgtbl: 0 - 768
+00000000: 8000000e
+00000004: 80000014
+00000008: 8c000002
+read data=124
+TLB miss at read source=2 offset=750
+print_pgtbl: 0 - 1792
+00000000: 8c00000c
+00000004: 80006009
+00000008: 8c07c018
+00000012: 80006017
+00000016: 8000000a
+00000020: 8000000d
+00000024: 80000005
+read data=111
+	CPU 4: Put process 19 to ready queue
+	CPU 4: Dispatched process 19
+TLB hit at write destination=2 offset=400 value=-100
+print_pgtbl: 0 - 768
+00000000: 80000006
+00000004: 80000000
+00000008: 8c046010
+	CPU 7: Put process 10 to ready queue
+	CPU 7: Dispatched process 10
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000012
+00000008: 00000000
+00000012: 00000000
+	CPU 2: Put process 18 to ready queue
+	CPU 2: Dispatched process 18
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 80000007
+00000004: 00000000
+00000008: 8c00000b
+00000012: 80006011
+read data=120
+Time slot  46
+	CPU 0: Put process 14 to ready queue
+	CPU 0: Dispatched process 14
+TLB hit at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 80000013
+00000004: 00000000
+00000008: 8000001b
+00000012: 8000001a
+read data=124
+	Loaded a process at input/proc/__2, PID: 21 PRIO: 95
+	CPU 5: Put process 15 to ready queue
+	CPU 5: Dispatched process 21
+	CPU 6: Put process 16 to ready queue
+	CPU 6: Dispatched process 16
+TLB miss at read source=2 offset=333
+print_pgtbl: 0 - 768
+00000000: 8000000e
+00000004: 80000014
+00000008: 8c000002
+read data=123
+Time slot  47
+	CPU 3: Put process 20 to ready queue
+	CPU 3: Dispatched process 20
+	CPU 1: Put process 17 to ready queue
+TLB hit at read source=2 offset=400
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 768	CPU 1: Dispatched process 15
+
+00000000: 80000006
+00000004: 80000000
+00000008: 8c046010
+TLB miss at write destination=4 offset=30 value=103
+TLB miss at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 80000013
+00000004: 00000000
+00000008: 8000001b
+00000012: 8000001a
+read data=-100
+print_pgtbl: 0 - 1024
+00000000: 80000007
+00000004: 00000000
+00000008: 8c00000b
+00000012: 80006011
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000012
+00000008: 00000000
+00000012: 00000000
+read data=59
+	CPU 7: Put process 10 to ready queue
+	CPU 7: Dispatched process 10
+	CPU 4: Put process 19 to ready queue
+	CPU 4: Dispatched process 17
+	CPU 2: Put process 18 to ready queue
+	CPU 2: Dispatched process 19
+TLB hit at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 80000006
+00000004: 80000000
+00000008: 8c046010
+read data=-100
+Time slot  48
+	CPU 0: Put process 14 to ready queue
+	CPU 0: Dispatched process 18
+TLB hit at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 80000007
+00000004: 00000000
+00000008: 8c00000b
+00000012: 80006011
+read data=103
+	CPU 5: Put process 21 to ready queue
+	CPU 5: Dispatched process 14
+TLB miss at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000013
+00000004: 00000000
+00000008: 8000001b
+00000012: 8000001a
+read data=96
+TLB miss at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000009
+00000004: 80000012
+00000008: 00000000
+00000012: 00000000
+	CPU 6: Put process 16 to ready queue
+	CPU 3: Put process 20 to ready queue
+	CPU 3: Dispatched process 16
+	CPU 6: Dispatched process 21
+TLB hit at write destination=2 offset=333 value=123
+print_pgtbl: 0 - 768
+00000000: 80000006
+00000004: 80000000
+00000008: 8c046010
+	CPU 1: Put process 15 to ready queue
+Time slot  49
+	CPU 1: Dispatched process 20
+	Loaded a process at input/proc/__3, PID: 22 PRIO: 41
+	CPU 7: Put process 10 to ready queue
+	CPU 7: Dispatched process 15
+TLB hit at read source=6 offset=200
+print_pgtbl: 0 - 1792
+00000000: 00000000
+00000004: 00000000
+00000008: 00000000
+00000012: 00000000
+00000016: 00000000
+	CPU 4: Put process 17 to ready queue
+	CPU 3: Processed 16 has finished
+	CPU 2: Put process 19 to ready queue
+	CPU 2: Dispatched process 22
+00000020: 8000000d
+00000024: 80000005
+read data=100
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 00000000
+00000008: 8c04601c
+00000012: 80006019
+Time slot  50
+	CPU 0: Put process 18 to ready queue
+	CPU 0: Dispatched process 17
+	CPU 4: Dispatched process 10
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000009
+00000004: 80000012
+00000008: 00000000
+00000012: 00000000
+read data=69
+	CPU 3: Dispatched process 19
+TLB miss at write destination=1 offset=99 value=124
+print_pgtbl: 0 - 768
+00000000: 80000006
+00000004: 80000000
+00000008: 8c046010
+	CPU 6: Put process 21 to ready queue
+	CPU 6: Dispatched process 18
+	CPU 5: Put process 14 to ready queue
+	CPU 5: Dispatched process 14
+TLB hit at read source=1 offset=99
+print_pgtbl: 0 - 768
+00000000: 80000006
+00000004: 80000000
+00000008: 8c046010
+read data=124
+Time slot  51
+	CPU 1: Put process 20 to ready queue
+	CPU 1: Dispatched process 21
+TLB miss at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 80000017
+00000004: 00000000
+00000008: 80000004
+00000012: 80000008
+	CPU 7: Processed 15 has finished
+	CPU 7: Dispatched process 20
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 00000000
+00000008: 8c04601c
+00000012: 80006019
+read data=120
+	CPU 4: Put process 10 to ready queue
+	CPU 4: Dispatched process 10
+	CPU 3: Put process 19 to ready queue
+	CPU 2: Put process 22 to ready queue
+Time slot  52
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8c000015
+00000012: 80006002
+	CPU 0: Put process 17 to ready queue
+	CPU 0: Dispatched process 17
+TLB hit at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000017
+00000004: 00000000
+00000008: 80000004
+00000012: 80000008
+	CPU 2: Dispatched process 22
+	CPU 3: Dispatched process 19
+TLB hit at read source=2 offset=333
+print_pgtbl: 0 - 768
+00000000: 80000006
+00000004: 80000000
+00000008: 8c046010
+read data=123
+	CPU 5: Put process 14 to ready queue
+	CPU 5: Dispatched process 14
+TLB miss at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000011
+00000008: 00000000
+00000012: 00000000
+	CPU 6: Put process 18 to ready queue
+	CPU 6: Dispatched process 18
+TLB hit at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 00000000
+00000008: 8c04601c
+00000012: 80006019
+	CPU 4: Processed 10 has finished
+	CPU 1: Put process 21 to ready queue
+	CPU 1: Dispatched process 21
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 80000005
+Time slot  53
+00000004: 00000000
+00000008: 8c000015
+00000012: 80006002
+read data=120
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 80000017
+00000004: 00000000
+00000008: 80000004
+00000012: 80000008
+read data=113
+	Loaded a process at input/proc/__0, PID: 23 PRIO: 2
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000011
+00000008: 00000000
+00000012: 00000000
+read data=49
+	CPU 7: Put process 20 to ready queue
+	CPU 4: Dispatched process 23
+	CPU 3: Put process 19 to ready queue
+	CPU 3: Dispatched process 19
+TLB miss at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 80000009
+00000004: 00000000
+00000008: 8000000b
+00000012: 80000018
+	CPU 7: Dispatched process 20
+	CPU 2: Put process 22 to ready queue
+	CPU 2: Dispatched process 22
+TLB miss at write destination=2 offset=750 value=111
+print_pgtbl: 0 - 1280
+00000000: 8000000d
+00000004: 80000007
+00000008: 80000013
+00000012: 80000012
+00000016: 80000000
+TLB hit at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 00000000
+00000008: 8c04601c
+00000012: 80006019
+read data=103
+TLB miss at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8c000015
+00000012: 80006002
+Time slot  54
+	CPU 0: Put process 17 to ready queue
+	CPU 0: Dispatched process 17
+TLB miss at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 80000017
+00000004: 00000000
+00000008: 80000004
+00000012: 80000008
+read data=124
+	CPU 5: Put process 14 to ready queue
+	CPU 5: Dispatched process 14
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000011
+00000008: 00000000
+00000012: 00000000
+	CPU 6: Put process 18 to ready queue
+	CPU 6: Dispatched process 18
+TLB miss at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000009
+00000004: 00000000
+00000008: 8000000b
+00000012: 80000018
+	CPU 3: Processed 19 has finished
+Time slot  55
+TLB hit at write destination=2 offset=756 value=111
+print_pgtbl: 0 - 1280
+00000000: 8000000d
+00000004: 80000007
+00000008: 80000013
+00000012: 80000012
+00000016: 80000000
+	CPU 1: Put process 21 to ready queue
+	CPU 1: Dispatched process 21
+TLB miss at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 80000005
+TLB miss at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 80000017
+00000004: 00000000
+00000008: 80000004
+00000012: 80000008
+00000004: 00000000
+00000008: 8c000015
+00000012: 80006002
+read data=103
+	Loaded a process at input/proc/__3, PID: 24 PRIO: 90
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+	CPU 7: Put process 20 to ready queue
+	CPU 7: Dispatched process 20
+00000000: 00000000
+00000004: 80000011
+00000008: 00000000
+00000012: 00000000
+read data=59
+	CPU 4: Put process 23 to ready queue
+	CPU 4: Dispatched process 24
+	CPU 3: Dispatched process 23
+	CPU 2: Put process 22 to ready queue
+	CPU 2: Dispatched process 22
+TLB hit at write destination=3 offset=119 value=111
+print_pgtbl: 0 - 1280
+00000000: 8000000d
+00000004: 80000007
+00000008: 80000013
+00000012: 80000012
+00000016: 80000000
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 80000009
+00000004: 00000000
+00000008: 8000000b
+00000012: 80000018
+read data=113
+Time slot  56
+	CPU 0: Put process 17 to ready queue
+	CPU 0: Dispatched process 17
+TLB hit at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000017
+00000004: 00000000
+00000008: 80000004
+00000012: 80000008
+read data=96
+	Loaded a process at input/proc/__0, PID: 25 PRIO: 85
+	CPU 5: Put process 14 to ready queue
+	CPU 5: Dispatched process 14
+	CPU 6: Put process 18 to ready queue
+TLB miss at read source=2 offset=756
+	CPU 6: Dispatched process 18
+print_pgtbl: 0 - 1280TLB hit at read source=8 offset=111
+
+print_pgtbl: 0 - 102400000000: 8000000d
+00000004: 80000007
+00000008: 80000013
+00000012: 80000012
+00000016: 80000000
+read data=111
+
+00000000: 80000009
+00000004: 00000000
+00000008: 8000000b
+00000012: 80000018
+read data=124
+	CPU 1: Put process 21 to ready queue
+	CPU 1: Dispatched process 25
+Time slot  57
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000002
+00000004: 80000011
+00000008: 00000000
+00000012: 00000000
+	CPU 7: Put process 20 to ready queue
+	CPU 7: Dispatched process 21
+	CPU 4: Put process 24 to ready queue
+	CPU 2: Put process 22 to ready queue
+	CPU 2: Dispatched process 20
+	CPU 4: Dispatched process 22
+TLB hit at read source=3 offset=119
+print_pgtbl: 0 - 1280
+00000000: 8000000d
+00000004: 80000007
+00000008: 80000013
+00000012: 80000012
+00000016: 80000000
+read data=111
+Time slot  58
+	CPU 3: Put process 23 to ready queue
+	CPU 3: Dispatched process 24
+	CPU 0: Put process 17 to ready queue
+	CPU 0: Dispatched process 17
+TLB miss at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 80000009
+00000004: 00000000
+00000008: 8000000b
+00000012: 80000018
+	CPU 5: Put process 14 to ready queue
+	CPU 5: Dispatched process 23
+TLB hit at write destination=1 offset=20 value=102
+print_pgtbl: 0 - 768
+00000000: 80000015
+00000004: 00000000
+00000008: 8c07c019
+	CPU 6: Put process 18 to ready queue
+	CPU 6: Dispatched process 14
+TLB miss at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000002
+00000004: 80000011
+00000008: 00000000
+00000012: 00000000
+TLB miss at write destination=8 offset=100 value=113
+read data=69
+print_pgtbl: 0 - 1024
+00000000: 8000000a
+00000004: 00000000
+00000008: 80000010
+00000012: 8000001c
+	CPU 1: Put process 25 to ready queue
+	CPU 1: Dispatched process 18
+TLB miss at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000009
+00000004: 00000000
+00000008: 8000000b
+00000012: 80000018
+read data=96
+Time slot  59
+	Loaded a process at input/proc/__2, PID: 26 PRIO: 33
+	CPU 7: Put process 21 to ready queue
+	CPU 7: Dispatched process 26
+TLB hit at write destination=2 offset=50 value=1
+print_pgtbl: 0 - 768
+00000000: 80000015
+00000004: 00000000
+00000008: 8c07c019
+	CPU 4: Put process 22 to ready queue
+	CPU 4: Dispatched process 22
+TLB hit at write destination=6 offset=200 value=100
+print_pgtbl: 0 - 1792
+00000000: 8000000d
+00000004: 80000007
+00000008: 80000013
+00000012: 80000012
+00000016: 80000000
+00000020: 80000008
+00000024: 80000005
+	CPU 3: Put process 24 to ready queue
+	CPU 3: Dispatched process 25
+	CPU 2: Put process 20 to ready queue
+	CPU 2: Dispatched process 24
+TLB miss at write destination=2 offset=750 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c06a003
+00000004: 80006001
+00000008: 8c07c00f
+00000012: 80006016
+00000016: 80000004
+Time slot  60
+	CPU 0: Put process 17 to ready queue
+	CPU 0: Dispatched process 21
+TLB hit at read source=2 offset=750
+print_pgtbl: 0 - 1792
+00000000: 8000000d
+00000004: 80000007
+00000008: 80000013
+00000012: 80000012
+00000016: 80000000
+00000020: 80000008
+00000024: 80000005
+read data=111
+	CPU 6: Put process 14 to ready queue
+Time slot  61
+	CPU 6: Dispatched process 17
+TLB hit at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+	CPU 5: Put process 23 to ready queue
+	CPU 5: Dispatched process 23
+TLB hit at read source=2 offset=50
+print_pgtbl: 0 - 768
+00000000: 80000015
+00000004: 00000000
+00000008: 8c07c019
+read data=1
+TLB hit at write destination=2 offset=756 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c06a003
+00000004: 80006001
+00000008: 8c07c00f
+00000012: 80006016
+00000016: 80000004
+	CPU 1: Put process 18 to ready queue
+	CPU 1: Dispatched process 20
+TLB miss at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 8000000a
+TLB miss at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 00000000
+00000008: 8000000e
+00000012: 8000001b
+00000004: 00000000
+00000008: 80000010
+00000012: 8000001c
+TLB hit at write destination=2 offset=70 value=10
+print_pgtbl: 0 - 768
+00000000: 80000015
+00000004: 00000000
+00000008: 8c07c019
+	CPU 4: Put process 22 to ready queue
+	CPU 4: Dispatched process 14
+	CPU 3: Put process 25 to ready queue
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+read data=49
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 8000000a
+Time slot  62
+	CPU 3: Dispatched process 18
+00000004: 00000000
+00000008: 80000010
+00000012: 8000001c
+read data=113
+	CPU 2: Put process 24 to ready queue
+	CPU 2: Dispatched process 22
+	CPU 7: Put process 26 to ready queue
+	CPU 0: Put process 21 to ready queue
+	CPU 0: Dispatched process 25
+TLB miss at write destination=1 offset=20 value=102
+print_pgtbl: 0 - 768
+00000000: 8000001d
+	CPU 7: Dispatched process 24
+00000004: 00000000
+00000008: 8c07c00c
+TLB hit at write destination=3 offset=119 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c06a003
+00000004: 80006001
+00000008: 8c07c00f
+00000012: 80006016
+00000016: 80000004
+	CPU 5: Put process 23 to ready queue
+	CPU 4: Processed 14 has finished
+TLB miss at read source=2 offset=756
+print_pgtbl: 0 - 1280
+00000000: 8c06a003
+00000004: 80006001
+00000008: 8c07c00f
+00000012: 80006016
+	CPU 6: Put process 17 to ready queue
+	CPU 1: Put process 20 to ready queue
+	CPU 5: Dispatched process 21
+TLB miss at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 00000000
+00000008: 8000000e
+00000012: 8000001b
+Time slot  63
+	CPU 1: Dispatched process 23
+TLB hit at read source=2 offset=10
+print_pgtbl: 0 - 768
+00000000: 80000015
+00000004: 00000000
+	CPU 4: Dispatched process 20
+	CPU 6: Dispatched process 26
+TLB hit at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 8000000a
+00000004: 00000000
+00000008: 80000010
+00000012: 8000001c
+00000008: 8c07c019
+TLB hit at write destination=2 offset=50 value=1
+print_pgtbl: 0 - 768
+00000000: 8000001d
+00000004: 00000000
+00000008: 8c07c00c
+00000016: 80000004
+read data=111
+read data=124
+read data=0
+	Loaded a process at input/proc/__3, PID: 27 PRIO: 1
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 00000000
+00000008: 8000000e
+00000012: 8000001b
+read data=113
+	CPU 7: Put process 24 to ready queue
+	CPU 7: Dispatched process 24
+TLB hit at read source=3 offset=119
+print_pgtbl: 0 - 1280
+00000000: 8c06a003
+00000004: 80006001
+00000008: 8c07c00f
+00000012: 80006016
+00000016: 80000004
+read data=111
+	CPU 3: Put process 18 to ready queue
+	CPU 3: Dispatched process 17
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+	CPU 2: Put process 22 to ready queue
+	CPU 2: Dispatched process 27
+TLB hit at write destination=2 offset=90 value=10
+print_pgtbl: 0 - 768
+00000000: 80000015
+00000004: 00000000
+00000008: 8c07c019
+Time slot  64
+TLB miss at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 8000000a
+00000004: 00000000
+00000008: 80000010
+00000012: 8000001c
+	CPU 0: Put process 25 to ready queue
+	CPU 0: Dispatched process 18
+TLB miss at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+	CPU 5: Put process 21 to ready queue
+	CPU 5: Dispatched process 22
+TLB hit at read source=6 offset=200
+print_pgtbl: 0 - 1792
+00000000: 00000000
+00000004: 00000000
+00000008: 00000000
+00000012: 00000000
+00000016: 00000000
+00000020: 80000008
+00000024: 80000005
+read data=100
+	CPU 6: Put process 26 to ready queue
+	CPU 6: Dispatched process 25
+Time slot  65
+TLB hit at read source=6 offset=114
+	CPU 4: Put process 20 to ready queue
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 8000001a
+00000008: 00000000
+	CPU 4: Dispatched process 21
+	CPU 1: Put process 23 to ready queue
+	CPU 1: Dispatched process 23
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 768TLB hit at read source=2 offset=50
+TLB hit at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 00000000
+00000008: 8000000e
+00000012: 8000001b
+read data=124
+print_pgtbl: 0 - 768
+00000000: 8000001d
+00000004: 00000000
+00000008: 8c07c00c
+read data=1
+
+00000000: 80000015
+00000004: 00000000
+00000008: 8c07c019
+read data=102
+00000012: 00000000
+read data=59
+	Loaded a process at input/proc/__2, PID: 28 PRIO: 110
+TLB hit at write destination=2 offset=70 value=10
+print_pgtbl: 0 - 768
+00000000: 8000001d
+00000004: 00000000
+00000008: 8c07c00c
+	CPU 3: Put process 17 to ready queue
+	CPU 3: Dispatched process 20
+TLB hit at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 8000000a
+00000004: 00000000
+00000008: 80000010
+00000012: 8000001c
+read data=96
+	CPU 2: Put process 27 to ready queue
+	CPU 2: Dispatched process 26
+TLB miss at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024	CPU 7: Put process 24 to ready queue
+	CPU 7: Dispatched process 24
+TLB hit at write destination=6 offset=200 value=100
+print_pgtbl: 0 - 1792Time slot  66
+
+00000000: 80000014
+00000004: 00000000
+00000008: 8000000e
+00000012: 8000001b
+
+00000000: 8c06a003
+00000004: 80006001
+00000008: 8c07c00f
+00000012: 80006016
+00000016: 80000004
+00000020: 80000017
+00000024: 80000006
+	CPU 0: Put process 18 to ready queue
+	CPU 0: Dispatched process 17
+	Loaded a process at input/proc/__1, PID: 29 PRIO: 95
+	CPU 5: Processed 22 has finished
+	CPU 5: Dispatched process 29
+TLB hit at read source=2 offset=750
+print_pgtbl: 0 - 1792
+00000000: 8c06a003
+00000004: 80006001
+00000008: 8c07c00f
+00000012: 80006016
+00000016: 80000004
+00000020: 80000017
+00000024: 80000006
+read data=111
+	CPU 4: Put process 21 to ready queue
+Time slot  67
+	CPU 4: Dispatched process 21
+TLB miss at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 00000000
+00000008: 8000000e
+00000012: 8000001b
+read data=96
+	CPU 6: Put process 25 to ready queue
+	CPU 6: Dispatched process 28
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8c000009
+00000012: 80006000
+	CPU 1: Put process 23 to ready queue
+	CPU 1: Dispatched process 27
+TLB miss at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000019
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+Time slot  68
+	CPU 7: Put process 24 to ready queue
+	CPU 3: Put process 20 to ready queue
+	CPU 3: Dispatched process 20
+	CPU 2: Put process 26 to ready queue
+	CPU 0: Put process 17 to ready queue
+	CPU 0: Dispatched process 18
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+	CPU 2: Dispatched process 26
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8c000009
+00000012: 80006000
+read data=120
+	CPU 7: Dispatched process 23
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 25
+TLB miss at read source=2 offset=10
+print_pgtbl: 0 - 768
+00000000: 8000001d
+00000004: 00000000
+00000008: 8c07c00c
+read data=0
+	CPU 7: Processed 23 has finished
+	CPU 5: Put process 29 to ready queue
+	CPU 5: Dispatched process 24
+	CPU 7: Dispatched process 17
+TLB miss at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000019
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+read data=69
+	CPU 4: Put process 21 to ready queue
+	CPU 4: Dispatched process 29
+TLB hit at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8c000009
+00000012: 80006000
+	CPU 1: Put process 27 to ready queue
+	CPU 1: Dispatched process 21
+Time slot  69
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=59
+	Loaded a process at input/proc/__2, PID: 30 PRIO: 33
+TLB miss at write destination=2 offset=90 value=10
+print_pgtbl: 0 - 768
+00000000: 8000001d
+00000004: 00000000
+00000008: 8c07c00c
+	CPU 3: Put process 20 to ready queue
+	CPU 3: Dispatched process 28
+	CPU 2: Put process 26 to ready queue
+	CPU 2: Dispatched process 27
+TLB hit at write destination=2 offset=750 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000b
+00000004: 80006018
+00000008: 8c00000d
+00000012: 80006007
+00000016: 8c08c01c
+Time slot  70
+	CPU 0: Put process 18 to ready queue
+	CPU 0: Dispatched process 20
+TLB miss at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000013
+00000008: 00000000
+00000012: 00000000
+	CPU 7: Put process 17 to ready queue
+	CPU 7: Dispatched process 18
+	CPU 6: Put process 25 to ready queue
+	CPU 6: Dispatched process 30
+	CPU 5: Put process 24 to ready queue
+	CPU 5: Dispatched process 26
+TLB hit at read source=4 offset=30
+	CPU 4: Put process 29 to ready queue
+	CPU 4: Dispatched process 25
+TLB miss at read source=1 offset=20
+print_pgtbl: 0 - 768
+00000000: 8000001d
+print_pgtbl: 0 - 1024TLB hit at write destination=2 offset=756 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000b
+00000004: 80006018
+00000008: 8c00000d
+00000012: 80006007
+00000016: 8c08c01c
+	CPU 1: Put process 21 to ready queue
+	CPU 1: Dispatched process 24
+TLB hit at read source=6 offset=200
+print_pgtbl: 0 - 1792
+00000000: 00000000
+00000004: 00000000
+00000008: 00000000
+00000012: 00000000
+00000016: 00000000
+00000020: 80000017
+00000024: 80000006
+read data=100
+Time slot  71
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000013
+00000008: 00000000
+00000012: 00000000
+read data=49
+
+00000000: 80000005
+00000004: 00000000
+00000008: 8c000009
+00000012: 80006000
+read data=103
+00000004: 00000000
+00000008: 8c07c00c
+read data=102
+	CPU 3: Put process 28 to ready queue
+	CPU 3: Dispatched process 17
+	CPU 2: Put process 27 to ready queue
+	CPU 2: Dispatched process 29
+TLB hit at write destination=2 offset=400 value=-100
+print_pgtbl: 0 - 768
+00000000: 80000019
+00000004: 80000004
+00000008: 8000001f
+Time slot  72
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+	CPU 0: Put process 20 to ready queue
+	CPU 0: Dispatched process 21
+TLB miss at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000020
+00000008: 00000000
+00000012: 00000000
+	CPU 6: Put process 30 to ready queue
+	CPU 6: Dispatched process 28
+	CPU 5: Put process 26 to ready queue
+	CPU 5: Dispatched process 27
+TLB hit at write destination=3 offset=119 value=111
+print_pgtbl: 0 - 1280
+00000000: 8c00000b
+00000004: 80006018
+00000008: 8c00000d
+00000012: 80006007
+00000016: 8c08c01c
+	CPU 4: Put process 25 to ready queue
+	CPU 4: Dispatched process 20
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000013
+00000008: 00000000
+00000012: 00000000
+	CPU 7: Put process 18 to ready queue
+TLB miss at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 80000019
+00000004: 80000004
+	CPU 3: Processed 17 has finished
+	CPU 3: Dispatched process 30
+00000008: 8000001f
+	CPU 1: Processed 24 has finished
+read data=-100
+	CPU 1: Dispatched process 26
+	CPU 7: Dispatched process 25
+TLB miss at read source=6 offset=118
+print_pgtbl: 0 - 1024
+Time slot  73
+00000000: 00000000
+00000004: 80000020
+00000008: 00000000
+00000012: 00000000
+read data=49
+	CPU 7: Processed 25 has finished
+	CPU 7: Dispatched process 18
+TLB miss at read source=1 offset=15
+print_pgtbl: 0 - 1024
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000013
+00000008: 00000000
+00000012: 00000000
+read data=59
+00000000: 80000014
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=69
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 8000000c
+00000004: 00000000
+00000008: 8000000e
+00000012: 8000001b
+TLB hit at read source=2 offset=756
+Time slot  74
+	CPU 2: Put process 29 to ready queue
+	CPU 2: Dispatched process 29
+TLB miss at read source=2 offset=400
+print_pgtbl: 0 - 768
+00000000: 80000019
+00000004: 80000004
+00000008: 8000001f
+read data=-100
+print_pgtbl: 0 - 1280
+00000000: 8c00000b
+00000004: 80006018
+00000008: 8c00000d
+00000012: 80006007
+00000016: 8c08c01c
+read data=111
+	CPU 0: Put process 21 to ready queue
+	CPU 0: Dispatched process 21
+TLB miss at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000020
+00000008: 00000000
+00000012: 00000000
+	CPU 5: Put process 27 to ready queue
+	CPU 5: Dispatched process 27
+	CPU 4: Put process 20 to ready queue
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 8000000c
+00000004: 00000000
+00000008: 8000000e
+00000012: 8000001b
+read data=120
+Time slot  75
+	CPU 4: Dispatched process 20
+	CPU 3: Put process 30 to ready queue
+TLB miss at write destination=2 offset=333 value=123
+print_pgtbl: 0 - 768
+	CPU 3: Dispatched process 30
+00000000: 80000019
+00000004: 80000004
+00000008: 8000001f
+TLB hit at read source=3 offset=119
+	CPU 1: Put process 26 to ready queue
+print_pgtbl: 0 - 1280
+00000000: 8c00000b
+00000004: 80006018
+00000008: 8c00000d
+00000012: 80006007
+00000016: 8c08c01c
+read data=111
+	CPU 1: Dispatched process 26
+TLB miss at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000020
+00000008: 00000000
+00000012: 00000000
+read data=59
+	CPU 7: Put process 18 to ready queue
+	CPU 7: Dispatched process 18
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 80000013
+00000008: 00000000
+00000012: 00000000
+TLB hit at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024
+00000000: 8000000c
+00000004: 00000000
+00000008: 8000000e
+00000012: 8000001b
+TLB miss at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8c0bc000
+00000012: 8000601a
+Time slot  76
+	CPU 2: Put process 29 to ready queue
+	CPU 2: Dispatched process 29
+TLB miss at write destination=1 offset=99 value=124
+print_pgtbl: 0 - 768
+00000000: 80000019
+00000004: 80000004
+00000008: 8000001f
+	CPU 0: Put process 21 to ready queue
+	CPU 0: Dispatched process 21
+TLB hit at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 80000006
+00000004: 00000000
+00000008: 80000011
+00000012: 80000009
+	CPU 5: Put process 27 to ready queue
+	CPU 5: Dispatched process 27
+TLB hit at write destination=6 offset=200 value=100
+print_pgtbl: 0 - 1792
+00000000: 8c00000b
+00000004: 80006018
+00000008: 8c00000d
+00000012: 80006007
+00000016: 8c08c01c
+00000020: 80006017
+00000024: 8c08c002
+	CPU 7: Processed 18 has finished
+	CPU 4: Put process 20 to ready queue
+	CPU 4: Dispatched process 20
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000014
+00000004: 80000013
+00000008: 00000000
+00000012: 00000000
+read data=69
+	CPU 1: Put process 26 to ready queue
+	CPU 1: Dispatched process 26
+TLB hit at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000006
+TLB hit at read source=1 offset=99
+print_pgtbl: 0 - 768
+	CPU 3: Put process 30 to ready queue
+00000004: 00000000
+Time slot  77
+00000008: 80000011
+00000012: 80000009
+00000000: 80000019
+00000004: 80000004
+00000008: 8000001f
+read data=124
+	CPU 3: Dispatched process 30
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8c0bc000
+00000012: 8000601a
+read data=120
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+TLB hit at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 8000000c
+00000004: 00000000
+00000008: 8000000e
+00000012: 8000001b
+read data=103
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 8000001d
+00000004: 80000020
+00000008: 00000000
+00000012: 00000000
+TLB hit at read source=2 offset=750
+print_pgtbl: 0 - 1792
+00000000: 8c00000b
+00000004: 80006018
+00000008: 8c00000d
+00000012: 80006007
+00000016: 8c08c01c
+00000020: 80006017
+00000024: 8c08c002
+read data=111
+TLB miss at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8c0bc000
+00000012: 8000601a
+	CPU 2: Put process 29 to ready queue
+	CPU 2: Dispatched process 29
+TLB miss at read source=2 offset=333
+print_pgtbl: 0 - 768
+00000000: 80000019
+00000004: 80000004
+00000008: 8000001f
+TLB miss at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 80000006
+00000004: 00000000
+00000008: 80000011
+00000012: 80000009
+read data=123
+read data=113
+Time slot  78
+	CPU 0: Put process 21 to ready queue
+	CPU 0: Dispatched process 21
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 8000001d
+00000004: 80000020
+00000008: 00000000
+00000012: 00000000
+read data=69
+	CPU 5: Put process 27 to ready queue
+	CPU 5: Dispatched process 27
+	CPU 4: Put process 20 to ready queue
+	CPU 4: Dispatched process 20
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+Time slot  79
+	CPU 1: Put process 26 to ready queue
+	CPU 3: Put process 30 to ready queue
+	CPU 1: Dispatched process 26
+TLB hit at read source=8 offset=111
+	CPU 3: Dispatched process 30
+TLB miss at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8c0bc000
+00000012: 8000601a
+read data=103
+print_pgtbl: 0 - 1024
+00000000: 80000006
+00000004: 00000000
+00000008: 80000011
+00000012: 80000009
+read data=124
+	Loaded a process at input/proc/__2, PID: 31 PRIO: 89
+	CPU 7: Dispatched process 31
+	CPU 4: Processed 20 has finished
+	CPU 2: Put process 29 to ready queue
+	CPU 2: Dispatched process 29
+Time slot  80
+TLB miss at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 80000006
+00000004: 00000000
+00000008: 80000011
+00000012: 80000009
+	CPU 0: Put process 21 to ready queue
+	CPU 0: Dispatched process 21
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+	CPU 5: Put process 27 to ready queue
+	CPU 5: Dispatched process 27
+TLB hit at read source=6 offset=200
+print_pgtbl: 0 - 1792
+00000000: 00000000
+00000004: 00000000
+00000008: 00000000
+00000012: 00000000
+00000016: 00000000
+00000020: 80006017
+00000024: 8c08c002
+read data=100
+	CPU 3: Put process 30 to ready queue
+	CPU 3: Dispatched process 30
+	CPU 2: Processed 29 has finished
+	CPU 2 stopped
+Time slot  81
+	CPU 1: Put process 26 to ready queue
+	CPU 1: Dispatched process 26
+TLB hit at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000006
+00000004: 00000000
+00000008: 80000011
+00000012: 80000009
+read data=96
+	CPU 0: Processed 21 has finished
+	CPU 0 stopped
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+Time slot  82
+TLB hit at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 8000001a
+00000004: 00000000
+00000008: 80000007
+00000012: 80000013
+	CPU 4 stopped
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+TLB hit at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 8000001a
+00000004: 00000000
+00000008: 80000007
+00000012: 80000013
+Time slot  83
+	CPU 5: Processed 27 has finished
+	CPU 3: Put process 30 to ready queue
+	CPU 1: Put process 26 to ready queue
+	CPU 1: Dispatched process 30
+	CPU 3: Dispatched process 26
+	CPU 5 stopped
+Time slot  84
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8000000c
+00000012: 80000000
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 8000001a
+00000004: 00000000
+00000008: 80000007
+00000012: 80000013
+read data=113
+Time slot  85
+TLB hit at write destination=1 offset=20 value=120
+print_pgtbl: 0 - 1024
+00000000: 80000020
+00000004: 00000000
+00000008: 8c05801d
+00000012: 8000601c
+	CPU 1: Put process 30 to ready queue
+	CPU 1: Dispatched process 30
+TLB hit at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8000000c
+00000012: 80000000
+	CPU 3: Put process 26 to ready queue
+	CPU 3: Dispatched process 26
+TLB hit at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+TLB hit at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 8000001a
+00000004: 00000000
+00000008: 80000007
+00000012: 80000013
+read data=124
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+Time slot  86
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=49
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8000000c
+00000012: 80000000
+read data=113
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at read source=1 offset=20
+print_pgtbl: 0 - 1024
+00000000: 80000020
+00000004: 00000000
+TLB hit at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 8000001a
+00000004: 00000000
+00000008: 80000007
+00000012: 80000013
+00000008: 8c05801d
+00000012: 8000601c
+read data=120
+Time slot  87
+	CPU 1: Put process 30 to ready queue
+TLB hit at write destination=4 offset=30 value=103
+print_pgtbl: 0 - 1024	CPU 6: Put process 28 to ready queue
+	CPU 1: Dispatched process 30
+TLB hit at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8000000c
+00000012: 80000000
+read data=124
+	CPU 6: Dispatched process 28
+TLB hit at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 8000001a
+00000004: 00000000
+00000008: 80000007
+00000012: 80000013
+read data=96
+
+00000000: 80000020
+00000004: 00000000
+00000008: 8c05801d
+00000012: 8000601c
+	CPU 3: Put process 26 to ready queue
+	CPU 3: Dispatched process 26
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+Time slot  88
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at read source=4 offset=30
+print_pgtbl: 0 - 1024
+00000000: 80000020
+00000004: 00000000
+00000008: 8c05801d
+00000012: 8000601c
+read data=103
+TLB hit at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8000000c
+00000012: 80000000
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=59
+Time slot  89
+	CPU 1: Put process 30 to ready queue
+	CPU 1: Dispatched process 30
+TLB hit at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000005
+00000004: 00000000
+00000008: 8000000c
+00000012: 80000000
+read data=96
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+	CPU 3: Put process 26 to ready queue
+	CPU 3: Dispatched process 26
+Time slot  90
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000013
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+Time slot  91
+	CPU 1: Put process 30 to ready queue
+	CPU 1: Dispatched process 30
+	CPU 3: Put process 26 to ready queue
+	CPU 3: Dispatched process 26
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000013
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+TLB hit at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000006
+00000008: 00000000
+00000012: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=69
+Time slot  92
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000006
+00000008: 00000000
+00000012: 00000000
+read data=49
+Time slot  93
+TLB hit at write destination=8 offset=100 value=113
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 8000001c
+00000012: 80000007
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+	CPU 3: Put process 26 to ready queue
+	CPU 1: Put process 30 to ready queue
+00000000: 00000000
+00000004: 80000006
+00000008: 00000000
+00000012: 00000000
+	CPU 1: Dispatched process 30
+	CPU 3: Dispatched process 26
+TLB hit at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+	CPU 3: Processed 26 has finished
+Time slot  94
+	CPU 3 stopped
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at write destination=8 offset=111 value=124
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 8000001c
+00000012: 80000007
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+read data=49
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000006
+00000008: 00000000
+00000012: 00000000
+read data=59
+TLB hit at read source=8 offset=100
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 8000001c
+00000012: 80000007
+read data=113
+Time slot  95
+	CPU 1: Put process 30 to ready queue
+	CPU 1: Dispatched process 30
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+Time slot  96
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+read data=59
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at read source=8 offset=111
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 8000001c
+00000012: 80000007
+read data=124
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000002
+00000004: 80000006
+00000008: 00000000
+00000012: 00000000
+TLB hit at write destination=9 offset=123 value=96
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 8000001c
+00000012: 80000007
+Time slot  97
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000002
+00000004: 80000006
+00000008: 00000000
+00000012: 00000000
+read data=69
+	CPU 1: Put process 30 to ready queue
+	CPU 1: Dispatched process 30
+Time slot  98
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at read source=9 offset=123
+print_pgtbl: 0 - 1024
+00000000: 80000000
+00000004: 00000000
+00000008: 8000001c
+00000012: 80000007
+read data=96
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 80000013
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+Time slot  99
+	CPU 1: Put process 30 to ready queue
+	CPU 1: Dispatched process 30
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 80000013
+00000004: 8000001a
+00000008: 00000000
+00000012: 00000000
+read data=69
+	CPU 6: Put process 28 to ready queue
+	CPU 6: Dispatched process 28
+Time slot 100
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+	CPU 6: Processed 28 has finished
+	CPU 6 stopped
+Time slot 101
+	CPU 1: Put process 30 to ready queue
+	CPU 1: Dispatched process 30
+Time slot 102
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at write destination=6 offset=118 value=49
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+	CPU 1: Processed 30 has finished
+	CPU 1 stopped
+Time slot 103
+TLB hit at read source=6 offset=118
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=49
+Time slot 104
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at write destination=6 offset=114 value=59
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+Time slot 105
+TLB hit at read source=6 offset=114
+print_pgtbl: 0 - 1024
+00000000: 00000000
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=59
+Time slot 106
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+Time slot 107
+TLB hit at write destination=1 offset=15 value=69
+print_pgtbl: 0 - 1024
+00000000: 8000001a
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+Time slot 108
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+TLB hit at read source=1 offset=15
+print_pgtbl: 0 - 1024
+00000000: 8000001a
+00000004: 80000002
+00000008: 00000000
+00000012: 00000000
+read data=69
+Time slot 109
+Time slot 110
+	CPU 7: Put process 31 to ready queue
+	CPU 7: Dispatched process 31
+Time slot 111
+	CPU 7: Processed 31 has finished
+	CPU 7 stopped

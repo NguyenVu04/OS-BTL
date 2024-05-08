@@ -13,5 +13,6 @@
 #define IODUMP 1
 #define PAGETBL_DUMP 1
 //#define DEBUG
+//#define TLBDUMP
 
 #endif
